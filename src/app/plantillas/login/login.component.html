@@ -1,0 +1,20 @@
+<div class="contenedor">
+    <mat-card>
+        <mat-card-title style="color:#0d47a1">Login {{titulo}} </mat-card-title><br>
+        <mat-card-content>
+            <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="pasarData(form.value)">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <input type="input" matInput formControlName="usuario" placeholder="usuario" autocomplete="off" required autofocus>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName="password" placeholder="password" autocomplete="off" required>
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">ENVIAR</button>
+                <br>
+            </form>
+            <div class="errorMsg" *ngIf="errorMsg"> {{errorMsg}} </div>
+        </mat-card-content>
+    </mat-card>
+</div>
