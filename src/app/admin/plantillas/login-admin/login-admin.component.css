@@ -1,0 +1,9 @@
+.separador {
+    height: 100px;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;      
+}
