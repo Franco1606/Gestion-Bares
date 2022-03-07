@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import("../app/mozo/mozo.module").then(x => x.MozoModule)
   },
   {
-    path: "users",
+    path: "cocina",
     loadChildren: () => import("../app/cocina/cocina.module").then(x => x.CocinaModule)
   }
 ];
