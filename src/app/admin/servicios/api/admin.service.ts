@@ -17,6 +17,8 @@ export class AdminService {
   //Paso de variables por servicio
   usuarioID!:number
   categoriaID!:number
+  productoID!:number
+  nombre!:string
   tokenAdmin!:string
 
   /////////////////////////////////////////////////////////
@@ -50,5 +52,15 @@ export class AdminService {
       }
     }
     return this._http.delete<modeloRespuesta>(this.url + `categorias.php`, options)
+  }
+
+  //Modificar categoria
+  modificarCategoria(categoriaID:number, tokenAdmin:string, nombre:string) {
+    let body = {
+      categoriaID: categoriaID,
+      tokenAdmin: tokenAdmin,
+      nombre: nombre
+    }
+    return this._http.put<modeloCategoria>(this.url + `categorias.php`, body)
   }
 }
