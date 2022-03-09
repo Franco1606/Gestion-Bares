@@ -62,10 +62,9 @@ export class ListaCategoriasComponent {
     this._adminServiceApi.tokenAdmin = this.tokenAdmin
   }
 
-  editarNombreCategoria(categoriaID:number, nombre:string) {
+  editarNombreCategoria(categoria:modeloCategoria) {
     this._dialog.open(EditarCategoriaDialogComponent)    
-    this._adminServiceApi.categoriaID = categoriaID
-    this._adminServiceApi.nombre = nombre    
+    this._adminServiceApi.categoria = categoria       
     this._adminServiceApi.tokenAdmin = this.tokenAdmin
   }
 

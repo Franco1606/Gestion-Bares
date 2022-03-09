@@ -61,7 +61,7 @@ export class ListaProductosComponent {
 
   agregarProducto() {
     this._adminServiceApi.usuarioID = this.usuarioID
-    this._adminServiceApi.categoriaID = this.categoriaID
+    this._adminServiceApi.categoria.categoriaID = this.categoriaID
     this._adminServiceApi.tokenAdmin = this.tokenAdmin
     this._dialog.open(AgregarProductoDialogComponent)
   }

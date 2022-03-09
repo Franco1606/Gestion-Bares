@@ -17,12 +17,9 @@ export class AdminService {
   url = "https://visita360.hopto.org/Api-Gestion-Bares/"
   //Paso de variables por servicio
   usuarioID!:number
-  categoriaID!:number
-  producto!:modeloProducto
-  productoID!:number
-  nombre!:string
-  mostrar!:number
   tokenAdmin!:string
+  categoria!:modeloCategoria
+  producto!:modeloProducto
 
   //////////////////////////////////////////////////////////
   /////////////  METODOS PARA CATEGORIAS  /////////////////

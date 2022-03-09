@@ -30,9 +30,9 @@ export class EditarCategoriaDialogComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoriaID)
+    this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoria.categoriaID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
-    this.nombre = this._AdminServiceApi.nombre    
+    this.nombre = this._AdminServiceApi.categoria.nombre    
   }
 
   msotrarDatosEnInputs(){
