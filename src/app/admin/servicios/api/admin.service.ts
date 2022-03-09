@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 //Importacion de Modelos
 import { modeloCategoria } from '../../ModelosAdmin/modeloCategoria';
 import { modeloRespuesta } from "../../../ModelosApp/modeloRespuesta"
+import { modeloProducto } from '../../ModelosAdmin/modeloProducto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,27 +18,24 @@ export class AdminService {
   //Paso de variables por servicio
   usuarioID!:number
   categoriaID!:number
+  producto!:modeloProducto
   productoID!:number
   nombre!:string
+  mostrar!:number
   tokenAdmin!:string
 
-  /////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
   /////////////  METODOS PARA CATEGORIAS  /////////////////
-  /////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
 
   //Obtener categorias por usuarioID
-  obtenerCategorias(usuarioID:Number):Observable<modeloCategoria[]> {
+  obtenerCategorias(usuarioID:number):Observable<modeloCategoria[]> {
     return this._http.get<modeloCategoria[]>(this.url + `categorias.php?usuarioID=${usuarioID}`)
   }
 
   //Insertar categoria
-  agregarCategoria(usuarioID:number, tokenAdmin:string, nombre:string):Observable<modeloCategoria> {
-    let body = {
-      usuarioID: usuarioID,
-      tokenAdmin: tokenAdmin,
-      nombre: nombre
-    }
-    return this._http.post<modeloCategoria>(this.url + `categorias.php`, body)
+  agregarCategoria(form:any):Observable<modeloCategoria> {    
+    return this._http.post<modeloCategoria>(this.url + `categorias.php`, form)
   }
 
 //Eliminar categoria
@@ -55,12 +53,45 @@ export class AdminService {
   }
 
   //Modificar categoria
-  modificarCategoria(categoriaID:number, tokenAdmin:string, nombre:string) {
-    let body = {
-      categoriaID: categoriaID,
-      tokenAdmin: tokenAdmin,
-      nombre: nombre
-    }
-    return this._http.put<modeloCategoria>(this.url + `categorias.php`, body)
+  modificarCategoria(form:any) {    
+    return this._http.put<modeloCategoria>(this.url + `categorias.php`, form)
   }
+
+  /////////////////////////////////////////////////////////
+  /////////////  METODOS PARA PRODUCTOS  /////////////////
+  ///////////////////////////////////////////////////////
+
+  //Obtener productos por usuarioID y categoriaID
+  obtenerProductos(usuarioID:number, categoriaID:number):Observable<modeloProducto[]> {
+    return this._http.get<modeloProducto[]>(this.url + `productos.php?usuarioID=${usuarioID}&categoriaID=${categoriaID}`)
+  }
+
+  //Obtener producto por usuarioID y categoriaID
+  obtenerProducto(productoID:number):Observable<modeloProducto> {
+    return this._http.get<modeloProducto>(this.url + `productos.php?productoID=${productoID}`)
+  }
+
+   //Insertar Producto
+   agregarProducto(form:any):Observable<modeloProducto> {    
+    return this._http.post<modeloProducto>(this.url + `productos.php`, form)
+  }
+
+  //Eliminar producto
+  eliminarProducto(productoID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        productoID: productoID,
+        tokenAdmin: tokenAdmin        
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `productos.php`, options)
+  }
+
+    //Modificar producto
+    modificarProducto(form:any) {
+      return this._http.put<modeloProducto>(this.url + `productos.php`, form)
+    }
 }
