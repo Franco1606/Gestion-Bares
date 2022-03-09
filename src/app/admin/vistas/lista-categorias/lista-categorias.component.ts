@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 // Inyecciones de dependencia
-import { AppService } from "../../../servicios/api/app.service"
 import { AdminService } from "../../servicios/api/admin.service"
 import { Router } from "@angular/router"
 // Modelos
@@ -22,7 +21,7 @@ import { EditarCategoriaDialogComponent } from "../../Dialogs/editar-categoria-d
 })
 export class ListaCategoriasComponent {
 
-  constructor( private _router:Router, private _appServiceApi:AppService, private _adminServiceApi:AdminService, private _dialog:MatDialog ) { }
+  constructor( private _router:Router, private _adminServiceApi:AdminService, private _dialog:MatDialog ) { }
 
   //////////   Atributos de la clase   /////////////  
   categoriaID!:number
@@ -36,8 +35,9 @@ export class ListaCategoriasComponent {
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!:MatTableDataSource<modeloCategoria>
 
-  obtenerUsuario(usuarioID:number) {
-    this.usuarioID = usuarioID
+  obtenerUsuario(datosUsuario:any) {
+    this.usuarioID = datosUsuario["usuarioID"]
+    this.tokenAdmin = datosUsuario["tokenAdmin"]
     this.obtenerCategorias()
   }  
 
@@ -86,9 +86,8 @@ export class ListaCategoriasComponent {
     }
   }
 
-  irListaProductos(productoID:number) {    
-    this._adminServiceApi.productoID = productoID
-    this._router.navigateByUrl(`admin/lista-productos/${productoID}`)
+  irListaProductos(categoriaID:number) {   
+    this._router.navigateByUrl(`admin/lista-productos/${categoriaID}`)
   }
 
   //Filtro para el buscador de la tabla
