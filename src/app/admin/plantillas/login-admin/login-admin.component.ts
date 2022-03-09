@@ -23,6 +23,7 @@ export class LoginAdminComponent implements OnInit {
       usuarioAdmin : loginData["usuario"],
       password : loginData["password"]
     }
+    this.quitarEspaciosFinales(body)
     this._api.auth(body).subscribe({
       next: (x) => {
         if(x.status == "ok") {
@@ -34,5 +35,14 @@ export class LoginAdminComponent implements OnInit {
       }, 
       error: (err) => {console.log(err)}      
     })    
+  }
+
+  quitarEspaciosFinales(json:any){
+    let keys = Object.keys(json);
+    keys.forEach(key => {
+      if(typeof json[`${key}`] == 'string') {
+        json[`${key}`] = json[`${key}`].trim()
+      }
+    });    
   }
 }
