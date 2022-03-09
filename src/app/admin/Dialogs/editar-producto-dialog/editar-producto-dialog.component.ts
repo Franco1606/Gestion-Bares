@@ -33,15 +33,11 @@ export class EditarProductoDialogComponent implements OnInit {
   obtenerDatos() {
     this.form.controls["productoID"].setValue(this._AdminServiceApi.producto.productoID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
-    this._AdminServiceApi.obtenerProducto(this._AdminServiceApi.producto.productoID).subscribe({
-      next: (x) => {
-        this.form.controls["nombre"].setValue(x.nombre)
-        this.form.controls["descripcion"].setValue(x.descripcion)
-        this.form.controls["precio"].setValue(x.precio)
-        this.form.controls["mostrar"].setValue(Boolean(Number(x.mostrar)))
-        this.mostrar = Boolean(Number(x.mostrar))
-      }
-    })
+    this.form.controls["nombre"].setValue(this._AdminServiceApi.producto.nombre)
+    this.form.controls["descripcion"].setValue(this._AdminServiceApi.producto.descripcion)
+    this.form.controls["precio"].setValue(this._AdminServiceApi.producto.precio)
+    this.form.controls["mostrar"].setValue(Boolean(Number(this._AdminServiceApi.producto.mostrar)))
+    this.mostrar = Boolean(Number(this._AdminServiceApi.producto.mostrar))    
   }
 
   editarProducto() {
