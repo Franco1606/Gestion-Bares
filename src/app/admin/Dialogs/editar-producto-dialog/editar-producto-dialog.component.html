@@ -1,0 +1,30 @@
+<button mat-button color="warn" mat-dialog-close style="float: right;"><mat-icon>close</mat-icon></button>  
+<h2 mat-dialog-title>Actualizar Producto</h2>
+  <div class="publicado" *ngIf="mostrar">Publicado</div>
+  <div class="nopublicado" *ngIf="!mostrar">Sin Publicar</div>
+  <br>
+  <mat-dialog-content class="mat-typography">
+    <div class="contenedor">
+      <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="editarProducto()">      
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input type="input" matInput formControlName="nombre" placeholder="nombre" required autofocus>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Descripcion</mat-label>
+              <input type="input" matInput formControlName="descripcion" placeholder="descripcion">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Precio</mat-label>
+              <input type="input" matInput formControlName="precio" placeholder="precio">
+          </mat-form-field>                
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="mostrar">Publicar</mat-checkbox>         
+          <br>
+          <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Cambiar</button> 
+          <mat-dialog-actions align="end">
+            <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+          </mat-dialog-actions>           
+        </form>    
+    </div>
+  </mat-dialog-content>
+  

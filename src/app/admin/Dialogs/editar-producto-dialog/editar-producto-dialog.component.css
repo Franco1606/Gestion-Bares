@@ -1,0 +1,31 @@
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    min-width: 300px;
+}
+
+.publicado {      
+    background-color: rgb(77, 226, 97);  
+    color: white;
+    text-transform: uppercase;
+    padding: 10px; 
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.nopublicado {      
+    background-color: rgb(250, 95, 81);  
+    padding: 10px; 
+    border-radius: 4px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+}
