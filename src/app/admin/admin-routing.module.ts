@@ -9,7 +9,7 @@ import { ListaProductosComponent } from "./vistas/lista-productos/lista-producto
 const routes: Routes = [
   { path: "login", component:LoginAdminComponent },
   { path: "lista-categorias", component:ListaCategoriasComponent },
-  { path: "lista-productos/:productoID", component:ListaProductosComponent }
+  { path: "lista-productos/:categoriaID", component:ListaProductosComponent }
 ];
 
 @NgModule({
