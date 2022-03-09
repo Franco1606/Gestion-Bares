@@ -1,1 +1,49 @@
-<app-header-admin (usuarioID)="obtenerUsuario($event)"></app-header-admin>
+<app-header-admin (datosUsuario)="obtenerUsuario($event)"></app-header-admin>
+<br>
+<button mat-button routerLink="/admin/lista-categorias" color="primary"><mat-icon>chevron_left</mat-icon>Volver</button>
+<br>
+<div class="contendor-principal">
+    <h1 class="titulo">PRODUCTOS</h1>
+    <br>
+    <mat-form-field class="buscador">
+      <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Buscar">
+    </mat-form-field>
+    <br>
+    
+    <div class="contnedor-tabla-agregar">
+        <button class="agregar" (click)="agregarProducto()" mat-button color="primary">Agregar Producto <mat-icon>add</mat-icon></button>             
+        
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Nombre Column -->
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element">
+              <button  mat-button (click)="editarProducto(element)">{{element.nombre}}</button>           
+            </td>
+          </ng-container>
+        
+          <!-- Accion Column -->
+          <ng-container matColumnDef="accion">
+            <th mat-header-cell *matHeaderCellDef> Accion </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button matTooltip="Editar Producto" color="primary" (click)="editarProducto(element)"><mat-icon>edit</mat-icon></button>                           
+              <button mat-icon-button matTooltip="Eliminar lista" color="warn" (click)="borrarProducto(element.productoID, element.nombre)"><mat-icon>delete</mat-icon></button></td>
+          </ng-container>
+
+          <!-- publicar Column -->
+          <ng-container matColumnDef="publicar">
+            <th mat-header-cell *matHeaderCellDef> Publicar </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox type="checkbox" class="checkbox" [checked]="element.mostrar" (change)="cambiarMostrar(element)"></mat-checkbox>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                       showFirstLastButtons 
+                       aria-label="Seleccione pagina de categoria">
+        </mat-paginator>
+    </div>
+</div>
