@@ -1,0 +1,28 @@
+<button mat-button color="warn" mat-dialog-close style="float: right;"><mat-icon>close</mat-icon></button>  
+<h2 mat-dialog-title>Agregar Producto</h2>
+<mat-dialog-content>
+  <div class="contenedor">
+    <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="agregarProducto()">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="input" matInput formControlName="nombre" placeholder="Nombre" required autofocus>
+        </mat-form-field>                
+        <br>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <input type="input" matInput formControlName="descripcion" placeholder="Descripcion">
+        </mat-form-field>                
+        <br>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Precio</mat-label>
+            <input type="input" matInput formControlName="precio" placeholder="Precio" required>
+        </mat-form-field>                
+        <br>
+        <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Agregar</button> 
+        <mat-dialog-actions align="end">
+          <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+        </mat-dialog-actions>           
+    </form>    
+  </div>
+</mat-dialog-content>
+
