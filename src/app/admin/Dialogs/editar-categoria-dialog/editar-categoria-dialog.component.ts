@@ -19,7 +19,9 @@ export class EditarCategoriaDialogComponent implements OnInit {
   tokenAdmin!:string   
   // Formulario //
   form:FormGroup = new FormGroup({
-    "nombre" : new FormControl("", Validators.required)
+    "nombre" : new FormControl("", Validators.required),
+    "categoriaID" : new FormControl(),
+    "tokenAdmin" : new FormControl()
   })
 
   ngOnInit(): void {
@@ -28,27 +30,48 @@ export class EditarCategoriaDialogComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.categoriaID = this._AdminServiceApi.categoriaID
+    this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoriaID)
+    this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
     this.nombre = this._AdminServiceApi.nombre    
-    this.tokenAdmin = this._AdminServiceApi.tokenAdmin
   }
 
   msotrarDatosEnInputs(){
     this.form.controls["nombre"].patchValue(this.nombre)
   }
 
-  editarCategoria() {
-    this.nombre = this.form.controls["nombre"].value
-    this._AdminServiceApi.modificarCategoria(this.categoriaID, this.tokenAdmin, this.nombre).subscribe({
-      next: () => {
-        alert("Se actualizo el nombre de la categoria")
-        location.reload()
-      },
-      error: () => {        
-        alert("No se pudo actualizar el nombre de la categoria o no se modifico")
-        location.reload()
+  editarCategoria() {    
+    if(this.verificarCampos(this.nombre)) {
+      this.quitarEspaciosFinales(this.form.value)
+      this._AdminServiceApi.modificarCategoria(this.form.value).subscribe({
+        next: () => {
+          alert("Se actualizo el nombre de la categoria")
+          location.reload()
+        },
+        error: () => {        
+          alert("No se pudo actualizar el nombre de la categoria o no se modifico")
+          location.reload()
+        }
+      })
+    } else {
+      alert("El campo de categoria es requerido")
+    }    
+  }
+
+  verificarCampos(...campos:string[]):boolean {
+    let verificador = true
+    campos.forEach(campo => {
+      if(campo.trim() == "") {
+        verificador = false
       }
-    })
+    });
+    return verificador
+  }
+
+  quitarEspaciosFinales(json:any){
+    let keys = Object.keys(json);
+    keys.forEach(key => {
+      json[`${key}`] = json[`${key}`].trim()
+    });    
   }
 
 }
