@@ -16,7 +16,7 @@ export class HeaderAdminComponent implements OnInit {
   tokenAdmin!:string
   usuario!:string
 
-  @Output() usuarioID = new EventEmitter<number>();  
+  @Output() datosUsuario = new EventEmitter<any>();  
 
   ngOnInit(): void {
     if(localStorage.getItem("tokenAdmin")){
@@ -33,7 +33,7 @@ export class HeaderAdminComponent implements OnInit {
       next: (x) => {
         if(x.usuarioID != null) {
           this.usuario = x.usuario
-          this.usuarioID.emit(x.usuarioID)          
+          this.datosUsuario.emit({usuarioID: x.usuarioID, tokenAdmin: this.tokenAdmin})          
         } else {
           alert("Sesion expirada")
           localStorage.removeItem("tokenAdmin")       
