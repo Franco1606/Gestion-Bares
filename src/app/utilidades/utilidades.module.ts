@@ -14,6 +14,7 @@ import { MatTableModule } from "@angular/material/table"
 import { MatPaginatorModule } from "@angular/material/paginator"
 import { MatSortModule } from "@angular/material/sort"
 import { MatDialogModule } from "@angular/material/dialog"
+import { MatCheckboxModule } from "@angular/material/checkbox"
 
 const modules = [
   MatInputModule,
@@ -27,7 +28,8 @@ const modules = [
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule
 ]
 
 
