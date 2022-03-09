@@ -12,6 +12,8 @@ import { HeaderAdminComponent } from './plantillas/header-admin/header-admin.com
 import { AgregarCategoriaDialogComponent } from './Dialogs/agregar-categoria-dialog/agregar-categoria-dialog.component';
 import { EditarCategoriaDialogComponent } from './Dialogs/editar-categoria-dialog/editar-categoria-dialog.component';
 import { ListaProductosComponent } from './vistas/lista-productos/lista-productos.component';
+import { AgregarProductoDialogComponent } from './Dialogs/agregar-producto-dialog/agregar-producto-dialog.component';
+import { EditarProductoDialogComponent } from './Dialogs/editar-producto-dialog/editar-producto-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ListaProductosComponent } from './vistas/lista-productos/lista-producto
     HeaderAdminComponent,
     AgregarCategoriaDialogComponent,
     EditarCategoriaDialogComponent,
-    ListaProductosComponent      
+    ListaProductosComponent,
+    AgregarProductoDialogComponent,
+    EditarProductoDialogComponent      
   ],
   imports: [
     CommonModule,
