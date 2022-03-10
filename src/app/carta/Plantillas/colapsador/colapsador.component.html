@@ -1,0 +1,9 @@
+<button mat-button (click)="conmutar()">
+    <div style="float: left;">{{titulo}}</div>
+    <div style="float: right;">
+        <mat-icon *ngIf="colapsar">add</mat-icon>
+        <mat-icon *ngIf="!colapsar">remove</mat-icon>
+    </div>
+</button>
+
+
