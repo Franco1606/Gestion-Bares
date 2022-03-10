@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable } from 'rxjs';
 //Importacion de Modelos
-import { modeloCategoria } from '../../ModelosAdmin/modeloCategoria';
 import { modeloRespuesta } from "../../../ModelosApp/modeloRespuesta"
+import { modeloCategoria } from '../../ModelosAdmin/modeloCategoria';
 import { modeloProducto } from '../../ModelosAdmin/modeloProducto';
 
 @Injectable({
@@ -19,6 +19,7 @@ export class AdminService {
   usuarioID!:number
   tokenAdmin!:string
   categoria!:modeloCategoria
+  categoriaID!:number
   producto!:modeloProducto
 
   //////////////////////////////////////////////////////////
