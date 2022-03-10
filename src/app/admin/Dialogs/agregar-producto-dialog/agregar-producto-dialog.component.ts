@@ -33,7 +33,7 @@ export class AgregarProductoDialogComponent implements OnInit {
 
   obtenerDatos() {
     this.form.controls["usuarioID"].setValue(this._AdminServiceApi.usuarioID)
-    this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoria.categoriaID)
+    this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoriaID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
   }
 
