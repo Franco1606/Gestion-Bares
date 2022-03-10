@@ -1,0 +1,154 @@
+header {
+    width: 100%;
+}
+
+.headerTxt {
+    width:100%;
+    height: 80px;
+    background-color: rgb(27, 27, 27);      
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    color: white;
+}
+
+h1 {
+    margin-top: 1em;
+    font-size: 3em;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.contenedorPrincipal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgb(19, 19, 19);
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.contenedorPrincipal::before{
+    position: absolute;    
+    background-image: url("../../../../assets/comida.svg");
+    background-size: 18em;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    content: '';
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.categoria {
+    width: 100vw;
+    margin: 1px;    
+}
+
+.colapsador {    
+    color: white;
+    font-size: 1.6em;
+    font-weight: 500;
+}
+
+.nombre h3 {
+    padding: 0;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.contenedorNombreDescripcion {
+    display: flex;
+    flex-direction: column;    
+}
+
+.nombre {
+    font-size: 1.2em;
+}
+
+.descripcion {
+    font-size: 1em;
+    max-width: 230px;
+}
+
+.contenedor-producto {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pedido {
+    font-size: 1.5em;
+    color: rgb(109, 226, 88);
+    font-weight: 600;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.76);
+}
+
+.producto {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.733);
+    padding: 10px;
+    border-radius: 3px;
+    border-bottom: solid rgb(180, 180, 180) 1px;       
+}
+
+.precio {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6em;
+    font-weight: 500;
+}
+
+.precio > div{ 
+    margin-top: 5px;
+}
+
+.contenedor-pedir-cantidad {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contenedor-contador-quitar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* transform: scale(0.8); */
+}
+
+.contenedor-contador-quitar button {
+    margin: 2px;
+}       
+
+.contador {    
+    transform: scale(0.8);
+    align-self: center;
+}
+
+.pedir-comentario {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.pedir-comentario button {
+    margin: 2px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 70px;
+    width: 100%;
+    background-color: rgb(27, 27, 27);       
+}

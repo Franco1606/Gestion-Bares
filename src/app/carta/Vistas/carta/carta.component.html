@@ -1,0 +1,58 @@
+<header>
+    <div class="headerImg"></div>
+    <div class="headerTxt" >
+      <h1 class="Titulo">Nuestra Carta</h1>
+      <span *ngIf="mesaID != null">Mesa Nº {{mesaID}}</span>
+    </div>
+</header>
+  
+<div class="contenedorPrincipal">
+    <div class="categoria" *ngFor="let categoria of categorias">
+        <app-colapsador class="colapsador" [titulo]="categoria.nombre" (colapsador)="colapsar($event, categoria.categoriaID)"></app-colapsador>        
+        <div *ngFor="let producto of productos">
+            <div class="producto" *ngIf="producto.categoriaID == categoria.categoriaID">
+                <div  class="contenedor-producto">
+                    <div class="contenedorNombreDescripcion">
+                        <div *ngIf="verificar(producto.productoID)" class="pedido">Pedido!</div>
+                        <div class="nombre">
+                            <h3>{{ producto.nombre }}</h3>
+                        </div>
+                        <div class="descripcion">
+                            <span *ngIf="producto.descripcion">({{producto.descripcion}})</span>
+                        </div>                           
+                    </div>
+                    <div class="precio">
+                    <div> $ {{ producto.precio }} </div>
+                    </div>
+                </div>
+                <br>
+                <div class="contenedor-pedir-cantidad">
+                    <div class="contenedor-contador-quitar">
+                        <app-contador class="contador" (cantidadProdcutos)="pasarCantidad($event, producto)"></app-contador>
+                        <br>
+                        <button mat-raised-button color="warn" (click)="quitar(producto.productoID, producto.nombre)"> QUITAR </button>
+                    </div>
+                    <div class="pedir-comentario">
+                        <button mat-raised-button color="primary" (click)="agregar(producto)"> AGREGAR </button>
+                        <button mat-raised-button (click)="agregarComentario(producto)">COMENTARIO</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+  
+  <!-- <div *ngIf="pedido.length > 0">
+    <button (click)="verPedido()" class="floatpedido" target="_blank">
+        <mat-icon style="transform: scale(1.6,1.6);">list_alt</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="pedido.length > 0" class="verpedido">
+        Ver pedido
+  </div> -->
+  
+<footer>
+    &reg; Franco Bertolotti
+</footer>
+  
