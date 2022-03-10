@@ -1,0 +1,30 @@
+.contenedor {
+    display: flex;
+}
+
+.boton-izq {
+    background-color: rgb(61, 61, 61);
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    width: 40px;    
+}
+
+.boton-der {
+    background-color: rgb(61, 61, 61);
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width:40px;
+}
+
+button {
+    color: #fff;
+}
+
+.cantidad {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
