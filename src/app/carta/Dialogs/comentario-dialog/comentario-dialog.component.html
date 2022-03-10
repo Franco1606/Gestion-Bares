@@ -1,0 +1,26 @@
+<div class="contenedor-principal">
+  <button mat-button color="warn" mat-dialog-close style="padding: 0;position: absolute; top: -20px; right: -20px;"><mat-icon>close</mat-icon></button>
+  <br>   
+  <h2 mat-dialog-title style="text-align: center; margin-bottom: 0;">Agregar con Comentario</h2>
+  <h3 style="text-align: center; color: rgb(63,81,181);"><strong>Hacé tu pedido personalizado!</strong></h3> 
+  <mat-dialog-content>
+    <div class="contenedor">         
+      <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="agregarComentario()">
+          <mat-form-field appearance="outline">
+              <mat-label>Comentario</mat-label>
+              <input matInput formControlName="comentario" placeholder="Comentario" [autocomplete]="false" autofocus>
+          </mat-form-field>                
+          <br>
+          <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Agregar</button>
+          <br>
+      <P style="text-align: center; margin-bottom: 0;">
+        Agregá el producto con comentarios para indicarnos si queres sacar algun ingrediente que no te guste o no quieras en tu producto
+      </P>
+          <mat-dialog-actions align="end">
+            <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+          </mat-dialog-actions>
+      </form>        
+    </div>
+  </mat-dialog-content>
+</div>
+
