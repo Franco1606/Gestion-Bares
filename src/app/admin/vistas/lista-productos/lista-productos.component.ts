@@ -42,7 +42,7 @@ export class ListaProductosComponent {
   }
   
   obtenerProductos() {
-    this.categoriaID = this._route.snapshot.params["categoriaID"]
+    this.categoriaID = this._route.snapshot.params["categoriaID"]    
     this._adminServiceApi.obtenerProductos(this.usuarioID, this.categoriaID).subscribe({
       next: (x) => {
         if(x.length != 0){
@@ -61,7 +61,7 @@ export class ListaProductosComponent {
 
   agregarProducto() {
     this._adminServiceApi.usuarioID = this.usuarioID
-    this._adminServiceApi.categoria.categoriaID = this.categoriaID
+    this._adminServiceApi.categoriaID = this.categoriaID
     this._adminServiceApi.tokenAdmin = this.tokenAdmin
     this._dialog.open(AgregarProductoDialogComponent)
   }
