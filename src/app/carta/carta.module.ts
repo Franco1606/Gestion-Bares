@@ -8,6 +8,7 @@ import { ColapsadorComponent } from './Plantillas/colapsador/colapsador.componen
 import { ContadorComponent } from './Plantillas/contador/contador.component';
 import { ComentarioDialogComponent } from './Dialogs/comentario-dialog/comentario-dialog.component';
 import { QuitarDialogComponent } from './Dialogs/quitar-dialog/quitar-dialog.component';
+import { PedidoDialogComponent } from './Dialogs/pedido-dialog/pedido-dialog.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { QuitarDialogComponent } from './Dialogs/quitar-dialog/quitar-dialog.com
     ColapsadorComponent,
     ContadorComponent,
     ComentarioDialogComponent,
-    QuitarDialogComponent    
+    QuitarDialogComponent,
+    PedidoDialogComponent    
   ],
   imports: [
     CommonModule,
