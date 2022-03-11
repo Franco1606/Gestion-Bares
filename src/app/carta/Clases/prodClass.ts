@@ -20,7 +20,11 @@ export class prodClass {
         this.mostrar = producto.mostrar
         this.usuarioID = producto.usuarioID
         this.categoriaID = producto.categoriaID
-        this.cantidad = producto.cantidad
+        if(!producto.cantidad) {
+            this.cantidad = 1    
+        } else {
+            this.cantidad = producto.cantidad
+        }
         this.comentario = producto.comentario
     }
 }
