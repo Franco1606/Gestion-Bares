@@ -14,6 +14,8 @@ export class CartaService {
   //URL de la API
   url = "https://visita360.hopto.org/Api-Gestion-Bares/"
   //Paso de variables por servicio
+  usuarioID!:number
+  mesaID!:number
   comentario!:string
   producto!:modeloProductoPedido
   productoID!:number
