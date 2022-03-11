@@ -13,6 +13,7 @@ import { MatDialog } from "@angular/material/dialog"
 // Dependencias para Dialogs
 import { ComentarioDialogComponent } from "../../Dialogs/comentario-dialog/comentario-dialog.component"
 import { QuitarDialogComponent } from '../../Dialogs/quitar-dialog/quitar-dialog.component';
+import { PedidoDialogComponent } from "../../Dialogs/pedido-dialog/pedido-dialog.component"
 
 @Component({
   selector: 'app-carta',
@@ -133,5 +134,17 @@ export class CartaComponent implements OnInit {
       verificador = true  
     }
     return verificador
+  }
+
+  verPedido() {
+    this._cartaServiceApi.mesaID = this.mesaID
+    this._cartaServiceApi.usuarioID = this.usuarioID
+    this._cartaServiceApi.pedido = this.pedido
+    let dialogRef = this._dialog.open(PedidoDialogComponent)
+    dialogRef.afterClosed().subscribe({
+      next: () => {
+        this.pedido = this._cartaServiceApi.pedido
+      }
+    })
   }
 }
