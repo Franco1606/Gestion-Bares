@@ -20,6 +20,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
   // Formulario //
   form:FormGroup = new FormGroup({
     "nombre" : new FormControl("", Validators.required),
+    "comentario" : new FormControl("", Validators.required),
     "categoriaID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
@@ -32,6 +33,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
   obtenerDatos() {
     this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoria.categoriaID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
+    this.form.controls["comentario"].setValue(Boolean(Number(this._AdminServiceApi.categoria.comentario)))
     this.nombre = this._AdminServiceApi.categoria.nombre    
   }
 
@@ -39,19 +41,21 @@ export class EditarCategoriaDialogComponent implements OnInit {
     this.form.controls["nombre"].patchValue(this.nombre)
   }
 
-  editarCategoria() {    
+  editarCategoria() { 
+    this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
     if(this.verificarCampos(this.nombre)) {
       this.quitarEspaciosFinales(this.form.value)
       this._AdminServiceApi.modificarCategoria(this.form.value).subscribe({
         next: () => {
-          alert("Se actualizo el nombre de la categoria")
+          alert("Se actualizo la categoria")
           location.reload()
         },
         error: () => {        
-          alert("No se pudo actualizar el nombre de la categoria o no se modifico")
+          alert("No se pudo actualizar la categoria o no se modifico")
           location.reload()
         }
       })
+      console.log(this.form.value)
     } else {
       alert("El campo de categoria es requerido")
     }    
@@ -70,7 +74,9 @@ export class EditarCategoriaDialogComponent implements OnInit {
   quitarEspaciosFinales(json:any){
     let keys = Object.keys(json);
     keys.forEach(key => {
-      json[`${key}`] = json[`${key}`].trim()
+      if(typeof json[`${key}`] == 'string') {
+        json[`${key}`] = json[`${key}`].trim()
+      }
     });    
   }
 
