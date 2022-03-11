@@ -13,7 +13,12 @@
             <div class="producto" *ngIf="producto.categoriaID == categoria.categoriaID">
                 <div  class="contenedor-producto">
                     <div class="contenedorNombreDescripcion">
-                        <div *ngIf="verificar(producto.productoID)" class="pedido">Pedido!</div>
+                        <div class="pedido-detalles">
+                            <div *ngIf="verificarExistencia(producto.productoID)" class="pedido">Pedido!</div>
+                            <div *ngIf="verificarExistencia(producto.productoID) && categoria.comentario == 1">
+                                <button mat-button (click)="quitar(producto.productoID, producto.nombre, categoria.comentario)">detalles</button >
+                            </div>
+                        </div>
                         <div class="nombre">
                             <h3>{{ producto.nombre }}</h3>
                         </div>
@@ -28,13 +33,11 @@
                 <br>
                 <div class="contenedor-pedir-cantidad">
                     <div class="contenedor-contador-quitar">
-                        <app-contador class="contador" (cantidadProdcutos)="pasarCantidad($event, producto)"></app-contador>
-                        <br>
-                        <button mat-raised-button color="warn" (click)="quitar(producto.productoID, producto.nombre)"> QUITAR </button>
+                        <app-contador class="contador" (cantidadProdcutos)="pasarCantidad($event, producto)"></app-contador>                        
                     </div>
-                    <div class="pedir-comentario">
-                        <button mat-raised-button color="primary" (click)="agregar(producto)"> AGREGAR </button>
-                        <button mat-raised-button (click)="agregarComentario(producto)">COMENTARIO</button>                        
+                    <div class="pedir-quitar">                        
+                        <button mat-raised-button color="primary" (click)="agregar(producto, categoria.comentario)">AGREGAR</button>
+                        <button mat-raised-button color="warn" (click)="quitar(producto.productoID, producto.nombre, categoria.comentario)">QUITAR</button>
                     </div>
                 </div>
             </div>
