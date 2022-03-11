@@ -6,7 +6,8 @@
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Nombre</mat-label>
             <input type="input" matInput formControlName="nombre" placeholder="Nombre" required autofocus>
-        </mat-form-field>                
+        </mat-form-field>        
+        <mat-checkbox type="checkbox" class="example-margin" formControlName="comentario">Habilitar Comentarios</mat-checkbox>
         <br>
         <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Cambiar</button> 
         <mat-dialog-actions align="end">
