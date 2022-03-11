@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+// Clases
+import { prodClass } from "../../Clases/prodClass"
 // Inyecciones de dependencia
 import { CartaService } from "../../servicios/api/carta.service"
 // Dependencias Formulario
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+// Dependencias del Dialog 
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-comentario-dialog',
@@ -11,15 +15,40 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ComentarioDialogComponent {
 
-  constructor( private _cartaServiceApi:CartaService ) { }
+  constructor( private _cartaServiceApi:CartaService, private dialogRef:MatDialogRef<ComentarioDialogComponent> ) { }
 
   //////////   Atributos de la clase   /////////////
     // Formulario //
     form:FormGroup = new FormGroup({
-      "comentario" : new FormControl(),
+      "comentario" : new FormControl("")
     })
 
   agregarComentario() {
-    this._cartaServiceApi.comentario = this.form.controls["comentario"].value || ""
+    let prod = new prodClass(this._cartaServiceApi.producto)    
+    prod.IDinterno = this._cartaServiceApi.IDinterno       
+    if(this.verificarCampos(this.form.controls["comentario"].value)) {
+      prod.comentario = this.form.controls["comentario"].value
+      this._cartaServiceApi.pedido.push(prod)
+      this._cartaServiceApi.IDinterno += 1
+    } else {
+      if(this._cartaServiceApi.pedido.filter(element => element.productoID == prod.productoID && element.comentario == null).length == 0 ) {
+        this._cartaServiceApi.pedido.push(prod)
+        this._cartaServiceApi.IDinterno += 1
+      } else {
+        alert("Este producto ya se agrego al pedido")
+      }
+    }
+    console.log(prod)
+    this.dialogRef.close()    
   } 
+
+  verificarCampos(...campos:string[]):boolean {
+    let verificador = true
+    campos.forEach(campo => {
+      if(campo.trim() == "") {
+        verificador = false
+      }
+    });
+    return verificador
+  }
 }
