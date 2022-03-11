@@ -52,36 +52,53 @@ export class CartaComponent implements OnInit {
     })
   }
 
-  agregar(producto:modeloProductoPedido) {
-    if(!producto.cantidad) {
-      producto.cantidad = 1      
-    }
+  agregar(producto:modeloProductoPedido, comentario:number) {    
+    if(comentario == 1) {      
+      let dialogRef = this._dialog.open(ComentarioDialogComponent)
+      this._cartaServiceApi.pedido = this.pedido
+      this._cartaServiceApi.producto = producto
+      this._cartaServiceApi.IDinterno = this.IDinterno
+      dialogRef.afterClosed().subscribe({
+        next: () => {
+          this.pedido = this._cartaServiceApi.pedido
+          this.IDinterno = this._cartaServiceApi.IDinterno        
+        }
+      })
 
-    if( this.pedido.filter(element =>  element.productoID == producto.productoID && element.comentario == null).length == 0 ) {      
-      let prod = new prodClass(producto)
-      prod.IDinterno = this.IDinterno
-      this.pedido.push(prod)
-      this.IDinterno += 1
-      console.log(this.pedido)
     } else {
-      alert("Este producto ya se agrego al pedido")
+      if( this.pedido.filter(element =>  element.productoID == producto.productoID && element.comentario == null).length == 0 ) {      
+        let prod = new prodClass(producto)
+        prod.IDinterno = this.IDinterno
+        this.pedido.push(prod)
+        this.IDinterno += 1        
+      } else {
+        alert("Este producto ya se agrego al pedido")
+      }
     }
   }
 
-  quitar(productoID:number, nombre:string) {
-    if(this.pedido.filter(element => element.productoID == productoID).length != 0) {
-      this._cartaServiceApi.productoID = productoID
-      this._cartaServiceApi.nombre = nombre
-      this._cartaServiceApi.pedido = this.pedido
-      let dialogRef = this._dialog.open(QuitarDialogComponent)
-      dialogRef.beforeClosed().subscribe({
-        next: () => {
-          this.pedido = this._cartaServiceApi.pedido
-        } 
-      })
+  quitar(productoID:number, nombre:string, comentario:number) {
+    if(comentario == 1){
+      if(this.pedido.filter(element => element.productoID == productoID).length != 0) {
+        this._cartaServiceApi.productoID = productoID
+        this._cartaServiceApi.nombre = nombre
+        this._cartaServiceApi.pedido = this.pedido
+        let dialogRef = this._dialog.open(QuitarDialogComponent)
+        dialogRef.afterClosed().subscribe({
+          next: () => {
+            this.pedido = this._cartaServiceApi.pedido
+          } 
+        })
+      } else {
+        alert("No hay pedidos de este producto")
+      }
     } else {
-      alert("No hay pedidos de este producto")
-    }
+      if(this.pedido.filter(element => element.productoID == productoID).length != 0) {
+        this.pedido = this.pedido.filter(element => element.productoID != productoID)
+      } else {
+        alert("No hay pedidos de este producto")
+      }
+    }    
   }
 
   colapsar(e: boolean, categoriaID:number) {
@@ -92,8 +109,7 @@ export class CartaComponent implements OnInit {
             if(producto.mostrar == 1) {
               this.productos.push(producto)
             }
-          }); 
-          console.log(this.productos)
+          });           
         }
       })
     } else {
@@ -101,49 +117,17 @@ export class CartaComponent implements OnInit {
         next: (x) => {                          
           x.forEach(producto => {
             this.productos =  this.productos.filter(producto => producto.categoriaID != categoriaID)
-          });
-          console.log(this.productos)
+          });         
         }
       })
-    }
+    }    
   }
 
   pasarCantidad(e: number, productoPedido:modeloProductoPedido){  
     productoPedido.cantidad = e
-  }
+  }  
 
-  agregarComentario(producto:modeloProductoPedido) {   
-    let dialogRef = this._dialog.open(ComentarioDialogComponent)
-    dialogRef.afterClosed().subscribe({
-      next: () => {
-        if(this.verificarCampos(this._cartaServiceApi.comentario)){
-          if(!producto.cantidad) {
-            producto.cantidad = 1      
-          }
-          let prod = new prodClass(producto)
-          prod.comentario = this._cartaServiceApi.comentario
-          prod.IDinterno = this.IDinterno
-          this.pedido.push(prod)
-          this.IDinterno += 1
-          console.log(this.pedido)
-        } else {
-          alert("No puede realizar un pedido con comentarios en blanco")
-        }
-      } 
-    })    
-  }
-
-  verificarCampos(...campos:string[]):boolean {
-    let verificador = true
-    campos.forEach(campo => {
-      if(campo.trim() == "") {
-        verificador = false
-      }
-    });
-    return verificador
-  }
-
-  verificar(productoID:number):boolean {
+  verificarExistencia(productoID:number):boolean {
     let verificador = false
     if(this.pedido.filter(element => element.productoID == productoID).length > 0){
       verificador = true  
