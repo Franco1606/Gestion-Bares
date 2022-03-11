@@ -84,11 +84,23 @@ h1 {
     justify-content: space-between;
 }
 
+.pedido-detalles {
+    display: flex;
+    align-items: baseline;    
+}
+
+.pedido-detalles div button {    
+    color: rgb(31, 92, 204);
+    text-decoration: underline;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
 .pedido {
     font-size: 1.5em;
     color: rgb(109, 226, 88);
     font-weight: 600;
-    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.76);
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.76);    
 }
 
 .producto {
@@ -120,6 +132,7 @@ h1 {
 .contenedor-contador-quitar {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     /* transform: scale(0.8); */
 }
@@ -133,13 +146,14 @@ h1 {
     align-self: center;
 }
 
-.pedir-comentario {
+.pedir-quitar {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
-.pedir-comentario button {
+.pedir-quitar button {
+    width: 100%;
     margin: 2px;
 }
 
