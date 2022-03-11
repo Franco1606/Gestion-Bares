@@ -24,8 +24,7 @@
           <ng-container matColumnDef="accion">
             <th mat-header-cell *matHeaderCellDef> Accion </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button matTooltip="Editar nombre" color="primary" (click)="editarNombreCategoria(element)"><mat-icon>edit</mat-icon></button>             
-              <button mat-icon-button matTooltip="Editar lista" color="primary" (click)="irListaProductos(element.categoriaID)"><mat-icon>menu_book</mat-icon></button>            
+              <button mat-icon-button matTooltip="Editar nombre" color="primary" (click)="editarCategoria(element)"><mat-icon>edit</mat-icon></button>                           
               <button mat-icon-button matTooltip="Eliminar lista" color="warn" (click)="borrarCategoria(element.categoriaID, element.nombre)"><mat-icon>delete</mat-icon></button></td>
           </ng-container>
         
