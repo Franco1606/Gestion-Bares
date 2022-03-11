@@ -1,5 +1,6 @@
 export interface modeloCategoria {
     categoriaID:number,
     nombre:string,
-    usuarioID:number
+    usuarioID:number,
+    comentario:number
 }
