@@ -67,7 +67,7 @@ export class ListaProductosComponent {
   }
 
   editarProducto(producto:modeloProducto) {
-    this._adminServiceApi.producto = producto    
+    this._adminServiceApi.producto = producto
     this._adminServiceApi.tokenAdmin = this.tokenAdmin
     this._dialog.open(EditarProductoDialogComponent)
   }
