@@ -38,27 +38,18 @@ export class CartaService {
   /////////////////////////////////////////////////////////
   /////////////  METODOS PARA ORDENES  ///////////////////
   ///////////////////////////////////////////////////////
-  generarOrdenMesa(usuarioID:number, mesaID:number, pedidos:claseProductoPedido[], estado:string, solicitante:string):Observable<modeloRespuesta> {
+  
+  generarOrden(usuarioID:number, mesaID:number, domicilio:string, pedidos:claseProductoPedido[]):Observable<modeloRespuesta> {
     let body = {
       usuarioID : usuarioID,
       mesaID : mesaID,
-      pedidos: pedidos,
-      estado: estado,
-      solicitante: solicitante
-    }
-    return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
-  }
-
-  generarOrdenDomicilio(usuarioID:number, domicilio:string, pedidos:claseProductoPedido[], estado:string, solicitante:string):Observable<modeloRespuesta> {
-    let body = {
-      usuarioID : usuarioID,
       domicilio: domicilio,
       pedidos: pedidos,
-      estado: estado,
-      solicitante: solicitante
+      estado: "nueva",
+      solicitante: "cliente"
     }
     return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
-  }
+  }  
 }
 
   
