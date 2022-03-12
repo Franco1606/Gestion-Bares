@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { modeloProductoPedido } from "../../ModelosCarta/modeloProductoPedido"
 //Importacion de clases
 import { claseProductoPedido } from '../../Clases/claseProductoPedido';
+import { modeloRespuesta } from 'src/app/ModelosApp/modeloRespuesta';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class CartaService {
   productoID!:number
   IDinterno!:number
   nombre!:string
-  pedido!:claseProductoPedido[]
+  pedidos!:claseProductoPedido[]
 
   /////////////////////////////////////////////////////////
   /////////////  METODOS PARA PRODUCTOS  /////////////////
@@ -32,6 +33,31 @@ export class CartaService {
   //Obtener productos por usuarioID y categoriaID
   obtenerProductos(usuarioID:number, categoriaID:number):Observable<modeloProductoPedido[]> {
     return this._http.get<modeloProductoPedido[]>(this.url + `productos.php?usuarioID=${usuarioID}&categoriaID=${categoriaID}`)
+  }
+
+  /////////////////////////////////////////////////////////
+  /////////////  METODOS PARA ORDENES  ///////////////////
+  ///////////////////////////////////////////////////////
+  generarOrdenMesa(usuarioID:number, mesaID:number, pedidos:claseProductoPedido[], estado:string, solicitante:string):Observable<modeloRespuesta> {
+    let body = {
+      usuarioID : usuarioID,
+      mesaID : mesaID,
+      pedidos: pedidos,
+      estado: estado,
+      solicitante: solicitante
+    }
+    return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
+  }
+
+  generarOrdenDomicilio(usuarioID:number, domicilio:string, pedidos:claseProductoPedido[], estado:string, solicitante:string):Observable<modeloRespuesta> {
+    let body = {
+      usuarioID : usuarioID,
+      domicilio: domicilio,
+      pedidos: pedidos,
+      estado: estado,
+      solicitante: solicitante
+    }
+    return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
   }
 }
 
