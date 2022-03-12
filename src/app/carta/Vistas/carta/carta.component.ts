@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // Clases
-import { prodClass } from "../../Clases/prodClass"
+import { claseProductoPedido } from "../../Clases/claseProductoPedido"
 // Inyecciones de dependencia
 import { AdminService } from "../../../admin/servicios/api/admin.service"
 import { CartaService } from "../../servicios/api/carta.service"
@@ -29,8 +29,7 @@ export class CartaComponent implements OnInit {
   mesaID!:number
   categorias!:modeloCategoria[]
   productos:modeloProductoPedido[] = []
-  pedido:modeloProductoPedido[] = []
-  comentario = ""
+  pedido:claseProductoPedido[] = []
   IDinterno = 0
 
   ngOnInit(): void {
@@ -68,7 +67,7 @@ export class CartaComponent implements OnInit {
 
     } else {
       if( this.pedido.filter(element =>  element.productoID == producto.productoID && element.comentario == null).length == 0 ) {      
-        let prod = new prodClass(producto)
+        let prod = new claseProductoPedido(producto)
         prod.IDinterno = this.IDinterno
         this.pedido.push(prod)
         this.IDinterno += 1        

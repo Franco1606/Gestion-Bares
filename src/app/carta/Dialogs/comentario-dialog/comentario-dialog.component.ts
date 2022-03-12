@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 // Clases
-import { prodClass } from "../../Clases/prodClass"
+import { claseProductoPedido } from "../../Clases/claseProductoPedido"
 // Inyecciones de dependencia
 import { CartaService } from "../../servicios/api/carta.service"
 // Dependencias Formulario
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 // Dependencias del Dialog 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -24,7 +24,7 @@ export class ComentarioDialogComponent {
     })
 
   agregarComentario() {
-    let prod = new prodClass(this._cartaServiceApi.producto)    
+    let prod = new claseProductoPedido(this._cartaServiceApi.producto)
     prod.IDinterno = this._cartaServiceApi.IDinterno       
     if(this.verificarCampos(this.form.controls["comentario"].value)) {
       prod.comentario = this.form.controls["comentario"].value

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable } from 'rxjs';
 //Importacion de Modelos
 import { modeloProductoPedido } from "../../ModelosCarta/modeloProductoPedido"
+//Importacion de clases
+import { claseProductoPedido } from '../../Clases/claseProductoPedido';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +23,7 @@ export class CartaService {
   productoID!:number
   IDinterno!:number
   nombre!:string
-  pedido!:modeloProductoPedido[]
+  pedido!:claseProductoPedido[]
 
   /////////////////////////////////////////////////////////
   /////////////  METODOS PARA PRODUCTOS  /////////////////

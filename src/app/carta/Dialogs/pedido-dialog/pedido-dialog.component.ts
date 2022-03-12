@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // Inyecciones de dependencia
 import { CartaService } from "../../servicios/api/carta.service"
-// Modelos
-import { modeloProductoPedido } from '../../ModelosCarta/modeloProductoPedido';
+// Clases
+import { claseProductoPedido } from '../../Clases/claseProductoPedido';
 // Dependencias del Dialog 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -19,10 +19,10 @@ export class PedidoDialogComponent implements OnInit {
     total = 0
     // Tabla //
     displayedColumns = ["cantidad", "producto", "precio", "comentario", "eliminar"]
-    dataSource!:modeloProductoPedido[]
+    dataSource!:claseProductoPedido[]
 
   ngOnInit(): void {     
-    this.dataSource = this._cartaServiceApi.pedido    
+    this.dataSource = this._cartaServiceApi.pedido
     this._cartaServiceApi.pedido.forEach(element => {
       this.total += element.cantidad*element.precio
     })

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // Inyecciones de dependencia
 import { CartaService } from "../../servicios/api/carta.service"
-// Modelos
-import { modeloProductoPedido } from '../../ModelosCarta/modeloProductoPedido';
+// Clases
+import { claseProductoPedido } from '../../Clases/claseProductoPedido';
 // Dependencias del Dialog 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -16,10 +16,10 @@ export class QuitarDialogComponent implements OnInit {
   constructor( private _cartaServiceApi:CartaService,  private dialogRef:MatDialogRef<QuitarDialogComponent> ) { }
 
     //////////   Atributos de la clase   /////////////
-    nombre!:string
+    nombre!:string    
     // Tabla //
     displayedColumns = ["cantidad", "comentario", "eliminar"]
-    dataSource!:modeloProductoPedido[]
+    dataSource!:claseProductoPedido[]
 
   ngOnInit(): void {
     this.nombre = this._cartaServiceApi.nombre
