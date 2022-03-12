@@ -23,13 +23,13 @@ export class QuitarDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.nombre = this._cartaServiceApi.nombre
-    this.dataSource = this._cartaServiceApi.pedido.filter(element => element.productoID == this._cartaServiceApi.productoID)
+    this.dataSource = this._cartaServiceApi.pedidos.filter(element => element.productoID == this._cartaServiceApi.productoID)
   }
 
   quitarProducto(IDinterno:number) {
-    this._cartaServiceApi.pedido = this._cartaServiceApi.pedido.filter(element => element.IDinterno != IDinterno )
-    this.dataSource = this._cartaServiceApi.pedido.filter(element => element.productoID == this._cartaServiceApi.productoID)
-    if(this._cartaServiceApi.pedido.filter(element => element.productoID == this._cartaServiceApi.productoID).length == 0) {
+    this._cartaServiceApi.pedidos = this._cartaServiceApi.pedidos.filter(element => element.IDinterno != IDinterno )
+    this.dataSource = this._cartaServiceApi.pedidos.filter(element => element.productoID == this._cartaServiceApi.productoID)
+    if(this._cartaServiceApi.pedidos.filter(element => element.productoID == this._cartaServiceApi.productoID).length == 0) {
       this.dialogRef.close()
     }
   }
