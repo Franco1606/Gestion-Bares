@@ -45,7 +45,7 @@ export class PedidoDialogComponent implements OnInit {
       this.domicilio = prompt("Ingrese su domicilio") || ""
     } else {
       this.domicilio = ""      
-    }
+    }   
 
     if(confirm("Confirmar Pedido?")) {      
       this._cartaServiceApi.generarOrden(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this.domicilio, this._cartaServiceApi.pedidos).subscribe({
