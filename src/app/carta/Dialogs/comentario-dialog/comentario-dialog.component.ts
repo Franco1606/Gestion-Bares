@@ -28,14 +28,14 @@ export class ComentarioDialogComponent {
     prod.IDinterno = this._cartaServiceApi.IDinterno       
     if(this.verificarCampos(this.form.controls["comentario"].value)) {
       prod.comentario = this.form.controls["comentario"].value
-      this._cartaServiceApi.pedido.push(prod)
+      this._cartaServiceApi.pedidos.push(prod)
       this._cartaServiceApi.IDinterno += 1
     } else {
-      if(this._cartaServiceApi.pedido.filter(element => element.productoID == prod.productoID && element.comentario == null).length == 0 ) {
-        this._cartaServiceApi.pedido.push(prod)
+      if(this._cartaServiceApi.pedidos.filter(element => element.productoID == prod.productoID && element.comentario == null).length == 0 ) {
+        this._cartaServiceApi.pedidos.push(prod)
         this._cartaServiceApi.IDinterno += 1
       } else {
-        alert("Este producto ya se agrego al pedido")
+        alert("Este producto ya se agrego al pedido, puede agregar otro de este tipo con un comentario")
       }
     }
     console.log(prod)
