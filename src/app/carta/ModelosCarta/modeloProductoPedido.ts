@@ -6,7 +6,5 @@ export interface modeloProductoPedido {
     mostrar:number,
     usuarioID:number,
     categoriaID:number,
-    cantidad:number,
-    comentario:string,
-    IDinterno:number
+    cantidad:number
 }
