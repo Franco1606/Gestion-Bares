@@ -55,12 +55,12 @@ export class CartaComponent implements OnInit {
   agregar(producto:modeloProductoPedido, comentario:number) {    
     if(comentario == 1) {      
       let dialogRef = this._dialog.open(ComentarioDialogComponent)
-      this._cartaServiceApi.pedido = this.pedido
+      this._cartaServiceApi.pedidos = this.pedido
       this._cartaServiceApi.producto = producto
       this._cartaServiceApi.IDinterno = this.IDinterno
       dialogRef.afterClosed().subscribe({
         next: () => {
-          this.pedido = this._cartaServiceApi.pedido
+          this.pedido = this._cartaServiceApi.pedidos
           this.IDinterno = this._cartaServiceApi.IDinterno        
         }
       })
@@ -82,11 +82,11 @@ export class CartaComponent implements OnInit {
       if(this.pedido.filter(element => element.productoID == productoID).length != 0) {
         this._cartaServiceApi.productoID = productoID
         this._cartaServiceApi.nombre = nombre
-        this._cartaServiceApi.pedido = this.pedido
+        this._cartaServiceApi.pedidos = this.pedido
         let dialogRef = this._dialog.open(QuitarDialogComponent)
         dialogRef.afterClosed().subscribe({
           next: () => {
-            this.pedido = this._cartaServiceApi.pedido
+            this.pedido = this._cartaServiceApi.pedidos
           } 
         })
       } else {
@@ -138,11 +138,11 @@ export class CartaComponent implements OnInit {
   verPedido() {
     this._cartaServiceApi.mesaID = this.mesaID
     this._cartaServiceApi.usuarioID = this.usuarioID
-    this._cartaServiceApi.pedido = this.pedido
+    this._cartaServiceApi.pedidos = this.pedido
     let dialogRef = this._dialog.open(PedidoDialogComponent)
     dialogRef.afterClosed().subscribe({
       next: () => {
-        this.pedido = this._cartaServiceApi.pedido
+        this.pedido = this._cartaServiceApi.pedidos
       }
     })
   }
