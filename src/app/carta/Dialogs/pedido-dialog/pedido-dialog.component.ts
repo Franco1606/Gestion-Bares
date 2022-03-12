@@ -40,22 +40,15 @@ export class PedidoDialogComponent implements OnInit {
   }
 
   emitirOrden() {    
-    if(this._cartaServiceApi.mesaID == null) {
+    if(this._cartaServiceApi.mesaID == null) {      
+      this._cartaServiceApi.mesaID = 0
       this.domicilio = prompt("Ingrese su domicilio") || ""
-      this._cartaServiceApi.generarOrdenDomicilio(this._cartaServiceApi.usuarioID, this.domicilio, this._cartaServiceApi.pedidos, "nueva", "cliente").subscribe({
-        next: (x) => {
-          console.log(x.result["ordenID"])
-          console.log(x.result["nuevaFecha"])
-          console.log(x.result["numOrden"])
-          location.reload()
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
     } else {
-      console.log(this._cartaServiceApi.mesaID)
-      this._cartaServiceApi.generarOrdenMesa(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this._cartaServiceApi.pedidos, "nueva", "cliente").subscribe({
+      this.domicilio = ""      
+    }
+
+    if(confirm("Confirmar Pedido?")) {      
+      this._cartaServiceApi.generarOrden(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this.domicilio, this._cartaServiceApi.pedidos).subscribe({
         next: (x) => {
           console.log(x.result["ordenID"])
           console.log(x.result["nuevaFecha"])
@@ -66,7 +59,7 @@ export class PedidoDialogComponent implements OnInit {
           console.log(err)
         }
       })
-    }    
+    }
   }
 
 }
