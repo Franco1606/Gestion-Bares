@@ -3,8 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { CartaService } from "../../servicios/api/carta.service"
 // Clases
 import { claseProductoPedido } from '../../Clases/claseProductoPedido';
+import { Pdf } from "../../Plantillas/pdf"
 // Dependencias del Dialog 
 import { MatDialogRef } from '@angular/material/dialog';
+// Dependencias pdfMake
+import pdfMake from "pdfmake/build/pdfMake"
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-pedido',
@@ -45,15 +50,16 @@ export class PedidoDialogComponent implements OnInit {
       this.domicilio = prompt("Ingrese su domicilio") || ""
     } else {
       this.domicilio = ""      
-    }   
-
-    if(confirm("Confirmar Pedido?")) {      
+    }
+    
+    if(confirm("Confirmar Pedido?")) {
       this._cartaServiceApi.generarOrden(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this.domicilio, this._cartaServiceApi.pedidos).subscribe({
         next: (x) => {
-          console.log(x.result["ordenID"])
-          console.log(x.result["nuevaFecha"])
-          console.log(x.result["numOrden"])
-          location.reload()
+          this.crearPdf(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"])
+          if(this.domicilio != "") {
+          let msjWhatsApp =  this.escribirTextoWhatsapp(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"])
+          window.location.href = `https://api.whatsapp.com/send?phone=+543413638536&text=${msjWhatsApp}`
+          }
         },
         error: (err) => {
           console.log(err)
@@ -62,4 +68,29 @@ export class PedidoDialogComponent implements OnInit {
     }
   }
 
+  crearPdf(pedidos:claseProductoPedido[] ,fecha:Date, numOrden:string) {
+    let pdf = new Pdf()
+    let contenido = pdf.crear(pedidos, fecha, numOrden)
+    pdfMake.createPdf(contenido).open()    
+  }
+
+  escribirTextoWhatsapp( pedidos:claseProductoPedido[], fecha:Date, numOrden:string):string {
+    let msjWhatsApp = `*IMPORTANTE:* Su pedido quedará confirmado cuando reciba un mensaje de confirmación a través de este medio.%0APedido del domicilio : ${this.domicilio}%0A${fecha}%0ACodigo de pedido: ${numOrden}%0A${this.escribirPedido(pedidos)}*Total: $ ${this.total}*`
+    return msjWhatsApp
+  }
+
+  escribirPedido(pedidos:claseProductoPedido[]):string {
+    let textoPedido = ""
+    pedidos.forEach(pedido => {      
+      let subTotal = 0
+      if(pedido.comentario == null) {
+        pedido.comentario = ""
+      }
+      subTotal = pedido.cantidad*pedido.precio
+      textoPedido += `${pedido.cantidad} x ${pedido.nombre} (${pedido.comentario}) : $ ${subTotal}%0A`
+  })
+  return textoPedido
+  }
+
+  
 }
