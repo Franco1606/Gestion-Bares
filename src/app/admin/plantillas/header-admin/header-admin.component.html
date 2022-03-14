@@ -2,8 +2,9 @@
     <div>
         <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item routerLink="">Inicio</button>
+            <button mat-menu-item routerLink="/admin/inicio">Inicio</button>
             <button mat-menu-item routerLink="/admin/lista-categorias">Lista de Categorias</button>
+            <button mat-menu-item routerLink="/admin/estilos-carta">Estilos de la Carta</button>
         </mat-menu>
         <span class="encabezado">Gestion de Listas de Precios</span>
     </div>
