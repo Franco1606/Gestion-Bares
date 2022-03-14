@@ -1,0 +1,85 @@
+<app-header-admin (datosUsuario)="obtenerUsuario($event)"></app-header-admin>
+<br>
+<h1>DISEÑO CARTA</h1>
+<br>
+<div class="contenedor-principal">
+    <h3>Imagenes</h3>
+    <div class="campoImagen">
+        <div class="btn-cargarImg">
+            <button type="button" style="margin-right: 20px;" mat-raised-button (click)="fileInput.click()">Logo Encabezado</button>
+            <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrar" (change)="cambiarMostrarImg()">Mostrar</mat-checkbox>                        
+            <input hidden (change)="archivoSeleccionado(fileInput)" #fileInput type="file" id="headerImg">
+        </div>
+        <div> {{ nombreArchivo }} </div>
+    </div>
+    <br>
+    <form [formGroup]="form" (submit)="guardarCambios()">
+        <h3>Estilos</h3>
+        <mat-form-field>
+            <mat-label>Texto Encabezado</mat-label>
+            <input type="input" matInput formControlName="headerTxt" placeholder="Texto Encabezado">            
+        </mat-form-field>
+        <br>
+        <div class="campoColor">
+            <mat-form-field>
+                <mat-label>Color Texto Encabezado</mat-label>
+                <input matInput [ngxMatColorPicker]="HeaderTxt" formControlName="colorHeaderTxt">
+                <ngx-mat-color-toggle matSuffix [for]="HeaderTxt"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #HeaderTxt [color]="color"></ngx-mat-color-picker>             
+            </mat-form-field>
+            <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrHeaderTxt.value"><mat-icon>content_copy</mat-icon></button>
+        </div>
+        <br>
+        <div class="campoColor">
+            <mat-form-field>
+                <mat-label>Color Fondo Encabezado</mat-label>
+                <input matInput [ngxMatColorPicker]="Header" formControlName="colorHeader">
+                <ngx-mat-color-toggle matSuffix [for]="Header"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #Header [color]="color"></ngx-mat-color-picker>    
+            </mat-form-field>
+            <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrHeader.value"><mat-icon>content_copy</mat-icon></button>
+        </div>
+        <br>
+        <div class="campoColor">
+            <mat-form-field>
+                <mat-label>Color Titulo Categorias</mat-label>
+                <input matInput [ngxMatColorPicker]="colorCategoriaTxt" formControlName="colorCategoriaTxt">
+                <ngx-mat-color-toggle matSuffix [for]="colorCategoriaTxt"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #colorCategoriaTxt [color]="color"></ngx-mat-color-picker>    
+            </mat-form-field>
+            <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrCategoriaTxt.value"><mat-icon>content_copy</mat-icon></button>
+        </div>
+        <br>
+        <div class="campoColor">
+            <mat-form-field>
+                <mat-label>Color Encabezado Categorias</mat-label>
+                <input matInput [ngxMatColorPicker]="colorHeaderCategoria" formControlName="colorCategoriaHeader">
+                <ngx-mat-color-toggle matSuffix [for]="colorHeaderCategoria"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #colorHeaderCategoria [color]="color"></ngx-mat-color-picker>    
+            </mat-form-field>
+            <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrCategoriaHeader.value"><mat-icon>content_copy</mat-icon></button>
+        </div>
+        <br>
+        <div class="campoColor">
+            <mat-form-field>
+                <mat-label>Color Boton Colapsar</mat-label>
+                <input matInput [ngxMatColorPicker]="colorBtnColapsar" formControlName="colorColapsar">
+                <ngx-mat-color-toggle matSuffix [for]="colorBtnColapsar"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #colorBtnColapsar [color]="color"></ngx-mat-color-picker>    
+            </mat-form-field>
+            <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrColapsar.value"><mat-icon>content_copy</mat-icon></button>
+        </div>
+        <br>
+        <div class="campoColor">
+            <mat-form-field>
+                <mat-label>Color Fondo</mat-label>
+                <input matInput [ngxMatColorPicker]="Fondo" formControlName="colorFondo">
+                <ngx-mat-color-toggle matSuffix [for]="Fondo"></ngx-mat-color-toggle>
+                <ngx-mat-color-picker #Fondo [color]="color"></ngx-mat-color-picker>    
+            </mat-form-field>
+            <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrFondo.value"><mat-icon>content_copy</mat-icon></button>
+        </div>        
+        <br>        
+        <button mat-raised-button color="primary" type="submit">Aplicar Cambios</button>
+    </form>
+</div>
