@@ -15,6 +15,8 @@ import { MatPaginatorModule } from "@angular/material/paginator"
 import { MatSortModule } from "@angular/material/sort"
 import { MatDialogModule } from "@angular/material/dialog"
 import { MatCheckboxModule } from "@angular/material/checkbox"
+import { NgxMatColorPickerModule, MAT_COLOR_FORMATS,  NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker'
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 const modules = [
   MatInputModule,
@@ -29,7 +31,9 @@ const modules = [
   MatPaginatorModule,
   MatSortModule,
   MatDialogModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  NgxMatColorPickerModule,
+  ClipboardModule
 ]
 
 
@@ -41,6 +45,11 @@ const modules = [
   ],
   exports: [
     ...modules
+  ],
+  providers: [
+    { provide: MAT_COLOR_FORMATS, 
+      useValue: NGX_MAT_COLOR_FORMATS 
+    }
   ]
 })
 export class UtilidadesModule { }
