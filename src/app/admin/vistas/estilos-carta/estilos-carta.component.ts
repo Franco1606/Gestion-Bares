@@ -136,8 +136,4 @@ export class EstilosCartaComponent {
       }
     })
   }
-
-  deleteImage(inputImagenId:string) {    
-  }
-
 }
