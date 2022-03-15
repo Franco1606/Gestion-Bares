@@ -8,7 +8,7 @@
 
 <div [ngStyle]="{'background-color':estilos.colorFondo.valor}" class="contenedorPrincipal">
     <div class="categoria" *ngFor="let categoria of categorias">
-        <app-colapsador [colorBtnColapsar]="estilos.colorColapsar.valor" [colorCategoriaTxt]="estilos.colorCategoriaTxt.valor" [colorCategoriaHeader]="estilos.colorCategoriaHeader.valor"  class="colapsador" [titulo]="categoria.nombre" (colapsador)="colapsar($event, categoria.categoriaID)"></app-colapsador>        
+        <app-colapsador [mostrarBtnColapsar]="mostrarColapsador" [colorBtnColapsar]="estilos.colorColapsar.valor" [colorCategoriaTxt]="estilos.colorCategoriaTxt.valor" [colorCategoriaHeader]="estilos.colorCategoriaHeader.valor"  class="colapsador" [titulo]="categoria.nombre" (colapsador)="colapsar($event, categoria.categoriaID)"></app-colapsador>        
         <div *ngFor="let producto of productos">
             <div class="producto" *ngIf="producto.categoriaID == categoria.categoriaID">
                 <div  class="contenedor-producto">
