@@ -7,7 +7,6 @@ import { ThemePalette } from '@angular/material/core';
 import { AdminService } from "../../servicios/api/admin.service"
 import { Router } from "@angular/router"
 
-
 @Component({
   selector: 'app-estilos-carta',
   templateUrl: './estilos-carta.component.html',
@@ -20,9 +19,10 @@ export class EstilosCartaComponent {
   //////////   Atributos de la clase   /////////////  
   usuarioID!:number   
   tokenAdmin!:string
-  nombre:string
   nombreArchivo!:string
-  mostrar = true
+  mostrarHeaderImg = false
+  mostrarEncabezado = false
+  mostrarColapsador = false  
   // ColorPicker
   color:ThemePalette = 'primary'
   // Form 
@@ -47,16 +47,18 @@ export class EstilosCartaComponent {
     this.usuarioID = datosUsuario["usuarioID"]
     this.tokenAdmin = datosUsuario["tokenAdmin"]
     this.obtenerImagenPorNombre("headerImg")
+    this.obtenerEstiloPorNombre("headerTxt")
   }
 
   guardarCambios(){
-    let estilos = this.obtenerValoresInputs(this.form.controls)
+    let estilos = this.obtenerValoresInputs(this.form.controls)   
     this._adminServiceApi.modificarEstilos(estilos, this.usuarioID, this.tokenAdmin).subscribe({
-      next: (x) => {
-        alert("Se actualizaron los estilos de la carta")
+      next: () => {        
+        let iframe = document.getElementById("iframe")
+        iframe.setAttribute("src", "http://localhost:4200/carta?usuarioID=1")
       },
-      error: (err) => {
-        alert("No se pudo actualizar todos o alguno de lo estilos")
+      error: () => {
+        alert("No se pudo actualizar todos o alguno de lo estilos")        
       }
     })
   }
@@ -68,16 +70,17 @@ export class EstilosCartaComponent {
       let valor = ""      
       if(typeof formControls[`${key}`].value == 'string') {
         try {
-          valor = formControls[`${key}`].value          
+          valor = formControls[`${key}`].value
         } catch (error) {}        
       } else {
         try {
-          valor = formControls[`${key}`].value.hex          
+          valor = formControls[`${key}`].value.hex
         } catch (error) {}        
       }
       let json = {
         nombre: key,
-        valor: valor
+        valor: valor,
+        mostrar: 1
       }
       if(valor != "") {
         estilos.push(json)
@@ -88,10 +91,20 @@ export class EstilosCartaComponent {
 
   obtenerImagenPorNombre(nombre:string) {
     this._adminServiceApi.obtenerImagenPorNombre(nombre, this.usuarioID).subscribe({
-      next: (x) => {
-        this.nombre = x.nombre
+      next: (x) => {        
         this.nombreArchivo = x.nombreArchivo
-        this.mostrar = Boolean(Number(x.mostrar))
+        this.mostrarHeaderImg = Boolean(Number(x.mostrar))
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  obtenerEstiloPorNombre(nombre:string) {
+    this._adminServiceApi.obtenerEstiloPorNombre(nombre, this.usuarioID).subscribe({
+      next: (x) => {
+        this.mostrarEncabezado = Boolean(Number(x.mostrar))
       },
       error: (err) => {
         console.log(err)
@@ -122,17 +135,23 @@ export class EstilosCartaComponent {
     }   
   }
 
-  cambiarMostrarImg() {
-    let mostrar = Number(Boolean(!Number(this.mostrar)))
-    this._adminServiceApi.actualizarMostrarImg(mostrar, this.nombre, this.usuarioID, this.tokenAdmin).subscribe({
+  cambiarMostrar(nombre:string){
+    let mostrar = Number(Boolean(!Number(this.mostrarEncabezado)))
+    this._adminServiceApi.actualizarMostrarEncabezado(mostrar, nombre, this.usuarioID, this.tokenAdmin).subscribe({
       next: () => {
-        if(mostrar) {
-          alert("El logo de la cabecera se muestra en la carta")
-          location.reload()
-        } else {
-          alert("No se muestra el logo de la cabecera de la carta")
-          location.reload()
-        }
+        location.reload()
+      }
+    })
+  }
+
+  cambiarMostrarImg(nombre:string) {
+    let mostrar = Number(Boolean(!Number(this.mostrarHeaderImg)))
+    this._adminServiceApi.actualizarMostrarImg(mostrar, nombre, this.usuarioID, this.tokenAdmin).subscribe({
+      next: () => {
+        location.reload()        
+      },
+      error: (err) => {
+        console.log(err)
       }
     })
   }
