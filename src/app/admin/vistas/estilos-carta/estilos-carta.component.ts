@@ -56,7 +56,7 @@ export class EstilosCartaComponent {
     this._adminService.modificarEstilos(estilos, this.usuarioID, this.tokenAdmin).subscribe({
       next: () => {        
         let iframe = document.getElementById("iframe")
-        iframe.setAttribute("src", "http://localhost:4200/carta?usuarioID=1")
+        iframe.setAttribute("src", `http://localhost:4200/carta?usuarioID=${this.usuarioID}`)
       },
       error: () => {
         alert("No se pudo actualizar todos o alguno de lo estilos")        
