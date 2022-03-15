@@ -11,6 +11,7 @@ export class ColapsadorComponent {
 
   //////////   Atributos de la clase   /////////////
   @Input() colorBtnColapsar!:string
+  @Input() mostrarBtnColapsar!:boolean
   @Input() colorCategoriaHeader!:string
   @Input() colorCategoriaTxt!:string
   @Input() titulo!:string
