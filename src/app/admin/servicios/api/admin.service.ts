@@ -115,7 +115,7 @@ export class AdminService {
   }
 
   //Mostrar encabezado
-  actualizarMostrarEncabezado(mostrar:number, nombre:string, usuarioID:number,tokenAdmin:string):Observable<modeloRespuesta>{
+  actualizarMostrar(mostrar:number, nombre:string, usuarioID:number,tokenAdmin:string):Observable<modeloRespuesta>{
     let body = {
       usuarioID: usuarioID,
       mostrar: mostrar,
