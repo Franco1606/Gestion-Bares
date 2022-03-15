@@ -9,7 +9,7 @@
             <div class="btn-cargarImg">
                 <button type="button" style="margin-right: 20px;" mat-raised-button (click)="fileInput.click()">Logo Encabezado</button>
                 <input hidden (change)="archivoSeleccionado(fileInput)" #fileInput type="file" id="headerImg">
-                <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrarHeaderImg" (change)="cambiarMostrarImg(fileInput.id)">Mostrar</mat-checkbox>                        
+                <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrarHeaderImg" (change)="cambiarMostrarImg(fileInput.id, $event)">Mostrar</mat-checkbox>                        
             </div>
             <div> {{ nombreArchivo }} </div>
         </div>
@@ -20,7 +20,7 @@
                 <mat-label>Texto Encabezado</mat-label>
                 <input type="input" matInput formControlName="headerTxt" id="headerTxt" #headerTxt placeholder="Texto Encabezado">            
             </mat-form-field>
-            <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrarEncabezado" (change)="cambiarMostrar(headerTxt.id)">Mostrar Encabezado</mat-checkbox>                        
+            <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrarEncabezado" (change)="cambiarMostrar(headerTxt.id, $event)">Mostrar Encabezado</mat-checkbox>                        
             <br>
             <div class="campoColor">
                 <mat-form-field>
@@ -71,7 +71,7 @@
                 </mat-form-field>
                 <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="colorCtrColapsar.value"><mat-icon>content_copy</mat-icon></button>
             </div>
-            <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrarColapsador" (change)="cambiarMostrar(btnColapsar.id)">Mostrar Colapsador</mat-checkbox>                        
+            <mat-checkbox type="checkbox" class="checkbox" [checked]="mostrarColapsador" (change)="cambiarMostrar(btnColapsar.id, $event)">Mostrar Colapsador</mat-checkbox>                        
             <br>
             <div class="campoColor">
                 <mat-form-field>
