@@ -14,6 +14,8 @@ import { EditarCategoriaDialogComponent } from './Dialogs/editar-categoria-dialo
 import { ListaProductosComponent } from './vistas/lista-productos/lista-productos.component';
 import { AgregarProductoDialogComponent } from './Dialogs/agregar-producto-dialog/agregar-producto-dialog.component';
 import { EditarProductoDialogComponent } from './Dialogs/editar-producto-dialog/editar-producto-dialog.component';
+import { EstilosCartaComponent } from './vistas/estilos-carta/estilos-carta.component';
+import { InicioComponent } from './vistas/inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { EditarProductoDialogComponent } from './Dialogs/editar-producto-dialog/
     EditarCategoriaDialogComponent,
     ListaProductosComponent,
     AgregarProductoDialogComponent,
-    EditarProductoDialogComponent      
+    EditarProductoDialogComponent,
+    EstilosCartaComponent,
+    InicioComponent      
   ],
   imports: [
     CommonModule,

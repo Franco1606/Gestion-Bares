@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // Inyecciones de dependencia
 import { CartaService } from "../../servicios/api/carta.service"
+import { AdminService } from "../../../admin/servicios/api/admin.service"
 // Clases
 import { claseProductoPedido } from '../../Clases/claseProductoPedido';
 import { Pdf } from "../../Plantillas/pdf"
@@ -18,7 +19,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class PedidoDialogComponent implements OnInit {
 
-  constructor( private _cartaServiceApi:CartaService,  private dialogRef:MatDialogRef<PedidoDialogComponent> ) { }
+  constructor( private _cartaServiceApi:CartaService, private _adminServiceApi:AdminService,  private dialogRef:MatDialogRef<PedidoDialogComponent> ) { }
 
     //////////   Atributos de la clase   /////////////
     total = 0
@@ -26,11 +27,26 @@ export class PedidoDialogComponent implements OnInit {
     // Tabla //
     displayedColumns = ["cantidad", "producto", "precio", "comentario", "eliminar"]
     dataSource!:claseProductoPedido[]
+    // Imagen de Encabezado de comprobante
+    headerImg!:string
 
   ngOnInit(): void {     
     this.dataSource = this._cartaServiceApi.pedidos
     this._cartaServiceApi.pedidos.forEach(element => {
       this.total += element.cantidad*element.precio
+    })
+    this.obtenerLogoEncabezado()
+    
+  }
+
+  obtenerLogoEncabezado() {
+    this._adminServiceApi.obtenerImagenPorNombre("headerImg", this._cartaServiceApi.usuarioID).subscribe({
+      next: (x) => {
+        this.headerImg = x.imgData
+      },
+      error: (err) => {
+        console.log(err)
+      }
     })
   }
 
@@ -70,7 +86,7 @@ export class PedidoDialogComponent implements OnInit {
 
   crearPdf(pedidos:claseProductoPedido[] ,fecha:Date, numOrden:string) {
     let pdf = new Pdf()
-    let contenido = pdf.crear(pedidos, fecha, numOrden)
+    let contenido = pdf.crear(pedidos, fecha, numOrden, this.headerImg)
     pdfMake.createPdf(contenido).open()    
   }
 

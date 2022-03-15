@@ -6,6 +6,7 @@ import { modeloProductoPedido } from "../../ModelosCarta/modeloProductoPedido"
 //Importacion de clases
 import { claseProductoPedido } from '../../Clases/claseProductoPedido';
 import { modeloRespuesta } from 'src/app/ModelosApp/modeloRespuesta';
+import { modeloEstilo } from '../../ModelosCarta/modeloEstilo';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +50,16 @@ export class CartaService {
       solicitante: "cliente"
     }
     return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
-  }  
+  }
+
+  /////////////////////////////////////////////////////////
+  /////////////  METODOS PARA ESTILOS  ///////////////////
+  ///////////////////////////////////////////////////////
+
+  //Obtener estilos
+  obtenerEstilos(usuarioID:number):Observable<modeloEstilo[]> {
+    return this._http.get<modeloEstilo[]>(this.url + `estilos.php?usuarioID=${usuarioID}`)
+  }
 }
 
   

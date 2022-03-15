@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+//Inyecciones de dependencias
 import { AppService } from "../../../servicios/api/app.service"
 import { Router } from "@angular/router"
 
