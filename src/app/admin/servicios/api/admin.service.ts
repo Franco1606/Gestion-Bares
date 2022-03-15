@@ -6,6 +6,7 @@ import { modeloRespuesta } from "../../../ModelosApp/modeloRespuesta"
 import { modeloCategoria } from '../../ModelosAdmin/modeloCategoria';
 import { modeloProducto } from '../../ModelosAdmin/modeloProducto';
 import { modeloImagen } from "../../ModelosAdmin/modeloImagen"
+import { modeloEstilo } from 'src/app/carta/ModelosCarta/modeloEstilo';
 
 @Injectable({
   providedIn: 'root'
@@ -108,6 +109,22 @@ export class AdminService {
     return this._http.post<modeloRespuesta>(this.url + `estilos.php`, body)
   }
 
+  //Obtener estilo de este usuario por nombre
+  obtenerEstiloPorNombre(nombre:string, usuarioID:number):Observable<modeloEstilo>{      
+    return this._http.get<modeloEstilo>(this.url + `estilos.php?nombre=${nombre}&usuarioID=${usuarioID}`)
+  }
+
+  //Mostrar encabezado
+  actualizarMostrarEncabezado(mostrar:number, nombre:string, usuarioID:number,tokenAdmin:string):Observable<modeloRespuesta>{
+    let body = {
+      usuarioID: usuarioID,
+      mostrar: mostrar,
+      nombre: nombre,
+      tokenAdmin: tokenAdmin
+    }
+    return this._http.put<modeloRespuesta>(this.url + `estilos.php`, body)
+  }
+
   //////////////////////////////////////////////////////////
   /////////////  METODOS PARA IMAGENES  ///////////////////
   ////////////////////////////////////////////////////////
@@ -133,9 +150,9 @@ export class AdminService {
     //Actualizar Mostrar
     actualizarMostrarImg(mostrar:number, nombre:string, usuarioID:number, tokenAdmin:string) {
       let body = {
+        usuarioID: usuarioID,
         mostrar: mostrar,
         nombre: nombre,
-        usuarioID: usuarioID,
         tokenAdmin: tokenAdmin
       }
       return this._http.put<modeloProducto>(this.url + `imagenes.php`, body)
