@@ -43,6 +43,7 @@ export class CartaComponent implements OnInit {
   }
   mostrarHeaderImg = true 
   mostrarHeaderTxt!:boolean
+  mostrarColapsador!:boolean
   //Atributos para imagenes
   headerImg!:string
 
@@ -173,11 +174,12 @@ export class CartaComponent implements OnInit {
               if(this.estilos[key].nombre != "headerTxt"){
                 this.estilos[key].valor = `#${x.filter(estilo => estilo.nombre == key)[0].valor}`
               } else if (this.estilos[key].nombre == "headerTxt") {
-                this.estilos[key].valor = x.filter(estilo => estilo.nombre == key)[0].valor
-                this.mostrarHeaderTxt = Boolean(Number(x.filter(estilo => estilo.nombre == key)[0].mostrar))
+                this.estilos[key].valor = x.filter(estilo => estilo.nombre == key)[0].valor                
               }
             }
           })
+          this.mostrarHeaderTxt = Boolean(Number(x.filter(estilo => estilo.nombre == "headerTxt")[0].mostrar))
+          this.mostrarColapsador = Boolean(Number(x.filter(estilo => estilo.nombre == "colorColapsar")[0].mostrar))
         }            
       },
       error: (err) => {
