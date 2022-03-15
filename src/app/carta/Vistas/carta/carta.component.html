@@ -1,14 +1,14 @@
 <header>
-    <div class="headerImg"></div>
-    <div class="headerTxt" >
-      <h1 class="Titulo">Nuestra Carta</h1>
-      <span *ngIf="mesaID != null">Mesa Nº {{mesaID}}</span>
+    <div *ngIf="mostrarHeaderImg" [ngStyle]="{'background-image':headerImg}" class="headerImg"></div>
+    <div *ngIf="mostrarHeaderTxt" [ngStyle]="{'background-color':estilos.colorHeader.valor}" class="headerTxt" >
+      <h1 [ngStyle]="{'color':estilos.colorHeaderTxt.valor}" class="Titulo"> {{estilos.headerTxt.valor}} </h1>
+      <span [ngStyle]="{'color':estilos.colorHeaderTxt.valor}" *ngIf="mesaID != null">Mesa Nº {{mesaID}}</span>
     </div>
 </header>
-  
-<div class="contenedorPrincipal">
+
+<div [ngStyle]="{'background-color':estilos.colorFondo.valor}" class="contenedorPrincipal">
     <div class="categoria" *ngFor="let categoria of categorias">
-        <app-colapsador class="colapsador" [titulo]="categoria.nombre" (colapsador)="colapsar($event, categoria.categoriaID)"></app-colapsador>        
+        <app-colapsador [colorBtnColapsar]="estilos.colorColapsar.valor" [colorCategoriaTxt]="estilos.colorCategoriaTxt.valor" [colorCategoriaHeader]="estilos.colorCategoriaHeader.valor"  class="colapsador" [titulo]="categoria.nombre" (colapsador)="colapsar($event, categoria.categoriaID)"></app-colapsador>        
         <div *ngFor="let producto of productos">
             <div class="producto" *ngIf="producto.categoriaID == categoria.categoriaID">
                 <div  class="contenedor-producto">
