@@ -31,6 +31,20 @@ export class CartaComponent implements OnInit {
   productos:modeloProductoPedido[] = []
   pedido:claseProductoPedido[] = []
   IDinterno = 0
+  //Atributos de estilo de la carta
+  estilos = {
+    headerTxt : {nombre: "headerTxt", valor: "", mostrar: true},
+    colorHeaderTxt : {nombre: "colorHeaderTxt", valor: "", mostrar: true},
+    colorHeader : {nombre: "colorHeader", valor: "", mostrar: true},
+    colorCategoriaTxt : {nombre: "colorCategoriaTxt", valor: "", mostrar: true},
+    colorCategoriaHeader : {nombre: "colorCategoriaHeader", valor: "", mostrar: true},
+    colorColapsar : {nombre: "colorColapsar", valor: "", mostrar: true},
+    colorFondo : {nombre: "colorFondo", valor: "", mostrar: true}
+  }
+  mostrarHeaderImg = true 
+  mostrarHeaderTxt!:boolean
+  //Atributos para imagenes
+  headerImg!:string
 
   ngOnInit(): void {
     this.obtenerParametros()
@@ -41,6 +55,8 @@ export class CartaComponent implements OnInit {
       this.usuarioID = params["usuarioID"]
       this.mesaID = params["mesaID"]      
       this.obtenerCategorias()
+      this.obtenerEstilos()
+      this.obtenerImagenPorNombre("headerImg")
     })     
   }
 
@@ -143,6 +159,41 @@ export class CartaComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: () => {
         this.pedido = this._cartaServiceApi.pedidos
+      }
+    })
+  }
+
+  obtenerEstilos() {
+    this._cartaServiceApi.obtenerEstilos(this.usuarioID).subscribe({
+      next: (x) => {
+        if(x.length) {
+          let keys = Object.keys(this.estilos);
+          keys.forEach(key => {
+            if(x.filter(estilo => estilo.nombre == key)) {
+              if(this.estilos[key].nombre != "headerTxt"){
+                this.estilos[key].valor = `#${x.filter(estilo => estilo.nombre == key)[0].valor}`
+              } else if (this.estilos[key].nombre == "headerTxt") {
+                this.estilos[key].valor = x.filter(estilo => estilo.nombre == key)[0].valor
+                this.mostrarHeaderTxt = Boolean(Number(x.filter(estilo => estilo.nombre == key)[0].mostrar))
+              }
+            }
+          })
+        }            
+      },
+      error: (err) => {
+        alert("No se pudieron obtener los estilos de la base de datos")
+      }
+    })
+  }
+
+  obtenerImagenPorNombre(nombre:string) {
+    this._adminServiceApi.obtenerImagenPorNombre(nombre, this.usuarioID).subscribe({
+      next: (x) => {        
+        this.headerImg = `url("${x.imgData}")`
+        this.mostrarHeaderImg = Boolean(Number(x.mostrar))
+      },
+      error: (err) => {
+        alert("No se pudo obtener la iamgen de la base de datos")
       }
     })
   }
