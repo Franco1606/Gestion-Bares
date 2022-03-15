@@ -5,6 +5,7 @@ import { FormControl, FormGroup} from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 //Inyecciones de dependencias
 import { AdminService } from "../../servicios/api/admin.service"
+import { CartaService } from "../../../carta/servicios/api/carta.service"
 import { Router } from "@angular/router"
 
 @Component({
@@ -14,7 +15,7 @@ import { Router } from "@angular/router"
 })
 export class EstilosCartaComponent {
 
-  constructor( private _adminServiceApi:AdminService, private _router:Router ) { }
+  constructor( private _adminService:AdminService, private _cartaService:CartaService, private _router:Router ) { }
 
   //////////   Atributos de la clase   /////////////  
   usuarioID!:number   
@@ -47,12 +48,12 @@ export class EstilosCartaComponent {
     this.usuarioID = datosUsuario["usuarioID"]
     this.tokenAdmin = datosUsuario["tokenAdmin"]
     this.obtenerImagenPorNombre("headerImg")
-    this.obtenerEstiloPorNombre("headerTxt")
+    this.valoresMostrarEstilos()
   }
 
   guardarCambios(){
     let estilos = this.obtenerValoresInputs(this.form.controls)   
-    this._adminServiceApi.modificarEstilos(estilos, this.usuarioID, this.tokenAdmin).subscribe({
+    this._adminService.modificarEstilos(estilos, this.usuarioID, this.tokenAdmin).subscribe({
       next: () => {        
         let iframe = document.getElementById("iframe")
         iframe.setAttribute("src", "http://localhost:4200/carta?usuarioID=1")
@@ -90,7 +91,7 @@ export class EstilosCartaComponent {
   }
 
   obtenerImagenPorNombre(nombre:string) {
-    this._adminServiceApi.obtenerImagenPorNombre(nombre, this.usuarioID).subscribe({
+    this._adminService.obtenerImagenPorNombre(nombre, this.usuarioID).subscribe({
       next: (x) => {        
         this.nombreArchivo = x.nombreArchivo
         this.mostrarHeaderImg = Boolean(Number(x.mostrar))
@@ -101,10 +102,15 @@ export class EstilosCartaComponent {
     })
   }
 
-  obtenerEstiloPorNombre(nombre:string) {
-    this._adminServiceApi.obtenerEstiloPorNombre(nombre, this.usuarioID).subscribe({
+  valoresMostrarEstilos() {
+    this._cartaService.obtenerEstilos(this.usuarioID).subscribe({
       next: (x) => {
-        this.mostrarEncabezado = Boolean(Number(x.mostrar))
+        if(x.filter(estilo => estilo.nombre == "headerTxt")) {
+          this.mostrarEncabezado = Boolean(Number(x.filter(estilo => estilo.nombre == "headerTxt")[0].mostrar))
+        }
+        if(x.filter(estilo => estilo.nombre == "colorColapsar")) {
+          this.mostrarColapsador = Boolean(Number(x.filter(estilo => estilo.nombre == "colorColapsar")[0].mostrar))
+        }
       },
       error: (err) => {
         console.log(err)
@@ -121,7 +127,7 @@ export class EstilosCartaComponent {
       reader.onload = (e: any) => {
         srcResult = e.target.result;
         //el nombre es el id del input del html
-        this._adminServiceApi.cambiarImagen(inputImagen.id, nombreArchivo, srcResult, this.usuarioID, this.tokenAdmin).subscribe({
+        this._adminService.cambiarImagen(inputImagen.id, nombreArchivo, srcResult, this.usuarioID, this.tokenAdmin).subscribe({
           next: () => {            
             alert("Se actualizo la imagen")
             location.reload()
@@ -135,18 +141,18 @@ export class EstilosCartaComponent {
     }   
   }
 
-  cambiarMostrar(nombre:string){
-    let mostrar = Number(Boolean(!Number(this.mostrarEncabezado)))
-    this._adminServiceApi.actualizarMostrarEncabezado(mostrar, nombre, this.usuarioID, this.tokenAdmin).subscribe({
+  cambiarMostrar(nombre:string, e:any){
+    let mostrar = Number(e.checked)
+    this._adminService.actualizarMostrar(mostrar, nombre, this.usuarioID, this.tokenAdmin).subscribe({
       next: () => {
         location.reload()
       }
     })
   }
 
-  cambiarMostrarImg(nombre:string) {
-    let mostrar = Number(Boolean(!Number(this.mostrarHeaderImg)))
-    this._adminServiceApi.actualizarMostrarImg(mostrar, nombre, this.usuarioID, this.tokenAdmin).subscribe({
+  cambiarMostrarImg(nombre:string, e:any) {
+    let mostrar = Number(e.checked)    
+    this._adminService.actualizarMostrarImg(mostrar, nombre, this.usuarioID, this.tokenAdmin).subscribe({
       next: () => {
         location.reload()        
       },
