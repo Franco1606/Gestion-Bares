@@ -15,7 +15,13 @@ export class Pdf {
             if(pedido.comentario == null) {
                 pedido.comentario = "n/a"
             }
-            let fila = [pedido.cantidad, pedido.nombre, pedido.comentario, pedido.precio]
+            let cantidad
+            if(pedido.cantidad == 0.5) {
+                cantidad = "1/2"
+            } else if(pedido.cantidad >= 1) {
+                cantidad = pedido.cantidad
+            }
+            let fila = [cantidad, pedido.nombre, pedido.comentario, pedido.precio]
             body.push(fila)
         })
 
@@ -43,22 +49,28 @@ export class Pdf {
                     fontSize: 10,
                 },
                 {
-                    layout: 'lightHorizontalLines',
-                    width: 400,
-                    
-                    table: {
-                      headerRows: 1,
-                      widths: [ 'auto', 'auto', 'auto', 'auto' ],              
-                      body: body,
-                      alignment: 'center',
-                    margin: [0,0,0,20],                    
-                    }                   
+                    columns: [
+                        { width: '*', text: '' },
+                        {
+                            layout: 'lightHorizontalLines', 
+                            width: "auto",
+                            alignment: 'center',                                       
+                            table: {
+                                headerRows: 1,
+                                widths: [ 'auto', 'auto', 'auto', 'auto' ],              
+                                body: body,                      
+                                margin: [0,20,0,20],                    
+                            }
+                        },
+                        { width: '*', text: '' },
+                    ]                                      
                 },                
                 {                    
                     text: `TOTAL: ${total}`,
                     alignment: "right",
                     fontSize: 15,
-                    bold: true
+                    bold: true,
+                    margin: [0,30,0,0],
                 }
                 
             ]
