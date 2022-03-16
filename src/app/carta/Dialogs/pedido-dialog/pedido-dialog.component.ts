@@ -87,7 +87,7 @@ export class PedidoDialogComponent implements OnInit {
   crearPdf(pedidos:claseProductoPedido[] ,fecha:Date, numOrden:string) {
     let pdf = new Pdf()
     let contenido = pdf.crear(pedidos, fecha, numOrden, this.headerImg)
-    pdfMake.createPdf(contenido).open()    
+    pdfMake.createPdf(contenido).download(`#${numOrden}`)    
   }
 
   escribirTextoWhatsapp( pedidos:claseProductoPedido[], fecha:Date, numOrden:string):string {
