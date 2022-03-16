@@ -11,7 +11,10 @@
               <!-- Cantidad Column -->
               <ng-container class="container" matColumnDef="cantidad">
                   <th mat-header-cell *matHeaderCellDef> Cant. </th>
-                  <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+                  <td mat-cell *matCellDef="let element">
+                    <div *ngIf="element.cantidad >= 1">{{element.cantidad}}</div> 
+                    <div *ngIf="element.cantidad == 0.5">1/2</div> 
+                  </td>
               </ng-container>
                   
               <!-- Comentario Column -->
