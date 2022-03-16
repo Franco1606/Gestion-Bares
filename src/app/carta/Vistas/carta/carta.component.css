@@ -152,6 +152,14 @@ h1 {
     align-self: center;
 }
 
+.pedir-media {
+    font-weight: 500;
+    font-size: 1.2em;
+    color: rgb(253, 228, 82);
+    text-shadow: 0 0 3px #000;
+    margin-top: 10px;
+}
+
 .pedir-quitar {
     display: flex;
     flex-direction: column;
