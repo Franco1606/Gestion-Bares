@@ -1,5 +1,5 @@
 <button mat-button color="warn" mat-dialog-close style="float: right;"><mat-icon>close</mat-icon></button>  
-<h2 mat-dialog-title>Editar nombre de la categoria</h2>
+<h2 mat-dialog-title>Editar Categoria</h2>
 <mat-dialog-content class="mat-typography">
   <div class="contenedor">
     <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="editarCategoria()">
@@ -8,6 +8,7 @@
             <input type="input" matInput formControlName="nombre" placeholder="Nombre" required autofocus>
         </mat-form-field>        
         <mat-checkbox type="checkbox" class="example-margin" formControlName="comentario">Habilitar Comentarios</mat-checkbox>
+        <mat-checkbox type="checkbox" class="example-margin" formControlName="mitad">Habilitar Medio Pedido</mat-checkbox>
         <br>
         <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Cambiar</button> 
         <mat-dialog-actions align="end">
