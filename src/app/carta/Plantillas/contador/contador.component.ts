@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { InputModalityDetector } from '@angular/cdk/a11y';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-contador',
@@ -7,16 +8,34 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class ContadorComponent {
 
+  @Input() mitad = 0
   @Output() cantidadProdcutos = new EventEmitter<number>();
   cantidad:number = 1  
 
   agregar(){
-    this.cantidad += 1
+    if(this.cantidad >= 1) {
+      this.cantidad += 1
+    } else if (this.cantidad == 0.5 && this.mitad == 1) {
+      this.cantidad = 1
+    }    
     this.cantidadProdcutos.emit(this.cantidad)    
   }
 
-  quitar(){
+/*   agregar(){
+    this.cantidad += 1
+    this.cantidadProdcutos.emit(this.cantidad)    
+  } */
+
+/*   quitar(){
     if(this.cantidad>1) {this.cantidad -= 1}
+    this.cantidadProdcutos.emit(this.cantidad)    
+  } */
+
+  quitar(){
+    if(this.cantidad > 1) {
+      this.cantidad -=1
+    } else if(this.cantidad == 1 && this.mitad == 1) 
+    {this.cantidad = 0.5}
     this.cantidadProdcutos.emit(this.cantidad)    
   }
 
