@@ -1,5 +1,5 @@
 <button mat-button [ngStyle]="{'background-color': colorCategoriaHeader}" (click)="conmutar()">
-    <div [ngStyle]="{'color':colorCategoriaTxt}" style="float: left;">{{titulo}}</div>
+    <div [ngStyle]="{'color':colorCategoriaTxt}" style="float: left;">{{titulo}}</div>    
     <div style="float: right;" *ngIf="mostrarBtnColapsar">
         <mat-icon [ngStyle]="{'color':colorBtnColapsar}" *ngIf="colapsar">add</mat-icon>
         <mat-icon [ngStyle]="{'color':colorBtnColapsar}" *ngIf="!colapsar">remove</mat-icon>
