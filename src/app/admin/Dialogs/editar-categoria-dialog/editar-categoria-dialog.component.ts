@@ -21,6 +21,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
   form:FormGroup = new FormGroup({
     "nombre" : new FormControl("", Validators.required),
     "comentario" : new FormControl("", Validators.required),
+    "mitad" : new FormControl("", Validators.required),
     "categoriaID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
@@ -34,6 +35,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
     this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoria.categoriaID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
     this.form.controls["comentario"].setValue(Boolean(Number(this._AdminServiceApi.categoria.comentario)))
+    this.form.controls["mitad"].setValue(Boolean(Number(this._AdminServiceApi.categoria.mitad)))
     this.nombre = this._AdminServiceApi.categoria.nombre    
   }
 
@@ -43,6 +45,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
 
   editarCategoria() { 
     this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
+    this.form.controls["mitad"].setValue(Number(this.form.controls["mitad"].value))
     if(this.verificarCampos(this.nombre)) {
       this.quitarEspaciosFinales(this.form.value)
       this._AdminServiceApi.modificarCategoria(this.form.value).subscribe({
