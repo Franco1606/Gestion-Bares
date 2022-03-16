@@ -14,10 +14,7 @@
                 <div  class="contenedor-producto">
                     <div class="contenedorNombreDescripcion">
                         <div class="pedido-detalles">
-                            <div *ngIf="verificarExistencia(producto.productoID)" class="pedido">Pedido!</div>
-                            <div *ngIf="verificarExistencia(producto.productoID) && categoria.comentario == 1">
-                                <button mat-button (click)="quitar(producto.productoID, producto.nombre, categoria.comentario)">detalles</button >
-                            </div>
+                            <div *ngIf="verificarExistencia(producto.productoID)" class="pedido">Pedido!</div>                           
                         </div>
                         <div class="nombre">
                             <h3>{{ producto.nombre }}</h3>
@@ -31,9 +28,10 @@
                     </div>
                 </div>
                 <br>
-                <div class="contenedor-pedir-cantidad">
+                <div class="contenedor-pedir-cantidad">                    
                     <div class="contenedor-contador-quitar">
-                        <app-contador class="contador" (cantidadProdcutos)="pasarCantidad($event, producto)"></app-contador>                        
+                        <app-contador class="contador" [mitad]="categoria.mitad" (cantidadProdcutos)="pasarCantidad($event, producto)"></app-contador>                        
+                        <div *ngIf="categoria.mitad == 1" class="pedir-media">(Se puede pedir media)</div>
                     </div>
                     <div class="pedir-quitar">                        
                         <button mat-raised-button color="primary" (click)="agregar(producto, categoria.comentario)">AGREGAR</button>
