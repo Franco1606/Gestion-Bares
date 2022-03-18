@@ -3,7 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', cursive; }
 
-.contnedor-tabla-agregar {
+.contenedor-tabla-agregar {
     width: 100%;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.123);
 }
