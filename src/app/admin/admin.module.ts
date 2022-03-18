@@ -16,6 +16,8 @@ import { AgregarProductoDialogComponent } from './Dialogs/agregar-producto-dialo
 import { EditarProductoDialogComponent } from './Dialogs/editar-producto-dialog/editar-producto-dialog.component';
 import { EstilosCartaComponent } from './vistas/estilos-carta/estilos-carta.component';
 import { InicioComponent } from './vistas/inicio/inicio.component';
+import { GestionMozosComponent } from './vistas/gestion-mozos/gestion-mozos.component';
+import { AgregarMozoDialogComponent } from './Dialogs/agregar-mozo-dialog/agregar-mozo-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { InicioComponent } from './vistas/inicio/inicio.component';
     AgregarProductoDialogComponent,
     EditarProductoDialogComponent,
     EstilosCartaComponent,
-    InicioComponent      
+    InicioComponent,
+    GestionMozosComponent,
+    AgregarMozoDialogComponent      
   ],
   imports: [
     CommonModule,
