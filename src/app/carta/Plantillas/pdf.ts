@@ -4,7 +4,7 @@ import { DatePipe } from '@angular/common';
 export class Pdf {
     //////////   Atributos de la clase   /////////////
     
-    crear(pedidos:claseProductoPedido[], nuevaFecha:Date, numOrden:string, imgData:string):any {
+    crear(pedidos:claseProductoPedido[], nuevaFecha:Date, numOrden:string, imgData:string, happy:number):any {
         const datepipe: DatePipe = new DatePipe('en-US')
         let formattedDate = datepipe.transform(nuevaFecha, 'dd MMM YYYY, HH:mm')
         let total = 0
@@ -24,6 +24,12 @@ export class Pdf {
             let fila = [cantidad, pedido.nombre, pedido.comentario, pedido.precio]
             body.push(fila)
         })
+
+        let textHappy = ""
+
+        if(Boolean(Number(happy))) {
+            textHappy = `Hay productos en Happy Hour! :), al cerrar la mesa seran descontados los productos correspondientes.`
+        }
 
         let contenido:any = {
             pageSize: {
@@ -71,6 +77,14 @@ export class Pdf {
                     fontSize: 15,
                     bold: true,
                     margin: [0,30,0,0],
+                },
+                {
+                    text: textHappy,
+                    alignment: "center",
+                    fontSize: 15,
+                    margin: [15,30,15,0],
+                    bold: true,
+                    color: "#1b36b1"                    
                 }
                 
             ]
