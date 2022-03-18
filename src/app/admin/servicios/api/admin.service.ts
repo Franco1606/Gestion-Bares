@@ -25,6 +25,7 @@ export class AdminService {
   categoria!:modeloCategoria
   categoriaID!:number
   producto!:modeloProducto
+  mozoID!:number
 
   //////////////////////////////////////////////////////////
   /////////////  METODOS PARA CATEGORIAS  /////////////////
@@ -198,8 +199,32 @@ export class AdminService {
     return this._http.get<modeloMozo[]>(this.url + `mozos.php?usuarioID=${usuarioID}`)
   }
 
+  // Obtener Mozos por usuarioID
+  obtenerMozo(mozoID:number):Observable<modeloMozo> {
+    return this._http.get<modeloMozo>(this.url + `mozos.php?mozoID=${mozoID}`)
+  }
+
   //Insertar Mozo
   agregarMozo(form:any):Observable<modeloRespuesta> {    
     return this._http.post<modeloRespuesta>(this.url + `mozos.php`, form)
+  }
+
+  //Modificar Mozo
+  modificarMozo(form:any) {
+    return this._http.put<modeloRespuesta>(this.url + `mozos.php`, form)
+  }
+
+  //Eliminar Mozo
+  eliminarMozo(mozoID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        mozoID: mozoID,
+        tokenAdmin: tokenAdmin               
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `mozos.php`, options)
   }
 }
