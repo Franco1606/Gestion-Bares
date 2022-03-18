@@ -27,7 +27,7 @@
             <th mat-header-cell *matHeaderCellDef> Accion </th>
             <td mat-cell *matCellDef="let element">
             <button mat-icon-button matTooltip="Editar nombre" color="primary" (click)="IrEditarMozo(element.mozoID)"><mat-icon>edit</mat-icon></button>                       
-            <button mat-icon-button matTooltip="Eliminar lista" color="warn" (click)="eliminarMozo(element.mozoID, element.usuario)"><mat-icon>delete</mat-icon></button></td>
+            <button mat-icon-button matTooltip="Eliminar lista" color="warn" (click)="eliminarMozo(element.mozoID, element.nombre)"><mat-icon>delete</mat-icon></button></td>
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
