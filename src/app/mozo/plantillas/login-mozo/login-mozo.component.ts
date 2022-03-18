@@ -28,7 +28,7 @@ export class LoginMozoComponent implements OnInit {
       next: (x) => {
         if(x.status == "ok") {
           localStorage.setItem("tokenMozo", x.result.token)
-          this._router.navigateByUrl("home");
+          this._router.navigateByUrl("mozo/gestion-mesas");
         } else {
           this.errorMsg = x.result["error_msg"];            
         }       
