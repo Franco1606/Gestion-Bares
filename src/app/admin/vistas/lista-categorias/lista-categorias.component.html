@@ -1,14 +1,13 @@
 <app-header-admin (datosUsuario)="obtenerUsuario($event)"></app-header-admin>
 <br>
-<div class="contendor-principal">
+<div class="contenedor-principal">
     <h1 class="titulo">CATEGORIAS</h1>
     <br>
     <mat-form-field class="buscador">
       <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Buscar">
     </mat-form-field>
-    <br>
-    
-    <div class="contnedor-tabla-agregar">
+    <br>    
+    <div class="contenedor-tabla-agregar">
         <button class="agregar" (click)="agregarCategoria()" mat-button color="primary">Agregar Categoria <mat-icon>add</mat-icon></button>             
         
         <table mat-table [dataSource]="dataSource" matSort>

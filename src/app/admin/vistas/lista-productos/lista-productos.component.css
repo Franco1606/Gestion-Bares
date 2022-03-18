@@ -1,11 +1,11 @@
-.contendor-principal {
+.contenedor-principal {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 @media (min-width:900px){
-    .contnedor-tabla-agregar {
+    .contenedor-tabla-agregar {
         width: 60%;
     }
 }

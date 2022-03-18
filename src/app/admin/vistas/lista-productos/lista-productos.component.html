@@ -2,7 +2,7 @@
 <br>
 <button mat-button routerLink="/admin/lista-categorias" color="primary"><mat-icon>chevron_left</mat-icon>Volver</button>
 <br>
-<div class="contendor-principal">
+<div class="contenedor-principal">
     <h1 class="titulo">PRODUCTOS</h1>
     <br>
     <mat-form-field class="buscador">
@@ -10,7 +10,7 @@
     </mat-form-field>
     <br>
     
-    <div class="contnedor-tabla-agregar">
+    <div class="contenedor-tabla-agregar">
         <button class="agregar" (click)="agregarProducto()" mat-button color="primary">Agregar Producto <mat-icon>add</mat-icon></button>             
         
         <table mat-table [dataSource]="dataSource" matSort>

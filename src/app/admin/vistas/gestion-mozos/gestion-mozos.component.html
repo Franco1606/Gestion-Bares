@@ -7,13 +7,10 @@
       <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Buscar">
     </mat-form-field>
     <br>
-    <div class="contenedor-tabla-agregar">
-        <div class="agregar">
-          <button (click)="irAgregarMozo()" mat-icon-button color="primary"><mat-icon>add</mat-icon></button>
-          <a style="color: rgb(63,81,181); cursor: pointer;" (click)="irAgregarMozo()">Agregar Mozo</a>
-        </div>      
-        <table mat-table [dataSource]="dataSource" matSort>
-    
+    <div class="contenedor-tabla-agregar">        
+        <button class="agregar" (click)="irAgregarMozo()" mat-button color="primary">Agregar Mozo <mat-icon>add</mat-icon></button>
+        
+        <table mat-table [dataSource]="dataSource" matSort>    
         <!-- Nombre Column -->
         <ng-container matColumnDef="nombre">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
