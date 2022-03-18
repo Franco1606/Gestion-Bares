@@ -10,11 +10,50 @@
         <mat-checkbox type="checkbox" class="example-margin" formControlName="comentario">Habilitar Comentarios</mat-checkbox>
         <mat-checkbox type="checkbox" class="example-margin" formControlName="mitad">Habilitar Medio Pedido</mat-checkbox>
         <br>
-        <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Cambiar</button> 
-        <mat-dialog-actions align="end">
-          <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
-        </mat-dialog-actions>           
-    </form>    
+        <button mat-raised-button color="primary" type="submit">Cambiar</button>          
+    </form>
+    <br>
+    <br>
+    <mat-card style="background-color: #0d48a111;">
+      <mat-card-title style="color:#0d47a1; text-align: center;"> Happy Hour </mat-card-title>
+      <br>
+      <mat-card-content>
+        <form [formGroup]="formHappy" style="display: flex; flex-direction: column;" (ngSubmit)="editarHappy()">
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="estado">Activar</mat-checkbox>
+          <br>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Inicio</mat-label>
+              <mat-select formControlName="inicio">
+                <mat-option *ngFor="let opcion of horas" [value]="opcion">
+                  {{opcion}}
+                </mat-option>              
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Fin</mat-label>
+              <mat-select formControlName="fin">
+                <mat-option *ngFor="let opcion of horas" [value]="opcion">
+                  {{opcion}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>        
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="lunes">Lunes</mat-checkbox>
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="martes">Martes</mat-checkbox>
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="miercoles">Miércoles</mat-checkbox>
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="jueves">Jueves</mat-checkbox>
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="viernes">Viernes</mat-checkbox>
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="sabado">Sábado</mat-checkbox>
+          <mat-checkbox type="checkbox" class="example-margin" formControlName="domingo">Domingo</mat-checkbox>
+          <br>
+          <button mat-raised-button color="primary" type="submit">Actualizar Happy Hour</button>
+          <br>
+          <button mat-raised-button color="warn" type="button" (click)="eliminarHappy()">Eliminar Happy Hour</button> 
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-dialog-actions align="end">
+      <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+    </mat-dialog-actions>           
   </div>
 </mat-dialog-content>
 
