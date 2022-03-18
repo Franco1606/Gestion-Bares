@@ -8,6 +8,7 @@ import { modeloProducto } from '../../ModelosAdmin/modeloProducto';
 import { modeloImagen } from "../../ModelosAdmin/modeloImagen"
 import { modeloEstilo } from 'src/app/carta/ModelosCarta/modeloEstilo';
 import { modeloHappy } from '../../ModelosAdmin/modeloHappy';
+import { modeloMozo } from '../../ModelosAdmin/modeloMozo';
 
 @Injectable({
   providedIn: 'root'
@@ -160,7 +161,7 @@ export class AdminService {
     }
 
   //////////////////////////////////////////////////////////
-  /////////////  METODOS PARA HAPPY HPUR  /////////////////
+  /////////////  METODOS PARA HAPPY HOUR  /////////////////
   ////////////////////////////////////////////////////////
 
   //Obtener Happy Hour por categoriaID
@@ -186,5 +187,19 @@ export class AdminService {
       }
     }
     return this._http.delete<modeloRespuesta>(this.url + `happy.php`, options)
+  }
+
+  //////////////////////////////////////////////////////////
+  ////////////////  METODOS PARA MOZOS  ///////////////////
+  ////////////////////////////////////////////////////////
+
+  // Obtener Mozos por usuarioID
+  obtenerMozos(usuarioID:number):Observable<modeloMozo[]> {
+    return this._http.get<modeloMozo[]>(this.url + `mozos.php?usuarioID=${usuarioID}`)
+  }
+
+  //Insertar Mozo
+  agregarMozo(form:any):Observable<modeloRespuesta> {    
+    return this._http.post<modeloRespuesta>(this.url + `mozos.php`, form)
   }
 }
