@@ -18,6 +18,7 @@ import { EstilosCartaComponent } from './vistas/estilos-carta/estilos-carta.comp
 import { InicioComponent } from './vistas/inicio/inicio.component';
 import { GestionMozosComponent } from './vistas/gestion-mozos/gestion-mozos.component';
 import { AgregarMozoDialogComponent } from './Dialogs/agregar-mozo-dialog/agregar-mozo-dialog.component';
+import { EditarMozoDialogComponent } from './Dialogs/editar-mozo-dialog/editar-mozo-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AgregarMozoDialogComponent } from './Dialogs/agregar-mozo-dialog/agrega
     EstilosCartaComponent,
     InicioComponent,
     GestionMozosComponent,
-    AgregarMozoDialogComponent      
+    AgregarMozoDialogComponent,
+    EditarMozoDialogComponent      
   ],
   imports: [
     CommonModule,
