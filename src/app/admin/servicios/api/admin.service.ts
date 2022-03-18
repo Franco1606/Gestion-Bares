@@ -7,6 +7,7 @@ import { modeloCategoria } from '../../ModelosAdmin/modeloCategoria';
 import { modeloProducto } from '../../ModelosAdmin/modeloProducto';
 import { modeloImagen } from "../../ModelosAdmin/modeloImagen"
 import { modeloEstilo } from 'src/app/carta/ModelosCarta/modeloEstilo';
+import { modeloHappy } from '../../ModelosAdmin/modeloHappy';
 
 @Injectable({
   providedIn: 'root'
@@ -157,4 +158,33 @@ export class AdminService {
       }
       return this._http.put<modeloProducto>(this.url + `imagenes.php`, body)
     }
+
+  //////////////////////////////////////////////////////////
+  /////////////  METODOS PARA HAPPY HPUR  /////////////////
+  ////////////////////////////////////////////////////////
+
+  //Obtener Happy Hour por categoriaID
+  obtenerHappy(usuarioID:number, categoriaID:number):Observable<modeloHappy>{      
+    return this._http.get<modeloHappy>(this.url + `happy.php?usuarioID=${usuarioID}&categoriaID=${categoriaID}`)
+  }
+
+  //Insertar o modificar categoria
+  agregarHappy(form:any):Observable<modeloRespuesta> {    
+    return this._http.post<modeloRespuesta>(this.url + `happy.php`, form)
+  }
+
+  //Eliminar Happy
+  eliminarHappy(usuarioID:number, categoriaID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        usuarioID: usuarioID,
+        categoriaID: categoriaID,
+        tokenAdmin: tokenAdmin        
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `happy.php`, options)
+  }
 }
