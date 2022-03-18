@@ -17,7 +17,9 @@ export class EstilosCartaComponent {
 
   constructor( private _adminService:AdminService, private _cartaService:CartaService, private _router:Router ) { }
 
-  //////////   Atributos de la clase   /////////////  
+  //////////   Atributos de la clase   ///////////// 
+  iframe:HTMLElement
+  iframeURL = "https://visita360.hopto.org/bar/carta"
   usuarioID!:number   
   tokenAdmin!:string
   nombreArchivo!:string
@@ -49,17 +51,18 @@ export class EstilosCartaComponent {
     this.tokenAdmin = datosUsuario["tokenAdmin"]
     this.obtenerImagenPorNombre("headerImg")
     this.valoresMostrarEstilos()
+    this.iframe = document.getElementById("iframe")    
+    this.iframe.setAttribute("src", `${this.iframeURL}?usuarioID=${this.usuarioID}`)
   }
 
   guardarCambios(){
     let estilos = this.obtenerValoresInputs(this.form.controls)   
     this._adminService.modificarEstilos(estilos, this.usuarioID, this.tokenAdmin).subscribe({
       next: () => {        
-        let iframe = document.getElementById("iframe")
-        iframe.setAttribute("src", `http://localhost:4200/carta?usuarioID=${this.usuarioID}`)
+        this.iframe.setAttribute("src", `${this.iframeURL}?usuarioID=${this.usuarioID}`)
       },
       error: () => {
-        alert("No se pudo actualizar todos o alguno de lo estilos")        
+        alert("No se pudo actualizar todos o alguno de lo estilos")
       }
     })
   }
