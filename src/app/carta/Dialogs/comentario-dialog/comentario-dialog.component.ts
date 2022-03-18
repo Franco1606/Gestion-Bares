@@ -37,8 +37,7 @@ export class ComentarioDialogComponent {
       } else {
         alert("Este producto ya se agrego al pedido, puede agregar otro de este tipo con un comentario")
       }
-    }
-    console.log(prod)
+    }    
     this.dialogRef.close()    
   } 
 
