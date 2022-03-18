@@ -1,0 +1,16 @@
+<mat-toolbar class="header" color="primary">
+    <div>
+        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/mozo/gestion-mesas">Gestion Mesas</button>
+        </mat-menu>
+        <span class="encabezado">Gestion de Pedidos</span>
+    </div>
+    <div class="logout">
+        <span class="usuario">{{usuario}}</span>
+        <button class="flecha" mat-button [matMenuTriggerFor]="logout"><mat-icon>keyboard_arrow_down</mat-icon></button>
+        <mat-menu  #logout="matMenu">
+            <button (click)="closeSesion()" mat-menu-item>Cerrar sesion</button>            
+        </mat-menu>
+    </div>
+</mat-toolbar>
