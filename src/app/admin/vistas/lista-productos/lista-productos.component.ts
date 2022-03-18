@@ -21,7 +21,7 @@ import { EditarProductoDialogComponent } from "../../Dialogs/editar-producto-dia
 })
 export class ListaProductosComponent {
 
-  constructor( private _router:Router, private _route:ActivatedRoute, private _adminServiceApi:AdminService, private _dialog:MatDialog ) { }
+  constructor( private _route:ActivatedRoute, private _adminServiceApi:AdminService, private _dialog:MatDialog ) { }
 
   //////////   Atributos de la clase   ///////////// 
   nombre!:string
