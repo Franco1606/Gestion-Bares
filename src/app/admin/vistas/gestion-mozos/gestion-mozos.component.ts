@@ -11,6 +11,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from "@angular/material/dialog"
 // Dependencias para Dialogs
 import { AgregarMozoDialogComponent } from "../../Dialogs/agregar-mozo-dialog/agregar-mozo-dialog.component"
+import { EditarMozoDialogComponent } from "../../Dialogs/editar-mozo-dialog/editar-mozo-dialog.component"
 
 
 @Component({
@@ -60,11 +61,25 @@ export class GestionMozosComponent implements OnInit {
   }
 
   IrEditarMozo(mozoID:number) {
-
+    this._adminService.mozoID = mozoID
+    this._adminService.tokenAdmin = this.tokenAdmin
+    this._dialog.open(EditarMozoDialogComponent)
   }
 
-  eliminarMozo(mozoID:number, usuario:string) {
-
+  eliminarMozo(mozoID:number, nombre:string) {
+    if(confirm(`Esta por eliminar al mozo/a: ${nombre}`)){         
+      this._adminService.eliminarMozo(mozoID, this.tokenAdmin).subscribe({
+        next: (x) => {
+          if(x.status == "ok"){
+            alert(`Se elminino al mozo/a: ${nombre}`)
+            window.location.reload()
+          }
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+    }
   }
 
   //Filtro para el buscador de la tabla
