@@ -13,9 +13,9 @@ export class AgregarMozoDialogComponent implements OnInit {
 
   constructor( private _AdminServiceApi:AdminService ) { }
 
-  estado!:string
+  //////////   Atributos de la clase   ///////////// 
   errorMsg!:string
-
+  // Formulario //  
   form:FormGroup = new FormGroup({
     "usuario" : new FormControl("", Validators.required),
     "nombre" : new FormControl("", Validators.required), 
