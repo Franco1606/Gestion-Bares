@@ -1,0 +1,46 @@
+<app-header-admin (datosUsuario)="obtenerUsuario($event)"></app-header-admin>
+<br>
+<div class="contenedor-principal">
+    <h1>MOZOS</h1>
+    <br>
+    <mat-form-field class="buscador">
+      <input matInput type="text" (keyup)="doFilter($any($event.target).value)" placeholder="Buscar">
+    </mat-form-field>
+    <br>
+    <div class="contenedor-tabla-agregar">
+        <div class="agregar">
+          <button (click)="irAgregarMozo()" mat-icon-button color="primary"><mat-icon>add</mat-icon></button>
+          <a style="color: rgb(63,81,181); cursor: pointer;" (click)="irAgregarMozo()">Agregar Mozo</a>
+        </div>      
+        <table mat-table [dataSource]="dataSource" matSort>
+    
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element">
+                <button  mat-button (click)="IrEditarMozo(element.mozoID)">{{element.nombre}}</button>           
+            </td>
+        </ng-container>
+        
+        <!-- Accion Column -->
+        <ng-container matColumnDef="accion">
+            <th mat-header-cell *matHeaderCellDef> Accion </th>
+            <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="Editar nombre" color="primary" (click)="IrEditarMozo(element.mozoID)"><mat-icon>edit</mat-icon></button>                       
+            <button mat-icon-button matTooltip="Eliminar lista" color="warn" (click)="eliminarMozo(element.mozoID, element.usuario)"><mat-icon>delete</mat-icon></button></td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="Seleccione pagina de categoria"></mat-paginator>
+    </div>  
+</div>
+
+
+
+
+
+
+
