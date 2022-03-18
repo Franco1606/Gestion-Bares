@@ -4,6 +4,7 @@ export class claseProductoPedido {
 
     constructor(producto:modeloProductoPedido) { 
         this.productoID = producto.productoID
+        this.categoriaID = producto.categoriaID
         this.nombre = producto.nombre
         this.precio = Number(producto.precio)
         if(!producto.cantidad) {
@@ -15,6 +16,7 @@ export class claseProductoPedido {
 
     //////////   Atributos de la clase   /////////////
     productoID!:number
+    categoriaID!:number
     nombre!:string
     precio!:number
     cantidad!:number
