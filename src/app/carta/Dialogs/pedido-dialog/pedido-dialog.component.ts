@@ -24,6 +24,8 @@ export class PedidoDialogComponent implements OnInit {
     //////////   Atributos de la clase   /////////////
     total = 0
     domicilio!:string
+    pedidosAgrupados!:claseProductoPedido[][]
+    happy = false
     // Tabla //
     displayedColumns = ["cantidad", "producto", "precio", "comentario", "eliminar"]
     dataSource!:claseProductoPedido[]
@@ -36,7 +38,6 @@ export class PedidoDialogComponent implements OnInit {
       this.total += element.cantidad*element.precio
     })
     this.obtenerLogoEncabezado()
-    
   }
 
   obtenerLogoEncabezado() {
@@ -60,7 +61,8 @@ export class PedidoDialogComponent implements OnInit {
     }
   }
 
-  emitirOrden() {    
+  emitirOrden() {
+    console.log(this._cartaServiceApi.pedidos)
     if(this._cartaServiceApi.mesaID == null) {      
       this._cartaServiceApi.mesaID = 0
       this.domicilio = prompt("Ingrese su domicilio") || ""
@@ -68,10 +70,10 @@ export class PedidoDialogComponent implements OnInit {
       this.domicilio = ""      
     }
     
-    if(confirm("Confirmar Pedido?")) {
+    if(confirm("Confirmar Pedido?")) {      
       this._cartaServiceApi.generarOrden(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this.domicilio, this._cartaServiceApi.pedidos).subscribe({
-        next: (x) => {
-          this.crearPdf(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"])
+        next: (x) => {          
+          this.crearPdf(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"], x.result["happy"])
           if(this.domicilio != "") {
           let msjWhatsApp =  this.escribirTextoWhatsapp(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"])
           window.location.href = `https://api.whatsapp.com/send?phone=+543413638536&text=${msjWhatsApp}`
@@ -84,9 +86,9 @@ export class PedidoDialogComponent implements OnInit {
     }
   }
 
-  crearPdf(pedidos:claseProductoPedido[] ,fecha:Date, numOrden:string) {
+  crearPdf(pedidos:claseProductoPedido[] ,fecha:Date, numOrden:string, happy:number) {
     let pdf = new Pdf()
-    let contenido = pdf.crear(pedidos, fecha, numOrden, this.headerImg)
+    let contenido = pdf.crear(pedidos, fecha, numOrden, this.headerImg, happy)
     pdfMake.createPdf(contenido).download(`#${numOrden}`)    
   }
 
@@ -103,10 +105,14 @@ export class PedidoDialogComponent implements OnInit {
         pedido.comentario = ""
       }
       subTotal = pedido.cantidad*pedido.precio
-      textoPedido += `${pedido.cantidad} x ${pedido.nombre} (${pedido.comentario}) : $ ${subTotal}%0A`
-  })
-  return textoPedido
-  }
-
-  
+      let cantidad
+            if(pedido.cantidad == 0.5) {
+                cantidad = "1/2"
+            } else if(pedido.cantidad >= 1) {
+                cantidad = pedido.cantidad
+            }
+      textoPedido += `${cantidad} x ${pedido.nombre} (${pedido.comentario}) : $ ${subTotal}%0A`
+    })
+    return textoPedido
+  }  
 }
