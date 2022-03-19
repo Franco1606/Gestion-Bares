@@ -24,17 +24,30 @@ export class AgregarProductoDialogComponent implements OnInit {
     "precio" : new FormControl("", Validators.required),
     "usuarioID" : new FormControl(),
     "categoriaID" : new FormControl(),
+    "categoriaNombre" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
 
   ngOnInit(): void {
     this.obtenerDatos()
+    this.obtenerCategoria()
   }
 
   obtenerDatos() {
     this.form.controls["usuarioID"].setValue(this._AdminServiceApi.usuarioID)
     this.form.controls["categoriaID"].setValue(this._AdminServiceApi.categoriaID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
+  }
+
+  obtenerCategoria() {
+    this._AdminServiceApi.obtenerCategoria(this._AdminServiceApi.categoriaID).subscribe({
+      next: (x) => {
+        this.form.controls["categoriaNombre"].setValue(x.nombre)        
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
   }
 
   agregarProducto() {    
