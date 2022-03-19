@@ -33,8 +33,7 @@ export class HeaderMozoComponent implements OnInit {
       next: (x) => {
         if(x.mozoID != null) {
           this.usuario = x.usuario
-          console.log(x.mozoID)
-          this.datosUsuario.emit({usuarioID: x.mozoID, tokenMozo: this.tokenMozo})          
+          this.datosUsuario.emit({usuarioID: x.usuarioID, mozoID: x.mozoID, tokenMozo: this.tokenMozo})          
         } else {
           
           alert("Sesion expirada")
