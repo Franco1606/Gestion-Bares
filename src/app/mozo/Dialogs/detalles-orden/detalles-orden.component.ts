@@ -103,11 +103,23 @@ export class DetallesOrdenComponent implements OnInit {
   }
 
   enviarComanda() {
-
+    console.log(this.dataSource)
+    this._mozoService.enviarComanda(this.dataSource, this._mozoService.tokenMozo).subscribe({
+      next: () => {
+        alert("La comanda se envio a la cocina")
+      },
+      error: () => {
+        alert("No se pudo enviar la comanda a la cocina")
+      }
+    })
   }
 
   toggle(e:any, productoPedido:modeloPedido) {
-
+    if(e.checked){
+      productoPedido.cocina = 1   
+    } else {      
+      productoPedido.cocina = 0
+    }
   }
 
   eliminarPedido(pedidoID:number, cantidad:number, nombre:string) {
