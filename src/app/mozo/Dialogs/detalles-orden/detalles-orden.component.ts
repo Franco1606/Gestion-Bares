@@ -5,6 +5,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { modeloPedido } from '../../ModelosMozo/modeloPedido';
 //Inyeccions de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
+// Dependencias Angular Material
+import { MatDialog } from "@angular/material/dialog"
+// Dialogs
+import { DetallesSesionDialogComponent } from '../detalles-sesion-dialog/detalles-sesion-dialog.component';
+
 
 @Component({
   selector: 'app-detalles-orden',
@@ -13,7 +18,7 @@ import { MoozoService } from "../../servicios/api/moozo.service"
 })
 export class DetallesOrdenComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService ) { }
+  constructor( private _mozoService:MoozoService, private _dialog:MatDialog ) { }
 
   //////////   Atributos de la clase   /////////////   
   estado!:string
@@ -53,7 +58,7 @@ export class DetallesOrdenComponent implements OnInit {
         console.log(err)
       }
     })
-  }
+  }  
 
   obtenerDatos() {
     this._mozoService.obtenerOrden(this._mozoService.orden.ordenID).subscribe({
@@ -85,8 +90,10 @@ export class DetallesOrdenComponent implements OnInit {
   cambiarEstado(estado:string) {    
     this._mozoService.cambiarEstado(estado, this._mozoService.orden.ordenID, this._mozoService.sesion.sesionID, this._mozoService.mozoID, this._mozoService.tokenMozo).subscribe({
       next: () => {
-        alert("Se actualizo el estado de la orden")
-        location.reload()
+        alert("Se actualizo el estado de la orden")        
+        this._dialog.closeAll()
+        this._dialog.open(DetallesSesionDialogComponent)
+        
       },
       error: () => {
         alert("ERROR: Hubo un error al actualizar el estado de la orden")
