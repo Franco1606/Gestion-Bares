@@ -36,6 +36,11 @@ export class AdminService {
     return this._http.get<modeloCategoria[]>(this.url + `categorias.php?usuarioID=${usuarioID}`)
   }
 
+  //Obtener categorias por categoriaID
+  obtenerCategoria(categoriaID:number):Observable<modeloCategoria> {
+    return this._http.get<modeloCategoria>(this.url + `categorias.php?categoriaID=${categoriaID}`)
+  }
+
   //Insertar categoria
   agregarCategoria(form:any):Observable<modeloCategoria> {    
     return this._http.post<modeloCategoria>(this.url + `categorias.php`, form)
@@ -69,7 +74,7 @@ export class AdminService {
     return this._http.get<modeloProducto[]>(this.url + `productos.php?usuarioID=${usuarioID}&categoriaID=${categoriaID}`)
   }
 
-  //Obtener producto por usuarioID y categoriaID
+  //Obtener producto por productoID
   obtenerProducto(productoID:number):Observable<modeloProducto> {
     return this._http.get<modeloProducto>(this.url + `productos.php?productoID=${productoID}`)
   }
@@ -112,7 +117,7 @@ export class AdminService {
     return this._http.post<modeloRespuesta>(this.url + `estilos.php`, body)
   }
 
-  //Obtener estilo de este usuario por nombre
+  //Obtener estilo por nombre
   obtenerEstiloPorNombre(nombre:string, usuarioID:number):Observable<modeloEstilo>{      
     return this._http.get<modeloEstilo>(this.url + `estilos.php?nombre=${nombre}&usuarioID=${usuarioID}`)
   }
@@ -145,7 +150,7 @@ export class AdminService {
       return this._http.post<modeloRespuesta>(this.url + `imagenes.php`, body)
     }
 
-    //Obtener imagen de este usuario por nombre
+    //Obtener imagen por nombre
     obtenerImagenPorNombre(nombre:string, usuarioID:number):Observable<modeloImagen>{      
       return this._http.get<modeloImagen>(this.url + `imagenes.php?nombre=${nombre}&usuarioID=${usuarioID}`)
     }
@@ -170,7 +175,7 @@ export class AdminService {
     return this._http.get<modeloHappy>(this.url + `happy.php?usuarioID=${usuarioID}&categoriaID=${categoriaID}`)
   }
 
-  //Insertar o modificar categoria
+  //Insertar o modificar happy
   agregarHappy(form:any):Observable<modeloRespuesta> {    
     return this._http.post<modeloRespuesta>(this.url + `happy.php`, form)
   }
@@ -199,7 +204,7 @@ export class AdminService {
     return this._http.get<modeloMozo[]>(this.url + `mozos.php?usuarioID=${usuarioID}`)
   }
 
-  // Obtener Mozos por usuarioID
+  // Obtener Mozo por mozoID
   obtenerMozo(mozoID:number):Observable<modeloMozo> {
     return this._http.get<modeloMozo>(this.url + `mozos.php?mozoID=${mozoID}`)
   }
