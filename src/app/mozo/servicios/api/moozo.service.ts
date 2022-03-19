@@ -82,4 +82,13 @@ export class MoozoService {
   obtenerPedidosPorSesion(sesionID:number):Observable<modeloPedido[]> {
     return this._http.get<modeloPedido[]>(this.url + `pedidos.php?sesionID=${sesionID}`)
   }
+
+  //Modificar Pedido
+  enviarComanda(pedido:modeloPedido[], tokenMozo:string) {
+    let body = {
+      pedido: pedido,
+      tokenMozo: tokenMozo
+    }    
+    return this._http.put<modeloRespuesta>(this.url + `pedidos.php`, body)
+  }
 }
