@@ -71,7 +71,7 @@ export class PedidoDialogComponent implements OnInit {
     }
     
     if(confirm("Confirmar Pedido?")) {      
-      this._cartaServiceApi.generarOrden(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this.domicilio, this._cartaServiceApi.pedidos).subscribe({
+      this._cartaServiceApi.generarOrden(this._cartaServiceApi.usuarioID, this._cartaServiceApi.mesaID, this.domicilio, this._cartaServiceApi.pedidos, this.total).subscribe({
         next: (x) => {          
           this.crearPdf(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"], x.result["happy"])
           if(this.domicilio != "") {
