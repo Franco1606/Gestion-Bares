@@ -18,6 +18,10 @@
       <mat-card-title style="color:#0d47a1; text-align: center;"> Happy Hour </mat-card-title>
       <br>
       <mat-card-content>
+        <div *ngIf="desactivarHappy" class="aviso-happy">          
+          <div class="aviso-happy">EL happy Hour solo se puede configurar en categorias donde TODOS los proudctos tengan el MISMO PRECIO </div>
+          <br>
+        </div>
         <form [formGroup]="formHappy" style="display: flex; flex-direction: column;" (ngSubmit)="editarHappy()">
           <mat-checkbox type="checkbox" class="example-margin" formControlName="estado">Activar</mat-checkbox>
           <br>
@@ -45,9 +49,9 @@
           <mat-checkbox type="checkbox" class="example-margin" formControlName="sabado">Sábado</mat-checkbox>
           <mat-checkbox type="checkbox" class="example-margin" formControlName="domingo">Domingo</mat-checkbox>
           <br>
-          <button mat-raised-button color="primary" type="submit">Actualizar Happy Hour</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="desactivarHappy">Actualizar Happy Hour</button>
           <br>
-          <button mat-raised-button color="warn" type="button" (click)="eliminarHappy()">Eliminar Happy Hour</button> 
+          <button mat-raised-button color="warn" type="button" [disabled]="desactivarHappy" (click)="eliminarHappy()">Eliminar Happy Hour</button> 
         </form>
       </mat-card-content>
     </mat-card>
