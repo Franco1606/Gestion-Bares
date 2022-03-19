@@ -45,7 +45,12 @@ export class GestionMesasComponent {
     this._mozoService.usuarioID = this.usuarioID
     this._mozoService.mozoID = this.mozoID
     this._mozoService.tokenMozo = this.tokenMozo
-    this._dialog.open(DetallesSesionDialogComponent)
+    let dialogRef = this._dialog.open(DetallesSesionDialogComponent)
+    dialogRef.afterClosed().subscribe({
+      next: () => {        
+        this.obtenerSesiones()
+      }
+    })
   }
 
   tiempoTranscurrido(fecha:Date):string {
