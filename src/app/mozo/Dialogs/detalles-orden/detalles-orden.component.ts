@@ -71,6 +71,10 @@ export class DetallesOrdenComponent implements OnInit {
         }
         this.form.controls["total"].setValue(x.total)
         this.estado = x.estado
+        this.inhabilitarActivar()
+        this.inhabilitarFinalizar()
+        this.inhabilitarEnvioComanda()
+        this.inhabilitarEliminar()
       },
       error: (err) => {
         console.log(err)
@@ -79,13 +83,13 @@ export class DetallesOrdenComponent implements OnInit {
   }
 
   cambiarEstado(estado:string) {    
-    this._mozoService.cambiarEstado(estado, this._mozoService.orden.ordenID, this._mozoService.tokenMozo).subscribe({
+    this._mozoService.cambiarEstado(estado, this._mozoService.orden.ordenID, this._mozoService.sesion.sesionID, this._mozoService.mozoID, this._mozoService.tokenMozo).subscribe({
       next: () => {
         alert("Se actualizo el estado de la orden")
         location.reload()
       },
       error: () => {
-        alert("ERROR: No se pudo actualizar el estado de la orden")
+        alert("ERROR: Hubo un error al actualizar el estado de la orden")
         location.reload()
       }
     })
@@ -101,6 +105,36 @@ export class DetallesOrdenComponent implements OnInit {
 
   eliminarPedido(pedidoID:number, cantidad:number, nombre:string) {
 
+  }
+
+  inhabilitarEnvioComanda() {
+    if(this.estado == "activa") {
+      this.desactivarEnvioComanda = false
+      this.desactivarChecks = false      
+    } else {
+      this.desactivarEnvioComanda = true
+      this.desactivarChecks = true            
+    }
+  }
+
+  inhabilitarEliminar() {
+    if(this.estado == "nueva" || this.estado == "activa") {      
+      this.desactivarEliminar = false
+    } else {
+      this.desactivarEliminar = true                 
+    }
+  }
+
+  inhabilitarFinalizar() {
+    if(this.estado == "nueva") {
+      this.estados = this.estados.filter(element => element != "finalizada")      
+    }
+  }
+
+  inhabilitarActivar() {
+    if(this.estado == "lista" || this.estado == "activa" || this.estado == "finalizada") {
+      this.estados = this.estados.filter(element => element != "activa")      
+    }
   }
 
 }
