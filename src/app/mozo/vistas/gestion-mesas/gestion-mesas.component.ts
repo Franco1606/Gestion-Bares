@@ -8,11 +8,10 @@ import { MatDialog } from "@angular/material/dialog"
 // Dependencias para Dialogs
 import { DetallesSesionDialogComponent } from "../../Dialogs/detalles-sesion-dialog/detalles-sesion-dialog.component"
 
-
 @Component({
   selector: 'app-gestion-mesas',
   templateUrl: './gestion-mesas.component.html',
-  styleUrls: ['./gestion-mesas.component.css'],
+  styleUrls: ['./gestion-mesas.component.css'],  
   encapsulation: ViewEncapsulation.None
 })
 export class GestionMesasComponent {
@@ -30,6 +29,7 @@ export class GestionMesasComponent {
     this.mozoID = datosUsuario["mozoID"]
     this.tokenMozo = datosUsuario["tokenMozo"]
     this.obtenerSesiones()
+    setInterval(() => {this.obtenerSesiones()}, 300000)
   }
 
   obtenerSesiones() {
@@ -43,6 +43,7 @@ export class GestionMesasComponent {
   detallesMesa(sesion:modeloSesion) {
     this._mozoService.sesion = sesion
     this._mozoService.usuarioID = this.usuarioID
+    this._mozoService.mozoID = this.mozoID
     this._mozoService.tokenMozo = this.tokenMozo
     this._dialog.open(DetallesSesionDialogComponent)
   }
