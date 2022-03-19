@@ -28,7 +28,7 @@ export class Pdf {
         let textHappy = ""
 
         if(Boolean(Number(happy))) {
-            textHappy = `Hay productos en Happy Hour! :), al cerrar la mesa seran descontados los productos correspondientes.`
+            textHappy = `Hay productos en Happy Hour! ; ), al cerrar la mesa serán descontados los que correspondan.`
         }
 
         let contenido:any = {
