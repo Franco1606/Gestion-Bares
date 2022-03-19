@@ -14,11 +14,41 @@ import { MatDialog } from "@angular/material/dialog"
 import { ComentarioDialogComponent } from "../../Dialogs/comentario-dialog/comentario-dialog.component"
 import { QuitarDialogComponent } from '../../Dialogs/quitar-dialog/quitar-dialog.component';
 import { PedidoDialogComponent } from "../../Dialogs/pedido-dialog/pedido-dialog.component"
+//Animaciones
+import { trigger, style, animate, transition } from '@angular/animations'; 
 
 @Component({
   selector: 'app-carta',
   templateUrl: './carta.component.html',
-  styleUrls: ['./carta.component.css']
+  styleUrls: ['./carta.component.css'],
+  animations: [
+    trigger(
+      'inAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ height:0,  opacity: 0 }),
+            animate('250ms ease-out', 
+            style({ height:167, opacity: 1 }))
+          ]
+        )
+      ]
+    ),
+    trigger(
+      'outAnimation', 
+    [     
+      transition(
+        ':leave', 
+        [
+          style({  opacity: 1 }),
+          animate('100ms ease-in',
+          style({  opacity: 0 }))
+        ]
+      )
+    ]
+    ),    
+  ]
 })
 export class CartaComponent implements OnInit {
 
