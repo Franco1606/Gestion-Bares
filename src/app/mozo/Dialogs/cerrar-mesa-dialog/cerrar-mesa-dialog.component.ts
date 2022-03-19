@@ -23,8 +23,7 @@ export class CerrarMesaDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this._mozoService.obtenerPedidosPorSesion(this._mozoService.sesion.sesionID).subscribe({
-      next: (x) => {
-        console.log(x)
+      next: (x) => {        
         this.peidosSinHappy = this.pedidos(this.agruparPorProducto(x))
         this.pedidosConHappy = this.pedidosHappy(this.agruparPorCategoria(x))
         this.dataSource = this.peidosSinHappy.concat(this.pedidosConHappy)
@@ -45,7 +44,30 @@ export class CerrarMesaDialogComponent implements OnInit {
   }
 
   cerrarMesa() {
-
+    this._mozoService.obtenerOrdenes(this._mozoService.usuarioID, this._mozoService.sesion.sesionID).subscribe({
+      next: (x) => {
+        if(x.filter(element => element.estado == "nueva" || element.estado == "lista" || element.estado == "activa").length == 0) {
+          if(confirm("¿Desea cerrar la mesa?"))
+          this._mozoService.cambiarEstadoSesion("cerrada", this._mozoService.sesion.sesionID, this._mozoService.tokenMozo).subscribe({
+            next:() => {              
+              location.reload()
+            },
+            error: (err) => {
+              console.log(err)
+              alert("ERROR: No se pudo cerrar la mesa")
+              location.reload()
+            }
+          })
+        } else {
+          alert("No se puede cerrar la mesa con ordenes nuevas, listas o activas, debe finalizar todas las ordenes")
+          location.reload()
+        }
+      },
+      error: (err) => {
+        alert("No se pudo obtener los datos de la base de datos")
+        location.reload()
+      }
+    })
   }
 
   agruparPorCategoria(pedidos:modeloPedido[]):modeloPedido[][] {
