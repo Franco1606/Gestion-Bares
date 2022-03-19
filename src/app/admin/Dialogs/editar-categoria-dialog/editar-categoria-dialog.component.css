@@ -8,3 +8,18 @@
 form {
     min-width: 300px;
 }
+
+.aviso-happy {
+    color: rgb(63,81,181);
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1em;
+    max-width: 300px;
+    text-align: center;
+}
+
+.aviso-happy mat-icon {
+    color: rgb(250, 219, 79);
+    transform: scale(1.5);
+    margin-bottom: 15px;
+}
