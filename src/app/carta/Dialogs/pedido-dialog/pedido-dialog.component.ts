@@ -77,7 +77,9 @@ export class PedidoDialogComponent implements OnInit {
           if(this.domicilio != "") {
           let msjWhatsApp =  this.escribirTextoWhatsapp(this._cartaServiceApi.pedidos, x.result["nuevaFecha"], x.result["numOrden"])
           window.location.href = `https://api.whatsapp.com/send?phone=+543413638536&text=${msjWhatsApp}`
-          }
+        }
+        this._cartaServiceApi.pedidos = []
+        this.dialogRef.close()
         },
         error: (err) => {
           console.log(err)
