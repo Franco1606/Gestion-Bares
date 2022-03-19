@@ -21,6 +21,7 @@ export class MoozoService {
   sesion!:modeloSesion
   orden!:modeloOrden
   usuarioID!:number
+  mozoID!:number
   tokenMozo!:string
   pedidoFinal!:any[]
   
@@ -31,6 +32,16 @@ export class MoozoService {
   //Obtener sesiones por usuarioID
   obtenerSesiones(usuarioID:number):Observable<modeloSesion[]> {
     return this._http.get<modeloSesion[]>(this.url + `sesiones.php?usuarioID=${usuarioID}`)
+  }
+
+  //Modificar sesion
+  cambiarEstadoSesion(estado:string, sesionID:number, tokenMozo:string) {
+    let body = {
+      estado: estado,
+      sesionID: sesionID,
+      tokenMozo: tokenMozo
+    }
+    return this._http.put<modeloRespuesta>(this.url + `sesiones.php`, body)
   }
 
   /////////////////////////////////////////////////////////
@@ -48,10 +59,12 @@ export class MoozoService {
   }
 
   //Modificar Orden
-  cambiarEstado(estado:string, ordenID:number, tokenMozo:string) {
+  cambiarEstado(estado:string, ordenID:number, sesionID:number, mozoID:number,tokenMozo:string) {
     let body = {
       estado: estado,
       ordenID: ordenID,
+      sesionID: sesionID,
+      mozoID: mozoID,
       tokenMozo: tokenMozo
     }
     return this._http.put<modeloRespuesta>(this.url + `ordenes.php`, body)
