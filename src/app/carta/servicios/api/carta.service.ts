@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http"
+import { HttpClient } from "@angular/common/http"
 import { Observable } from 'rxjs';
 //Importacion de Modelos
 import { modeloProductoPedido } from "../../ModelosCarta/modeloProductoPedido"
@@ -40,14 +40,15 @@ export class CartaService {
   /////////////  METODOS PARA ORDENES  ///////////////////
   ///////////////////////////////////////////////////////
   
-  generarOrden(usuarioID:number, mesaID:number, domicilio:string, pedidos:claseProductoPedido[]):Observable<modeloRespuesta> {
+  generarOrden(usuarioID:number, mesaID:number, domicilio:string, pedidos:claseProductoPedido[], total:number):Observable<modeloRespuesta> {
     let body = {
       usuarioID : usuarioID,
       mesaID : mesaID,
       domicilio: domicilio,
       pedidos: pedidos,
       estado: "nueva",
-      solicitante: "cliente"
+      solicitante: "cliente",
+      total: total
     }
     return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
   }
