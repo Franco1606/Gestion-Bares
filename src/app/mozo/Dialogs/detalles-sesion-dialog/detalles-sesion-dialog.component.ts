@@ -5,7 +5,6 @@ import { MoozoService } from "../../servicios/api/moozo.service"
 import { MatDialog } from "@angular/material/dialog"
 //Modelos
 import { modeloOrden } from '../../ModelosMozo/modeloOrden';
-import { modeloPedido } from '../../ModelosMozo/modeloPedido';
 // Dependencias para Dialogs
 import { DetallesOrdenComponent } from "../../Dialogs/detalles-orden/detalles-orden.component"
 import { CerrarMesaDialogComponent } from '../cerrar-mesa-dialog/cerrar-mesa-dialog.component';
@@ -46,10 +45,28 @@ export class DetallesSesionDialogComponent implements OnInit {
 
   irDetallesOrden(orden:modeloOrden) {
     this._mozoService.orden = orden
-    this._dialog.open(DetallesOrdenComponent)
+    let dialogRef = this._dialog.open(DetallesOrdenComponent)
+    dialogRef.afterClosed().subscribe({
+      next: () => {        
+        this.obtenerOrdenes()
+      }
+    })
   }
 
-  cerrarMesa() {    
-    this._dialog.open(CerrarMesaDialogComponent)    
+  cerrarMesa() {
+    this._mozoService.obtenerOrdenes(this._mozoService.usuarioID, this._mozoService.sesion.sesionID).subscribe({
+      next: (x) => {
+        if(x.filter(element => element.estado == "nueva" || element.estado == "lista" || element.estado == "activa").length == 0) {
+          this._dialog.open(CerrarMesaDialogComponent)
+        } else {
+          alert("No se puede cerrar la mesa con ordenes nuevas, listas o activas, debe finalizar todas las ordenes")          
+        }
+      },
+      error: (err) => {
+        alert("No se pudo obtener los datos de la base de datos")
+        console.log(err)        
+      }
+    })
+        
   }  
 }
