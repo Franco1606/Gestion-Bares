@@ -133,14 +133,14 @@ h1 {
 .contenedor-pedir-cantidad {
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
 .contenedor-contador-quitar {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    /* transform: scale(0.8); */
+    align-items: center;    
 }
 
 .contenedor-contador-quitar button {
