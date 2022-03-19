@@ -1,0 +1,138 @@
+form {
+    width: 600px;
+}
+
+.header {    
+    display: flex;
+    justify-content: center;    
+    align-items: center; 
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.nueva {      
+    background-color: rgb(165, 165, 165);  
+    color: white;
+    text-transform: uppercase;
+    padding: 10px; 
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.activa {      
+    background-color: rgb(77, 226, 97);  
+    color: white;
+    text-transform: uppercase;
+    padding: 10px; 
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: center;
+}
+
+.lista {      
+    background-color: rgb(250, 219, 79);  
+    padding: 10px; 
+    border-radius: 4px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.finalizada {      
+    background-color: rgb(250, 95, 81);  
+    padding: 10px; 
+    border-radius: 4px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.estado {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.campo {
+    display: flex;
+    flex-direction: row;
+}
+
+.campo-pedido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.campo-pedido div{
+    background-color: rgb(63,81,181);    
+    padding: 10px;
+    width: 100%;
+    font-size: 1.2em;
+    text-align: center;
+    color: white;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+
+.copyIcon {
+    float: right;
+    transform: scale(0.8);    
+}
+
+.copyIconPedido {
+    position: absolute;
+    top: 0px !important;
+    right: 10px !important;
+    transform: scale(0.8);
+}
+
+table {
+    width: 100%;
+    padding: 2px !important; 
+}
+
+.td, th, .mat-cell {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-right: 5px !important;
+    padding-left: 5px !important;          
+}
+
+.boton-comanda {
+    max-width: 150px;    
+}
+
+.mat-dialog-container {
+    padding: 10px !important;
+}
+
+@media (max-width:900px){
+
+    form {
+        width: 100%;
+    }
+
+    .example-full-width{
+        width: 70vw;
+    }
+
+    .pedido .mat-form-field-wrapper {
+        width: 70vw;
+        ;
+    }
+}
