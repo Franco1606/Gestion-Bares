@@ -16,7 +16,8 @@ export class EditarCategoriaDialogComponent implements OnInit {
   //////////   Atributos de la clase   /////////////   
   nombre!:string
   categoriaID!:number  
-  tokenAdmin!:string   
+  tokenAdmin!:string
+  desactivarHappy!:boolean
   // Formularios //
   form:FormGroup = new FormGroup({
     "nombre" : new FormControl("", Validators.required),
@@ -45,7 +46,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerDatos()
-    this.msotrarDatosEnInputs()
+    this.verificarPosibiliadHappy()
   }
 
   obtenerDatos() {
@@ -57,29 +58,54 @@ export class EditarCategoriaDialogComponent implements OnInit {
     this.formHappy.controls["usuarioID"].setValue(this._AdminServiceApi.usuarioID)
     this.formHappy.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
     this.nombre = this._AdminServiceApi.categoria.nombre
-    console.log(this._AdminServiceApi.usuarioID)
-    console.log(this._AdminServiceApi.categoria.categoriaID)
-    this._AdminServiceApi.obtenerHappy(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
-      next: (x) => {        
-        this.formHappy.controls["estado"].setValue(Boolean(Number(x.estado)))
-        this.formHappy.controls["inicio"].setValue(x.inicio)
-        this.formHappy.controls["fin"].setValue(x.fin)
-        this.formHappy.controls["lunes"].setValue(Boolean(Number(x.lunes)))
-        this.formHappy.controls["martes"].setValue(Boolean(Number(x.martes)))
-        this.formHappy.controls["miercoles"].setValue(Boolean(Number(x.miercoles)))
-        this.formHappy.controls["jueves"].setValue(Boolean(Number(x.jueves)))
-        this.formHappy.controls["viernes"].setValue(Boolean(Number(x.viernes)))
-        this.formHappy.controls["sabado"].setValue(Boolean(Number(x.sabado)))
-        this.formHappy.controls["domingo"].setValue(Boolean(Number(x.domingo)))        
-      },  
+    this.form.controls["nombre"].setValue(this.nombre)
+  }
+
+  verificarPosibiliadHappy() {
+    this._AdminServiceApi.obtenerProductos(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
+      next: (productos) => {
+        let mismoPrecio = true
+        productos.forEach(producto => {
+          if(productos[0].precio != producto.precio) {
+            mismoPrecio = false
+          }
+        })
+        if(mismoPrecio) {
+          this._AdminServiceApi.obtenerHappy(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
+            next: (x) => {        
+              this.formHappy.controls["estado"].setValue(Boolean(Number(x.estado)))
+              this.formHappy.controls["inicio"].setValue(x.inicio)
+              this.formHappy.controls["fin"].setValue(x.fin)
+              this.formHappy.controls["lunes"].setValue(Boolean(Number(x.lunes)))
+              this.formHappy.controls["martes"].setValue(Boolean(Number(x.martes)))
+              this.formHappy.controls["miercoles"].setValue(Boolean(Number(x.miercoles)))
+              this.formHappy.controls["jueves"].setValue(Boolean(Number(x.jueves)))
+              this.formHappy.controls["viernes"].setValue(Boolean(Number(x.viernes)))
+              this.formHappy.controls["sabado"].setValue(Boolean(Number(x.sabado)))
+              this.formHappy.controls["domingo"].setValue(Boolean(Number(x.domingo)))
+            },  
+            error: (err) => {
+              console.log(err)
+            }
+          })
+        } else {
+          this.formHappy.controls["estado"].disable()
+          this.formHappy.controls["inicio"].disable()
+          this.formHappy.controls["fin"].disable()
+          this.formHappy.controls["lunes"].disable()
+          this.formHappy.controls["martes"].disable()
+          this.formHappy.controls["miercoles"].disable()
+          this.formHappy.controls["jueves"].disable()
+          this.formHappy.controls["viernes"].disable()
+          this.formHappy.controls["sabado"].disable()
+          this.formHappy.controls["domingo"].disable()
+          this.desactivarHappy = true
+        }
+      },
       error: (err) => {
         console.log(err)
       }
     })
-  }
-
-  msotrarDatosEnInputs(){
-    this.form.controls["nombre"].patchValue(this.nombre)
   }
 
   editarCategoria() { 
@@ -144,18 +170,35 @@ export class EditarCategoriaDialogComponent implements OnInit {
       this.formHappy.controls["domingo"].setValue(7)
     } else {
       this.formHappy.controls["domingo"].setValue(0)
-    }    
-    this._AdminServiceApi.agregarHappy(this.formHappy.value).subscribe({
-      next: () => {
-        alert("Se actualizo el happy hour")
-        location.reload()
-      },
-      error: (err) => {
-        alert("No se pudo actualizar el happy hour o no se modifico")
-        console.log(err)
-        location.reload()
+    } 
+
+    let inicioHoras = this.formHappy.controls["inicio"].value.slice(0, 2)
+    let inicioMinutos = this.formHappy.controls["inicio"].value.slice(3)
+    let finHoras = this.formHappy.controls["fin"].value.slice(0, 2)
+    let finMinutos = this.formHappy.controls["fin"].value.slice(3)    
+    let inicio = Number(inicioHoras)*60 + Number(inicioMinutos)    
+    let fin = Number(finHoras)*60 + Number(finMinutos)
+
+    if(this.formHappy.controls["inicio"].value && this.formHappy.controls["fin"].value) {
+      if(fin - inicio > 0) {
+        this._AdminServiceApi.agregarHappy(this.formHappy.value).subscribe({
+          next: () => {
+            alert("Se actualizo el happy hour")
+            location.reload()
+          },
+          error: (err) => {
+            alert("No se pudo actualizar el happy hour o no se modifico")
+            console.log(err)
+            location.reload()
+          }
+        })
+      } else {
+        alert("La hora de fin debe ser mayor a la hora de inicio")
       }
-    })
+    } else {
+      alert("Los campos inicio y fin son requeridos")
+    }
+
   }
 
   eliminarHappy() {
