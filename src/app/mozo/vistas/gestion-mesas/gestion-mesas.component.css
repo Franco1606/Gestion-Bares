@@ -22,6 +22,10 @@ body {
     background-color: rgb(93, 93, 93);
 }
 
+.abierta {
+    background-color: rgb(15, 124, 33);
+}
+
 .contenedor-mesa {
     position: relative;
     width: 100%;
@@ -33,10 +37,49 @@ body {
     overflow: hidden;
 }
 
+.orden-nueva {
+    position: absolute;
+    color: rgb(250, 95, 81);
+    top:5px;
+    right: 5px;
+    transform: scale(1.2);
+}
+
+@keyframes changeSize {
+    from {
+      transform: scale(0.9);
+    }
+  
+    to {
+        transform: scale(1.5);
+    }
+  }
+  
+  .orden-nueva {
+    position: absolute;
+    color: rgb(250, 95, 81);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.582);
+    top:12px;
+    right: 3px;
+    animation-duration: 0.5s;
+    animation-name: changeSize;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.estado-sesion {
+    position: absolute;
+    text-transform: uppercase;
+    top: 80px;
+    font-size: 1.6em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.178);
+}
+
 .mesaID {
     position: absolute;
-    top: 40px;
-    font-size: 120px;
+    top: 30px;
+    font-size: 6em;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.178);
 }
