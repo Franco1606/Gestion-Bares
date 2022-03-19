@@ -8,13 +8,19 @@ import { PlantillasModule } from "../plantillas/plantillas.module"
 import { LoginMozoComponent } from './plantillas/login-mozo/login-mozo.component';
 import { GestionMesasComponent } from './vistas/gestion-mesas/gestion-mesas.component';
 import { HeaderMozoComponent } from './plantillas/header-mozo/header-mozo.component';
+import { DetallesSesionDialogComponent } from './Dialogs/detalles-sesion-dialog/detalles-sesion-dialog.component';
+import { DetallesOrdenComponent } from './Dialogs/detalles-orden/detalles-orden.component';
+import { CerrarMesaDialogComponent } from './Dialogs/cerrar-mesa-dialog/cerrar-mesa-dialog.component';
 
 
 @NgModule({
   declarations: [
     LoginMozoComponent,
     GestionMesasComponent,
-    HeaderMozoComponent
+    HeaderMozoComponent,
+    DetallesSesionDialogComponent,
+    DetallesOrdenComponent,
+    CerrarMesaDialogComponent
   ],
   imports: [
     CommonModule,
