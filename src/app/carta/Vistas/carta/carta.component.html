@@ -43,14 +43,23 @@
     <br>
 </div>
   
-  <div *ngIf="pedido.length > 0">
+<div *ngIf="pedido.length > 0">
     <button (click)="verPedido()" class="floatpedido" target="_blank">
         <mat-icon style="transform: scale(1.6,1.6);">list_alt</mat-icon>
     </button>
-  </div>
-  <div *ngIf="pedido.length > 0" class="verpedido">
-        Ver pedido
-  </div>
+</div>
+<div *ngIf="pedido.length > 0" class="verpedido">
+    Ver pedido
+</div>
+
+<div>
+    <button (click)="llamarMozo()" class="floatllamar" target="_blank">
+        <mat-icon style="transform: scale(1.6,1.6);">record_voice_over</mat-icon>
+    </button>
+</div>
+<div class="llamarMozo">
+    LLamar Mozo
+</div>
   
 <footer>
     &reg; Franco Bertolotti
