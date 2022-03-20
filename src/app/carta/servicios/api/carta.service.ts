@@ -61,6 +61,20 @@ export class CartaService {
   obtenerEstilos(usuarioID:number):Observable<modeloEstilo[]> {
     return this._http.get<modeloEstilo[]>(this.url + `estilos.php?usuarioID=${usuarioID}`)
   }
+
+  /////////////////////////////////////////////////////////
+  /////////////  METODOS PARA SESIONES  //////////////////
+  ///////////////////////////////////////////////////////
+
+  //Modificar sesion
+  llamarMozo(usuarioID:number, mesaID:number) {
+   let body = {
+    mesaID: mesaID,
+    usuarioID: usuarioID,
+    llamarMozo: 1
+    }
+    return this._http.post<modeloRespuesta>(this.url + `sesiones.php`, body)
+  }
 }
 
   
