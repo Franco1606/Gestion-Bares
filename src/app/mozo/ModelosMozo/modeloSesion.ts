@@ -8,5 +8,6 @@ export interface modeloSesion {
     estado:string,
     ordenNueva:number,
     ordenLista:number,
-    mesaID:number
+    mesaID:number,
+    llamarMozo:number
 }
