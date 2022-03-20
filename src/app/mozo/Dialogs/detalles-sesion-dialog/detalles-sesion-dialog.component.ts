@@ -56,10 +56,23 @@ export class DetallesSesionDialogComponent implements OnInit {
   cerrarMesa() {
     this._mozoService.obtenerOrdenes(this._mozoService.usuarioID, this._mozoService.sesion.sesionID).subscribe({
       next: (x) => {
-        if(x.filter(element => element.estado == "nueva" || element.estado == "lista" || element.estado == "activa").length == 0) {
-          this._dialog.open(CerrarMesaDialogComponent)
+        if(x.length > 0) {
+          if(x.filter(element => element.estado == "nueva" || element.estado == "lista" || element.estado == "activa").length == 0) {
+            this._dialog.open(CerrarMesaDialogComponent)
+          } else {
+            alert("No se puede cerrar la mesa con ordenes nuevas, listas o activas, debe finalizar todas las ordenes")          
+          }
         } else {
-          alert("No se puede cerrar la mesa con ordenes nuevas, listas o activas, debe finalizar todas las ordenes")          
+          this._mozoService.cambiarEstadoSesion("cerrada", this._mozoService.sesion.sesionID, this._mozoService.tokenMozo).subscribe({
+            next:() => {              
+              location.reload()
+            },
+            error: (err) => {
+              console.log(err)
+              alert("ERROR: No se pudo cerrar la mesa")
+              location.reload()
+            }
+          })
         }
       },
       error: (err) => {
