@@ -37,13 +37,35 @@ body {
     overflow: hidden;
 }
 
-.orden-nueva {
-    position: absolute;
-    color: rgb(250, 95, 81);
-    top:5px;
-    right: 5px;
-    transform: scale(1.2);
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px,0,0);
+    }
+  
+    20%, 80% {
+        transform: translate3d(2px,0,0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-2px,0,0);
+    }
+
+    40%, 60% {
+        transform: translate3d(2px,0,0);
+    }    
 }
+
+.llamar-mozo {
+    position: absolute;
+    top:8px;
+    left:8px;
+    color: rgba(255, 255, 255, 0.541);
+    animation: shake 1s cubic-bezier(.36,.07,.19,.97) both;
+    animation-iteration-count: infinite;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+  
 
 @keyframes changeSize {
     from {
@@ -53,9 +75,9 @@ body {
     to {
         transform: scale(1.5);
     }
-  }
+}
   
-  .orden-nueva {
+.orden-nueva {
     position: absolute;
     color: rgb(250, 95, 81);
     text-shadow: 0 0 2px rgba(0, 0, 0, 0.582);
