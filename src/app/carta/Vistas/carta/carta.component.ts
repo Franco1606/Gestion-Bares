@@ -196,7 +196,7 @@ export class CartaComponent implements OnInit {
   }
 
   llamarMozo() {
-    this._cartaServiceApi.llamarMozo(this.usuarioID, this.mesaID).subscribe({
+    this._cartaServiceApi.llamarMozo(this.usuarioID, this.mesaID, 1).subscribe({
       next: () => {
         alert("Se mando un aviso de llamado al mozo/a")
       },
