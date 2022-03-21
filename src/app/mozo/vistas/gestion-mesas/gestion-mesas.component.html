@@ -5,7 +5,7 @@
         <button mat-raised-button [ngClass]="sesion.estado" class="mesa" (click)="detallesMesa(sesion)">
             <div class="contenedor-mesa">               
                 <div *ngIf="sesion.ordenNueva == 1" class="orden-nueva"><mat-icon>priority_high</mat-icon></div>
-                <div *ngIf="sesion.llamarMozo == 1" class="llamar-mozo"><mat-icon>phone_in_talk</mat-icon></div>
+                <div *ngIf="sesion.llamarMozo == 1" class="llamar-mozo"><mat-icon>spatial_audio_off</mat-icon></div>
                 <div class="estado-sesion"> {{sesion.estado}} </div>
                 <div class="mesaID"> {{sesion.mesaID}} </div>
                 <div class="tiempo"> {{tiempoTranscurrido(sesion.solicitadaFecha)}} </div>
