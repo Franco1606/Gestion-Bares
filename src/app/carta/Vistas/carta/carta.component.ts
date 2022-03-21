@@ -84,8 +84,9 @@ export class CartaComponent implements OnInit {
   obtenerParametros() {
     this._route.queryParams.subscribe(params => {
       this.usuarioID = params["usuarioID"]
-      this.mesaID = params["mesaID"]      
+      this.mesaID = params["mesaID"]
       this.obtenerCategorias()
+      setInterval(()=> {this.obtenerCategorias}, 30000)
       this.obtenerEstilos()
       this.obtenerImagenPorNombre("headerImg")
     })     
