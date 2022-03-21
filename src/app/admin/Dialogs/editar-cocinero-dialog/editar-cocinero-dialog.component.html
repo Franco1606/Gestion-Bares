@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Editar Cocinero</h2>
+<div class="activo" *ngIf="estado">Activo</div>
+<div class="inactivo" *ngIf="!estado">Inactivo</div>
+<br>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="editarCocinero()">
+      <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input type="input" matInput formControlName="usuario" placeholder="usuario" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="input" matInput formControlName="nombre" placeholder="nombre" required autofocus>
+      </mat-form-field>      
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label> Estado </mat-label>
+        <mat-select formControlName="estado">
+            <mat-option value="1">Activo</mat-option>
+            <mat-option value="0">Inactivo</mat-option>              
+        </mat-select>
+      </mat-form-field>      
+      <mat-form-field *ngIf="resetFlag" class="example-full-width" appearance="outline">
+        <mat-label>Nueva Contrasña</mat-label>
+        <input type="password" formControlName="newPassword" matInput placeholder="Nueva Contraseña" autocomplete="off">
+      </mat-form-field>   
+        <button mat-raised-button color="primary" class="btn" type="submit">Actualizar Datos</button>                      
+        <br>          
+        <button *ngIf="!resetFlag" class="btn" mat-raised-button color="warn" type="button" (click)="reset()">Resetear Contrasña</button> 
+        <br *ngIf="!resetFlag">
+    </form>    
+    <div class="errorMsg" *ngIf="errorMsg"> {{errorMsg}} </div>  
+    <mat-dialog-actions align="end">
+      <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+    </mat-dialog-actions>           
+</mat-dialog-content>
+
+
+
