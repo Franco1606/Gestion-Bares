@@ -28,7 +28,7 @@ export class LoginCocinaComponent implements OnInit {
       next: (x) => {
         if(x.status == "ok") {
           localStorage.setItem("tokenCocina", x.result.token)
-          this._router.navigateByUrl("home");
+          this._router.navigateByUrl("cocina/gestion-pedidos");
         } else {
           this.errorMsg = x.result["error_msg"];            
         }       
