@@ -30,7 +30,7 @@ export class HeaderCocinaComponent implements OnInit {
 
   obtenerUsuario(){    
     this._appServiceApi.obtenerUsuarioPorToken("tokenCocina", this.tokenCocina).subscribe({
-      next: (x) => {
+      next: (x) => {        
         if(x.cocineroID != null) {
           this.usuario = x.usuario
           this.datosUsuario.emit({usuarioID: x.usuarioID, cocineroID: x.cocineroID, tokenCocina: this.tokenCocina})          
@@ -50,7 +50,7 @@ export class HeaderCocinaComponent implements OnInit {
 
   closeSesion(){ 
     localStorage.removeItem("tokenCocina")       
-    this._router.navigateByUrl("mozo/login")
+    this._router.navigateByUrl("cocina/login")
   }
 
 }

@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Comfortaa', cursive;
+}
+
+.usuario {
+    color: white;
+    margin-right: 10px;
+}
+
+.logout {
+    display: flex;
+    align-items: center;
+}
+
+
+@media (max-width: 360px) {
+    .header {
+        padding: 0;
+    }
+
+    .logout .button {
+        transform: scale(0.8);
+    }
+
+    .usuario{
+        font-size: 0.7em;
+        margin-right: 0;
+    }
+
+    .h1 {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 700px) {
+    
+    .encabezado {
+      display: none;
+    }
+}
