@@ -1,0 +1,30 @@
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes changeSize {
+    from {
+      transform: scale(0.9);
+    }
+  
+    to {
+        transform: scale(1.5);
+    }
+}
+  
+.comentarios {
+    color: rgb(233, 71, 71);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.582);
+    animation-duration: 0.5s;
+    animation-name: changeSize;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@media (min-width:900px){
+    .contenedor-tabla-agregar {
+        width: 70%;
+    }
+}
