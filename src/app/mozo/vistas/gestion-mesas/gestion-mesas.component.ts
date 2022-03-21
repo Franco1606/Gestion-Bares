@@ -29,7 +29,7 @@ export class GestionMesasComponent {
     this.mozoID = datosUsuario["mozoID"]
     this.tokenMozo = datosUsuario["tokenMozo"]
     this.obtenerSesiones()
-    setInterval(() => {this.obtenerSesiones()}, 300000)
+    setInterval(() => {this.obtenerSesiones()}, 30000)
   }
 
   obtenerSesiones() {
