@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Agregar Cocinero</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="agregarCocinero()">
+      <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input type="input" matInput formControlName="usuario" placeholder="usuario" required autofocus>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="input" matInput formControlName="nombre" placeholder="nombre" required autofocus>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput formControlName="password" placeholder="password" required autofocus>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label> Estado </mat-label>
+        <mat-select formControlName="estado">
+            <mat-option value="1">Activo</mat-option>
+            <mat-option value="0">Inactivo</mat-option>              
+        </mat-select>
+      </mat-form-field>                
+      <br>
+      <button mat-raised-button color="primary" type="submit">Agregar</button> 
+    </form>
+    <br *ngIf="errorMsg">  
+    <div class="errorMsg" *ngIf="errorMsg"> {{errorMsg}} </div>  
+    <mat-dialog-actions align="end">
+      <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+    </mat-dialog-actions>           
+</mat-dialog-content>
+
+
