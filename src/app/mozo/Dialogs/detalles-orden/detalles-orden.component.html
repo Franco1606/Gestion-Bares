@@ -26,12 +26,15 @@
             <button class="copyIcon" mat-icon-button matTooltip="Copiar" color="primary" type="button" [cdkCopyToClipboard]="numorden.value"><mat-icon>content_copy</mat-icon></button>
         </div>
         <div class="campo-pedido">
-          <div>Pedido</div>
+          <div class="titulo">Pedido</div>
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
             <!-- Cantidad Column -->
             <ng-container class="container" matColumnDef="cantidad">
               <th mat-header-cell *matHeaderCellDef> Cant. </th>
-              <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+              <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.cantidad >= 1">{{element.cantidad}}</div> 
+                <div *ngIf="element.cantidad == 0.5">1/2</div>  
+              </td>
             </ng-container>
   
             <!-- Producto Column -->
