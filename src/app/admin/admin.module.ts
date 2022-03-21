@@ -19,6 +19,9 @@ import { InicioComponent } from './vistas/inicio/inicio.component';
 import { GestionMozosComponent } from './vistas/gestion-mozos/gestion-mozos.component';
 import { AgregarMozoDialogComponent } from './Dialogs/agregar-mozo-dialog/agregar-mozo-dialog.component';
 import { EditarMozoDialogComponent } from './Dialogs/editar-mozo-dialog/editar-mozo-dialog.component';
+import { GestionCocinerosComponent } from './vistas/gestion-cocineros/gestion-cocineros.component';
+import { AgregarCocineroDialogComponent } from './Dialogs/agregar-cocinero-dialog/agregar-cocinero-dialog.component';
+import { EditarCocineroDialogComponent } from './Dialogs/editar-cocinero-dialog/editar-cocinero-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { EditarMozoDialogComponent } from './Dialogs/editar-mozo-dialog/editar-m
     InicioComponent,
     GestionMozosComponent,
     AgregarMozoDialogComponent,
-    EditarMozoDialogComponent      
+    EditarMozoDialogComponent,
+    GestionCocinerosComponent,
+    AgregarCocineroDialogComponent,
+    EditarCocineroDialogComponent      
   ],
   imports: [
     CommonModule,
