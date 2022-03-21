@@ -78,7 +78,7 @@ form {
     justify-content: center;
 }
 
-.campo-pedido div{
+.titulo {
     background-color: rgb(63,81,181);    
     padding: 10px;
     width: 100%;
