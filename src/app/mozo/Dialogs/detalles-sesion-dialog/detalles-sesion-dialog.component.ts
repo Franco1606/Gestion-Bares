@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //Inyeccions de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
+import { CartaService } from "../../../carta/servicios/api/carta.service"
 // Dependencias Angular Material
 import { MatDialog } from "@angular/material/dialog"
 //Modelos
@@ -16,15 +17,17 @@ import { CerrarMesaDialogComponent } from '../cerrar-mesa-dialog/cerrar-mesa-dia
 })
 export class DetallesSesionDialogComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService, private _dialog:MatDialog ) { }
+  constructor( private _mozoService:MoozoService, private _adminService:CartaService, private _dialog:MatDialog ) { }
 
   //////////   Atributos de la clase   /////////////   
   mesaID!:number
+  llamarMozo!:number
   // Tabla //
   displayedColumns = ["numOrden", "estado"]
   dataSource!:modeloOrden[]
 
   ngOnInit(): void {
+    this.llamarMozo = this._mozoService.sesion.llamarMozo
     this.mesaID = this._mozoService.sesion.mesaID
     this.obtenerOrdenes()
   }
@@ -39,9 +42,7 @@ export class DetallesSesionDialogComponent implements OnInit {
         alert("No se pudo obtener los datos de la base de datos")
       }
     })
-  }
-
-  
+  }  
 
   irDetallesOrden(orden:modeloOrden) {
     this._mozoService.orden = orden
@@ -79,7 +80,18 @@ export class DetallesSesionDialogComponent implements OnInit {
         alert("No se pudo obtener los datos de la base de datos")
         console.log(err)        
       }
+    })        
+  }
+
+  atenderLlamada() {
+    this._adminService.llamarMozo(this._mozoService.usuarioID, this.mesaID, 0).subscribe({
+      next: () => {
+        alert("Se atendió la llamada de esta mesa")
+        location.reload()
+      },
+      error: (err) => {
+        console.log(err)
+      }
     })
-        
-  }  
+  }
 }
