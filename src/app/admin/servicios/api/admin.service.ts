@@ -9,6 +9,7 @@ import { modeloImagen } from "../../ModelosAdmin/modeloImagen"
 import { modeloEstilo } from 'src/app/carta/ModelosCarta/modeloEstilo';
 import { modeloHappy } from '../../ModelosAdmin/modeloHappy';
 import { modeloMozo } from '../../ModelosAdmin/modeloMozo';
+import { modeloCocinero } from '../../ModelosAdmin/modeloCocinero';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class AdminService {
   categoriaID!:number
   producto!:modeloProducto
   mozoID!:number
+  cocineroID!:number
 
   //////////////////////////////////////////////////////////
   /////////////  METODOS PARA CATEGORIAS  /////////////////
@@ -231,5 +233,43 @@ export class AdminService {
       }
     }
     return this._http.delete<modeloRespuesta>(this.url + `mozos.php`, options)
+  }
+
+  //////////////////////////////////////////////////////////
+  //////////////  METODOS PARA COCINEROS  /////////////////
+  ////////////////////////////////////////////////////////
+
+  // Obtener Cocineros por usuarioID
+  obtenerCocineros(usuarioID:number):Observable<modeloCocinero[]> {
+    return this._http.get<modeloCocinero[]>(this.url + `cocineros.php?usuarioID=${usuarioID}`)
+  }
+
+  // Obtener Cocinero por cocineroID
+  obtenerCocinero(cocineroID:number):Observable<modeloCocinero> {
+    return this._http.get<modeloCocinero>(this.url + `cocineros.php?cocineroID=${cocineroID}`)
+  }
+  
+  //Insertar Cocinero
+  agregarCocinero(form:any):Observable<modeloRespuesta> {    
+    return this._http.post<modeloRespuesta>(this.url + `cocineros.php`, form)
+  }
+  
+  //Modificar Cocinero
+  modificarCocinero(form:any) {
+    return this._http.put<modeloRespuesta>(this.url + `cocineros.php`, form)
+  }
+  
+  //Eliminar Cocinero
+  eliminarCocinero(cocineroID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        cocineroID: cocineroID,
+        tokenAdmin: tokenAdmin               
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `cocineros.php`, options)
   }
 }
