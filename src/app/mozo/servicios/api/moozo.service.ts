@@ -84,9 +84,10 @@ export class MoozoService {
   }
 
   //Modificar Pedido
-  enviarComanda(pedido:modeloPedido[], tokenMozo:string) {
+  enviarComanda(pedido:modeloPedido[], ordenID:number ,tokenMozo:string) {
     let body = {
       pedido: pedido,
+      ordenID: ordenID,
       tokenMozo: tokenMozo
     }    
     return this._http.put<modeloRespuesta>(this.url + `pedidos.php`, body)
