@@ -52,12 +52,12 @@
     Ver pedido
 </div>
 
-<div>
+<div *ngIf="mesaID">
     <button (click)="llamarMozo()" class="floatllamar" target="_blank">
         <mat-icon style="transform: scale(1.6,1.6);">record_voice_over</mat-icon>
     </button>
 </div>
-<div class="llamarMozo">
+<div *ngIf="mesaID" class="llamarMozo">
     LLamar Mozo
 </div>
   
