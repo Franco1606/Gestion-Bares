@@ -89,6 +89,18 @@ body {
     animation-direction: alternate;
 }
 
+.orden-lista {
+    position: absolute;
+    color: rgb(250, 205, 81);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.582);
+    bottom:30px;
+    right: 3px;
+    animation-duration: 0.5s;
+    animation-name: changeSize;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 .estado-sesion {
     position: absolute;
     text-transform: uppercase;
