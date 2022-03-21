@@ -67,11 +67,11 @@ export class CartaService {
   ///////////////////////////////////////////////////////
 
   //Modificar sesion
-  llamarMozo(usuarioID:number, mesaID:number) {
+  llamarMozo(usuarioID:number, mesaID:number, llamar:number) {
    let body = {
     mesaID: mesaID,
     usuarioID: usuarioID,
-    llamarMozo: 1
+    llamarMozo: llamar
     }
     return this._http.post<modeloRespuesta>(this.url + `sesiones.php`, body)
   }
