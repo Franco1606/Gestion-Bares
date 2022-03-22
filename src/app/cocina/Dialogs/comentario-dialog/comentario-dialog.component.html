@@ -2,6 +2,9 @@
     <h2 mat-dialog-title>Aclaracion del cliente:</h2>
 </div>  
 <mat-dialog-content class="mat-typography">      
-<div style="text-align: center;"> {{comentario}} </div>
+<div style="text-align: center;"> 
+    <div *ngIf="comentario">{{comentario}}</div>
+    <div *ngIf="!comentario">Sin Aclaraciones</div>
+</div>
 </mat-dialog-content>
 
