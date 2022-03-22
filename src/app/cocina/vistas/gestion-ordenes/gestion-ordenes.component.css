@@ -9,3 +9,8 @@
         width: 70%;
     }
 }
+
+.fila:hover {
+    background-color: rgba(0, 0, 0, 0.048);
+    cursor: pointer;
+}
