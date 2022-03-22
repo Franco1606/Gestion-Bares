@@ -23,6 +23,11 @@
     animation-direction: alternate;
 }
 
+.fila:hover {
+    background-color: rgba(0, 0, 0, 0.048);
+    cursor: pointer;
+}
+
 @media (min-width:900px){
     .contenedor-tabla-agregar {
         width: 70%;
