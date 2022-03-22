@@ -15,7 +15,7 @@ import { ComentarioDialogComponent } from "../../Dialogs/comentario-dialog/comen
 import { QuitarDialogComponent } from '../../Dialogs/quitar-dialog/quitar-dialog.component';
 import { PedidoDialogComponent } from "../../Dialogs/pedido-dialog/pedido-dialog.component"
 //Animaciones
-import { trigger, style, animate, transition } from '@angular/animations'; 
+import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-carta',
@@ -159,16 +159,14 @@ export class CartaComponent implements OnInit {
               this.productos.push(producto)
             }
           });           
+        },
+        error: (err) => {
+          console.log(err)
+          alert("No se pudo obtener los datos de la base de datos")
         }
       })
     } else {
-      this._cartaServiceApi.obtenerProductos(this.usuarioID, categoriaID).subscribe({      
-        next: (x) => {                          
-          x.forEach(producto => {
-            this.productos =  this.productos.filter(producto => producto.categoriaID != categoriaID)
-          });         
-        }
-      })
+      this.productos =  this.productos.filter(producto => producto.categoriaID != categoriaID)      
     }    
   }
 
@@ -215,7 +213,7 @@ export class CartaComponent implements OnInit {
           keys.forEach(key => {
             if(x.filter(estilo => estilo.nombre == key)) {
               if(this.estilos[key].nombre != "headerTxt"){
-                this.estilos[key].valor = `#${x.filter(estilo => estilo.nombre == key)[0].valor}`
+                this.estilos[key].valor = `#${x.filter(estilo => estilo.nombre == key)[0].valor}`                
               } else if (this.estilos[key].nombre == "headerTxt") {
                 this.estilos[key].valor = x.filter(estilo => estilo.nombre == key)[0].valor                
               }
