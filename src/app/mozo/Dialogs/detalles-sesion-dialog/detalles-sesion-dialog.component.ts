@@ -23,7 +23,7 @@ export class DetallesSesionDialogComponent implements OnInit {
   mesaID!:number
   llamarMozo!:number
   // Tabla //
-  displayedColumns = ["numOrden", "estado"]
+  displayedColumns = ["numOrden", "estado", "cocina"]
   dataSource!:modeloOrden[]
 
   ngOnInit(): void {
