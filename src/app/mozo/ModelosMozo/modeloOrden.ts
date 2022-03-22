@@ -12,5 +12,6 @@ export interface modeloOrden {
     finalizadaFecha:Date,
     estado:string,
     solicitante:string,
-    total:number
+    total:number,
+    cocina:number
 }
