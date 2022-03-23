@@ -6,7 +6,10 @@
         <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Categoria</mat-label>
             <input type="input" matInput formControlName="nombre" placeholder="Nombre" required autofocus>
-        </mat-form-field>                
+        </mat-form-field>
+        <mat-checkbox type="checkbox" class="example-margin" formControlName="comentario">Habilitar Comentarios</mat-checkbox>
+        <mat-checkbox type="checkbox" class="example-margin" formControlName="mitad">Habilitar Medio Pedido</mat-checkbox>
+        <mat-checkbox type="checkbox" class="example-margin" formControlName="cocina">Productos de Cocina</mat-checkbox>
         <br>
         <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Agregar</button> 
         <mat-dialog-actions align="end">
