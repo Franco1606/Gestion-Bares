@@ -153,10 +153,9 @@ h1 {
 }
 
 .pedir-media {
-    font-weight: 500;
+    font-weight: 800;
     font-size: 1.2em;
-    color: rgb(253, 228, 82);
-    text-shadow: 0 0 3px #000;
+    color: rgb(31, 92, 204);
     margin-top: 10px;
 }
 
