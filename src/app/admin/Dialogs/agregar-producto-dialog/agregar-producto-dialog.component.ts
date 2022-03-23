@@ -22,6 +22,7 @@ export class AgregarProductoDialogComponent implements OnInit {
     "nombre" : new FormControl("", Validators.required),
     "descripcion" : new FormControl(),
     "precio" : new FormControl("", Validators.required),
+    "cocina" : new FormControl(),
     "usuarioID" : new FormControl(),
     "categoriaID" : new FormControl(),
     "categoriaNombre" : new FormControl(),
@@ -42,7 +43,8 @@ export class AgregarProductoDialogComponent implements OnInit {
   obtenerCategoria() {
     this._AdminServiceApi.obtenerCategoria(this._AdminServiceApi.categoriaID).subscribe({
       next: (x) => {
-        this.form.controls["categoriaNombre"].setValue(x.nombre)        
+        this.form.controls["categoriaNombre"].setValue(x.nombre)
+        this.form.controls["cocina"].setValue(Number(x.cocina))
       },
       error: (err) => {
         console.log(err)
