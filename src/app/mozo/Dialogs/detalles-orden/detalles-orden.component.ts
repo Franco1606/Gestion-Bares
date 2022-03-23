@@ -6,9 +6,10 @@ import { modeloPedido } from '../../ModelosMozo/modeloPedido';
 //Inyeccions de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
 // Dependencias Angular Material
-import { MatDialog } from "@angular/material/dialog"
+import { MatDialog, MatDialogRef } from "@angular/material/dialog"
 // Dialogs
 import { DetallesSesionDialogComponent } from '../detalles-sesion-dialog/detalles-sesion-dialog.component';
+import { VerPedidoDialogComponent } from '../ver-pedido-dialog/ver-pedido-dialog.component';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { DetallesSesionDialogComponent } from '../detalles-sesion-dialog/detalle
 })
 export class DetallesOrdenComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService, private _dialog:MatDialog ) { }
+  constructor( private _mozoService:MoozoService, private _dialog:MatDialog, private dialogRef:MatDialogRef<VerPedidoDialogComponent>, ) { }
 
   //////////   Atributos de la clase   /////////////   
   estado!:string
@@ -107,6 +108,8 @@ export class DetallesOrdenComponent implements OnInit {
     this._mozoService.enviarComanda(this.dataSource, this._mozoService.ordenID ,this._mozoService.tokenMozo).subscribe({
       next: () => {
         alert("La comanda se envio a la cocina")
+        this.dialogRef.close()
+        
       },
       error: () => {
         alert("No se pudo enviar la comanda a la cocina")
