@@ -154,10 +154,6 @@ export class ProductosComponent implements OnInit{
     return verificador
   }
 
-  volver() {
-    this._router.navigateByUrl("/mozo/pedido-mozo");
-  }
-
   //Filtro para el buscador de la tabla
   doFilter(value: string) {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
