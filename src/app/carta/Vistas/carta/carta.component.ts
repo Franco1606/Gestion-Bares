@@ -123,7 +123,6 @@ export class CartaComponent implements OnInit {
         alert("Este producto ya se agrego al pedido")
       }
     }
-    console.log(this.pedido)
   }
 
   quitar(productoID:number, nombre:string, comentario:number) {
