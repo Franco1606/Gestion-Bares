@@ -14,7 +14,7 @@ import { DetallesOrdenComponent } from './Dialogs/detalles-orden/detalles-orden.
 import { CerrarMesaDialogComponent } from './Dialogs/cerrar-mesa-dialog/cerrar-mesa-dialog.component';
 import { PedidoMozoComponent } from './vistas/pedido-mozo/pedido-mozo.component';
 import { ProductosComponent } from './vistas/productos/productos.component';
-import { AgregarProductoComponent } from './Dialogs/agregar-producto-dialog/agregar-producto-dialog.component';
+import { AgregarComentarioComponent } from './Dialogs/agregar-comentario-dialog/agregar-comentario-dialog.component';
 import { VerPedidoDialogComponent } from './Dialogs/ver-pedido-dialog/ver-pedido-dialog.component';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { VerPedidoDialogComponent } from './Dialogs/ver-pedido-dialog/ver-pedido
     CerrarMesaDialogComponent,
     PedidoMozoComponent,
     ProductosComponent,
-    AgregarProductoComponent,
+    AgregarComentarioComponent,
     VerPedidoDialogComponent
   ],
   imports: [
