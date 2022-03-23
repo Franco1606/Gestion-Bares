@@ -15,11 +15,17 @@ export class AgregarCategoriaDialogComponent implements OnInit {
   
   //////////   Atributos de la clase   /////////////   
   nombre!:string
+  comentario!:number
+  mitad!:number
+  cocina!:number
   usuarioID!:number  
   tokenAdmin!:string   
   // Formulario //
   form:FormGroup = new FormGroup({
     "nombre" : new FormControl("", Validators.required),
+    "comentario" : new FormControl(0),
+    "mitad" : new FormControl(0),
+    "cocina" : new FormControl(0),
     "usuarioID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
@@ -35,6 +41,9 @@ export class AgregarCategoriaDialogComponent implements OnInit {
 
   agregarCategoria() {    
     this.nombre = this.form.controls["nombre"].value.trim()
+    this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
+    this.form.controls["mitad"].setValue(Number(this.form.controls["mitad"].value))
+    this.form.controls["cocina"].setValue(Number(this.form.controls["cocina"].value))    
     if(this.verificarCampos(this.nombre)) {
       this.quitarEspaciosFinales(this.form.value)
       this._AdminServiceApi.agregarCategoria(this.form.value).subscribe({
@@ -66,6 +75,7 @@ export class AgregarCategoriaDialogComponent implements OnInit {
   quitarEspaciosFinales(json:any){
     let keys = Object.keys(json);
     keys.forEach(key => {
+      if(typeof(json[`${key}`]) == "string" )
       json[`${key}`] = json[`${key}`].trim()
     });    
   }
