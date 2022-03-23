@@ -1,0 +1,19 @@
+.contenedor-principal {
+    position: relative;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 300px;
+}
+
+form ::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.5em;
+}

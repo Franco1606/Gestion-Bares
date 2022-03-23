@@ -1,0 +1,28 @@
+<div class="contenedor-principal">
+  <button mat-button color="warn" mat-dialog-close style="padding: 0;position: absolute; top: -20px; right: -20px;"><mat-icon>close</mat-icon></button>
+  <br>   
+  <h2 mat-dialog-title style="text-align: center; margin-bottom: 0;">Agregar Producto</h2>
+  <h3 style="text-align: center; color: rgb(63,81,181);"><strong>Aclaraciones del Pedido</strong></h3> 
+  <mat-dialog-content>
+    <div class="contenedor">         
+      <form [formGroup]="form" style="display: flex; flex-direction: column;" (ngSubmit)="agregarComentario()">
+          <mat-form-field appearance="outline">
+              <mat-label>Comentario</mat-label>
+              <input matInput formControlName="comentario" placeholder="Comentario" [autocomplete]="false" autofocus>
+          </mat-form-field>                
+          <br>
+          <button mat-raised-button color="primary" type="submit">Agregar</button>
+          <br>          
+          <P style="text-align: center; margin-bottom: 0;">
+            Indica si el cliente quiere quitar algun ingrediente o si quiere hacer alguna aclaracion sobre el pedido.
+          </P>
+          <mat-dialog-actions align="end">
+            <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
+          </mat-dialog-actions>
+      </form>        
+    </div>
+  </mat-dialog-content>
+</div>
+
+  
+
