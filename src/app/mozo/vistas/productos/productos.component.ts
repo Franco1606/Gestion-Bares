@@ -126,7 +126,7 @@ export class ProductosComponent implements OnInit{
         this.IDinterno += 1
       } else {
         alert("Este producto ya se agrego al pedido")
-      }      
+      }
     }
   }
 
