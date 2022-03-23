@@ -59,7 +59,6 @@ export class PedidoMozoComponent {
   }
 
   irListaProductos(categoria:modeloCategoria) {  
-    this._mozoService.categoria = categoria
     this._router.navigateByUrl(`mozo/productos/${categoria.categoriaID}`)
   }
 
