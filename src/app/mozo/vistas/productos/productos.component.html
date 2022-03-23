@@ -1,6 +1,6 @@
 <app-header-mozo (datosUsuario)="obtenerUsuario($event)"></app-header-mozo>
 <br>
-<button mat-button color="primary" routerLink="/mozo/pedido-mozo"><mat-icon>chevron_left</mat-icon>Volver</button>
+<button mat-button color="primary" routerLink="/mozo/pedido-mozo" ><mat-icon>chevron_left</mat-icon>Volver</button>
 <div class="body-bg">
     <br>
     <div class="contenedor-principal">
@@ -15,11 +15,12 @@
               <!-- Nombre Column -->
               <ng-container matColumnDef="nombre">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
-                <td mat-cell *matCellDef="let element">
+                <td mat-cell *matCellDef="let element" (click)="agregar(element, categoria.comentario)">
                     <div style="display: flex; flex-direction: column; align-items: center;">
+                      <div class="check" *ngIf="verificarExistencia(element.productoID)"><mat-icon>done</mat-icon> </div>
                       <div style="font-weight: 700; font-size: 1.5em; color: rgb(63,81,181);margin-bottom: 10px;"> $ {{element.precio}} </div>
                         <div style="font-weight: 500; font-size: 1.4em;">{{element.nombre}}</div>
-                        <div style="font-size: 0.9em;"> ({{element.descripcion}}) </div>
+                        <div *ngIf="element.descripcion != ''" style="font-size: 0.9em;"> ({{element.descripcion}}) </div>
                     </div>
                 </td>
               </ng-container>
@@ -30,7 +31,7 @@
                 <td mat-cell *matCellDef="let element">
                   <div style="display: flex; flex-direction: column; align-items: center;">
                     <app-contador class="contador" [mitad]="categoria.mitad" (cantidadProdcutos)="pasarCantidad($event, element)"></app-contador>
-                    <button mat-raised-button color="primary" (click)="agregar(element, categoria.comentario)">AGREGAR</button>                    
+                    <button mat-raised-button color="primary" (click)="agregar(element, categoria.comentario)">AGREGAR</button>
                   </div>
                 </td>
               </ng-container>
