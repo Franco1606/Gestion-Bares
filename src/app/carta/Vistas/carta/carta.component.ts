@@ -122,6 +122,7 @@ export class CartaComponent implements OnInit {
       } else {
         alert("Este producto ya se agrego al pedido")
       }
+      console.log(this._cartaServiceApi.pedidos)
     }
   }
 
