@@ -19,12 +19,11 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class PedidoDialogComponent implements OnInit {
 
-  constructor( private _cartaServiceApi:CartaService, private _adminServiceApi:AdminService,  private dialogRef:MatDialogRef<PedidoDialogComponent> ) { }
+  constructor( private _cartaServiceApi:CartaService, private _adminServiceApi:AdminService, private dialogRef:MatDialogRef<PedidoDialogComponent> ) { }
 
     //////////   Atributos de la clase   /////////////
     total = 0
     domicilio!:string
-    pedidosAgrupados!:claseProductoPedido[][]
     happy = false
     // Tabla //
     displayedColumns = ["cantidad", "producto", "precio", "comentario", "eliminar"]
@@ -61,8 +60,7 @@ export class PedidoDialogComponent implements OnInit {
     }
   }
 
-  emitirOrden() {
-    console.log(this._cartaServiceApi.pedidos)
+  emitirOrden() {    
     if(this._cartaServiceApi.mesaID == null) {      
       this._cartaServiceApi.mesaID = 0
       this.domicilio = prompt("Ingrese su domicilio") || ""
