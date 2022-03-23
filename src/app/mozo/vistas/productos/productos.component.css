@@ -27,9 +27,9 @@ table {
     padding: 15px 5px 15px !important;
 }
 
-.fila:hover {
-    background-color: rgba(0, 0, 0, 0.048);
-    cursor: pointer;
+.contador {
+    transform: scale(0.8) !important;
+    margin-bottom: 5px;
 }
 
 .floatpedido {
