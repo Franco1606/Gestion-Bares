@@ -116,7 +116,6 @@ export class ProductosComponent implements OnInit{
           this.IDinterno = this._mozoService.IDinterno        
         }
       })
-      console.log(this._mozoService.pedido)
 
     } else {
       if( this.pedido.filter(element =>  element.productoID == producto.productoID && element.comentario == null).length == 0 ) {      
@@ -127,7 +126,6 @@ export class ProductosComponent implements OnInit{
       } else {
         alert("Este producto ya se agrego al pedido")
       }
-      console.log(this._mozoService.pedido)
     }
   }
 
