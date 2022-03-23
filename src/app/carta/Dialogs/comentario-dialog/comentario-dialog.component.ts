@@ -37,8 +37,9 @@ export class ComentarioDialogComponent {
       } else {
         alert("Este producto ya se agrego al pedido, puede agregar otro de este tipo con un comentario")
       }
-    }    
-    this.dialogRef.close()    
+    }
+    console.log(this._cartaServiceApi.pedidos)
+    this.dialogRef.close()
   } 
 
   verificarCampos(...campos:string[]):boolean {
