@@ -23,6 +23,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
     "nombre" : new FormControl("", Validators.required),
     "comentario" : new FormControl("", Validators.required),
     "mitad" : new FormControl("", Validators.required),
+    "cocina" : new FormControl("", Validators.required),
     "categoriaID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
@@ -54,6 +55,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
     this.form.controls["comentario"].setValue(Boolean(Number(this._AdminServiceApi.categoria.comentario)))
     this.form.controls["mitad"].setValue(Boolean(Number(this._AdminServiceApi.categoria.mitad)))
+    this.form.controls["cocina"].setValue(Boolean(Number(this._AdminServiceApi.categoria.cocina)))
     this.formHappy.controls["categoriaID"].setValue(this._AdminServiceApi.categoria.categoriaID)
     this.formHappy.controls["usuarioID"].setValue(this._AdminServiceApi.usuarioID)
     this.formHappy.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
@@ -64,42 +66,56 @@ export class EditarCategoriaDialogComponent implements OnInit {
   verificarPosibiliadHappy() {
     this._AdminServiceApi.obtenerProductos(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
       next: (productos) => {
-        let mismoPrecio = true
-        productos.forEach(producto => {
-          if(productos[0].precio != producto.precio) {
-            mismoPrecio = false
-          }
-        })
-        if(mismoPrecio) {
-          this._AdminServiceApi.obtenerHappy(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
-            next: (x) => {        
-              this.formHappy.controls["estado"].setValue(Boolean(Number(x.estado)))
-              this.formHappy.controls["inicio"].setValue(x.inicio)
-              this.formHappy.controls["fin"].setValue(x.fin)
-              this.formHappy.controls["lunes"].setValue(Boolean(Number(x.lunes)))
-              this.formHappy.controls["martes"].setValue(Boolean(Number(x.martes)))
-              this.formHappy.controls["miercoles"].setValue(Boolean(Number(x.miercoles)))
-              this.formHappy.controls["jueves"].setValue(Boolean(Number(x.jueves)))
-              this.formHappy.controls["viernes"].setValue(Boolean(Number(x.viernes)))
-              this.formHappy.controls["sabado"].setValue(Boolean(Number(x.sabado)))
-              this.formHappy.controls["domingo"].setValue(Boolean(Number(x.domingo)))
-            },  
-            error: (err) => {
-              console.log(err)
+        if(productos.length) {
+          let mismoPrecio = true
+          productos.forEach(producto => {
+            if(productos[0].precio != producto.precio) {
+              mismoPrecio = false
             }
           })
+          if(mismoPrecio) {
+            this._AdminServiceApi.obtenerHappy(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
+              next: (x) => {        
+                this.formHappy.controls["estado"].setValue(Boolean(Number(x.estado)))
+                this.formHappy.controls["inicio"].setValue(x.inicio)
+                this.formHappy.controls["fin"].setValue(x.fin)
+                this.formHappy.controls["lunes"].setValue(Boolean(Number(x.lunes)))
+                this.formHappy.controls["martes"].setValue(Boolean(Number(x.martes)))
+                this.formHappy.controls["miercoles"].setValue(Boolean(Number(x.miercoles)))
+                this.formHappy.controls["jueves"].setValue(Boolean(Number(x.jueves)))
+                this.formHappy.controls["viernes"].setValue(Boolean(Number(x.viernes)))
+                this.formHappy.controls["sabado"].setValue(Boolean(Number(x.sabado)))
+                this.formHappy.controls["domingo"].setValue(Boolean(Number(x.domingo)))
+              },  
+              error: (err) => {
+                console.log(err)
+              }
+            })
+          } else {
+            this.formHappy.controls["estado"].disable()
+            this.formHappy.controls["inicio"].disable()
+            this.formHappy.controls["fin"].disable()
+            this.formHappy.controls["lunes"].disable()
+            this.formHappy.controls["martes"].disable()
+            this.formHappy.controls["miercoles"].disable()
+            this.formHappy.controls["jueves"].disable()
+            this.formHappy.controls["viernes"].disable()
+            this.formHappy.controls["sabado"].disable()
+            this.formHappy.controls["domingo"].disable()
+            this.desactivarHappy = true
+          }
         } else {
-          this.formHappy.controls["estado"].disable()
-          this.formHappy.controls["inicio"].disable()
-          this.formHappy.controls["fin"].disable()
-          this.formHappy.controls["lunes"].disable()
-          this.formHappy.controls["martes"].disable()
-          this.formHappy.controls["miercoles"].disable()
-          this.formHappy.controls["jueves"].disable()
-          this.formHappy.controls["viernes"].disable()
-          this.formHappy.controls["sabado"].disable()
-          this.formHappy.controls["domingo"].disable()
-          this.desactivarHappy = true
+            this.formHappy.controls["estado"].disable()
+            this.formHappy.controls["inicio"].disable()
+            this.formHappy.controls["fin"].disable()
+            this.formHappy.controls["lunes"].disable()
+            this.formHappy.controls["martes"].disable()
+            this.formHappy.controls["miercoles"].disable()
+            this.formHappy.controls["jueves"].disable()
+            this.formHappy.controls["viernes"].disable()
+            this.formHappy.controls["sabado"].disable()
+            this.formHappy.controls["domingo"].disable()
+            this.desactivarHappy = true
         }
       },
       error: (err) => {
@@ -111,7 +127,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
   editarCategoria() { 
     this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
     this.form.controls["mitad"].setValue(Number(this.form.controls["mitad"].value))
-    console.log(this.form.value)
+    this.form.controls["cocina"].setValue(Number(this.form.controls["cocina"].value))    
     if(this.verificarCampos(this.nombre)) {
       this.quitarEspaciosFinales(this.form.value)
       this._AdminServiceApi.modificarCategoria(this.form.value).subscribe({
@@ -123,8 +139,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
           alert("No se pudo actualizar la categoria o no se modifico")
           location.reload()
         }
-      })
-      console.log(this.form.value)
+      })      
     } else {
       alert("El campo de categoria es requerido")
     }
