@@ -3,5 +3,6 @@ export interface modeloCategoria {
     nombre:string,
     usuarioID:number,
     comentario:number,
-    mitad:number
+    mitad:number,
+    cocina:number
 }
