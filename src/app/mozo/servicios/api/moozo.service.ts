@@ -6,7 +6,10 @@ import { modeloSesion } from '../../ModelosMozo/modeloSesion';
 import { modeloOrden } from '../../ModelosMozo/modeloOrden';
 import { modeloPedido } from '../../ModelosMozo/modeloPedido';
 import { modeloRespuesta } from 'src/app/ModelosApp/modeloRespuesta';
-import { StringifyOptions } from 'querystring';
+import { modeloCategoria } from 'src/app/admin/ModelosAdmin/modeloCategoria';
+import { modeloProductoPedido } from 'src/app/carta/ModelosCarta/modeloProductoPedido';
+//Clases
+import { claseProductoPedido } from 'src/app/carta/Clases/claseProductoPedido';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +22,16 @@ export class MoozoService {
   url = "https://visita360.hopto.org/Api-Gestion-Bares/"
   //Paso de variables por servicio
   sesion!:modeloSesion
+  categoria!:modeloCategoria
+  producto!:modeloProductoPedido
+  pedido:claseProductoPedido[] = []
   orden!:modeloOrden
+  ordenID!:number
   usuarioID!:number
   mozoID!:number
   tokenMozo!:string
   pedidoFinal!:any[]
+  IDinterno = 0
   
   /////////////////////////////////////////////////////////
   /////////////  METODOS PARA SESIONES  //////////////////
@@ -68,6 +76,19 @@ export class MoozoService {
       tokenMozo: tokenMozo
     }
     return this._http.put<modeloRespuesta>(this.url + `ordenes.php`, body)
+  }
+
+  generarOrdenMozo(usuarioID:number, mesaID:number, pedido:claseProductoPedido[], total:number, mozoID:number, tokenMozo:string):Observable<modeloRespuesta> {
+    let body = {
+      usuarioID : usuarioID,
+      mesaID : mesaID,
+      mozoID: mozoID,
+      pedidos: pedido,
+      estado: "activa",
+      tokenMozo: tokenMozo,
+      total: total
+    }
+    return this._http.post<modeloRespuesta>(this.url + "ordenes.php", body)
   }
 
   /////////////////////////////////////////////////////////
