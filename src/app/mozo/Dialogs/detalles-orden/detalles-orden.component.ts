@@ -88,7 +88,7 @@ export class DetallesOrdenComponent implements OnInit {
   }
 
   cambiarEstado(estado:string) {    
-    this._mozoService.cambiarEstado(estado, this._mozoService.orden.ordenID, this._mozoService.sesion.sesionID, this._mozoService.mozoID, this._mozoService.tokenMozo).subscribe({
+    this._mozoService.cambiarEstado(estado, this._mozoService.ordenID, this._mozoService.sesion.sesionID, this._mozoService.mozoID, this._mozoService.tokenMozo).subscribe({
       next: () => {
         alert("Se actualizo el estado de la orden")        
         this._dialog.closeAll()
