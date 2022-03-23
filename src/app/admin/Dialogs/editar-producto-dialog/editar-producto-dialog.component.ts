@@ -13,18 +13,18 @@ export class EditarProductoDialogComponent implements OnInit {
 
   constructor( private _AdminServiceApi:AdminService ) { }
 
-    //////////   Atributos de la clase   /////////////  
-    tokenAdmin!:string
-    mostrar!:boolean
-    // Formulario //
-    form:FormGroup = new FormGroup({
-      "nombre" : new FormControl("", Validators.required),
-      "descripcion" : new FormControl(),
-      "precio" : new FormControl("", Validators.required),
-      "mostrar" : new FormControl(),
-      "productoID" : new FormControl(),
-      "tokenAdmin" : new FormControl()
-    })
+  //////////   Atributos de la clase   /////////////  
+  tokenAdmin!:string
+  mostrar!:boolean
+  // Formulario //
+  form:FormGroup = new FormGroup({
+    "nombre" : new FormControl("", Validators.required),
+    "descripcion" : new FormControl(),
+    "precio" : new FormControl("", Validators.required),
+    "mostrar" : new FormControl(),
+    "productoID" : new FormControl(),
+    "tokenAdmin" : new FormControl()
+  })
 
   ngOnInit(): void {
     this.obtenerDatos()    
