@@ -26,7 +26,7 @@ import { claseProductoPedido } from 'src/app/carta/Clases/claseProductoPedido';
 })
 export class ProductosComponent implements OnInit{  
 
-  constructor( private _adminService:AdminService, private _mozoService:MoozoService, private _route:ActivatedRoute, private _dialog:MatDialog ) { }
+  constructor( private _adminService:AdminService, private _mozoService:MoozoService, private _route:ActivatedRoute, private _router:Router, private _dialog:MatDialog ) { }
 
   //////////   Atributos de la clase   /////////////
   usuarioID!:number
@@ -36,7 +36,7 @@ export class ProductosComponent implements OnInit{
   categoriaID!:number 
   productos!:modeloProducto[]
   pedido:claseProductoPedido[] = []
-  IDinterno = 0 
+  IDinterno!:number
   // Tabla //
   displayedColumns = ["nombre", "accion"]
   @ViewChild(MatPaginator) paginator!:MatPaginator
@@ -52,12 +52,13 @@ export class ProductosComponent implements OnInit{
     this.mozoID = datosUsuario["mozoID"]
     this.tokenMozo = datosUsuario["tokenMozo"]
     this.pedido = this._mozoService.pedido
+    this.verificarIDinterno()
     this.obtenerProductos()    
   }
 
   obtenerDatos() {
     this.categoriaID = this._route.snapshot.params["categoriaID"]
-    this.obtenerCategoria()        
+    this.obtenerCategoria()
   }
 
   obtenerCategoria() {
@@ -125,8 +126,36 @@ export class ProductosComponent implements OnInit{
         this.IDinterno += 1
       } else {
         alert("Este producto ya se agrego al pedido")
-      }
+      }      
     }
+  }
+
+  verificarIDinterno() { 
+    if(this.pedido.length){
+      let mayor
+      for (let i = 0; i < this.pedido.length-1; i++) {
+        if(this.pedido[i].IDinterno > this.pedido[i+1].IDinterno) {
+          mayor = this.pedido[i].IDinterno
+        } else {
+          mayor = this.pedido[i+1].IDinterno
+        }
+      }
+      this.IDinterno = mayor + 1     
+    } else {
+      this.IDinterno = 0
+    }
+  }
+
+  verificarExistencia(productoID:number):boolean {
+    let verificador = false
+    if(this._mozoService.pedido.filter(element => element.productoID == productoID).length > 0){
+      verificador = true  
+    }
+    return verificador
+  }
+
+  volver() {
+    this._router.navigateByUrl("/mozo/pedido-mozo");
   }
 
   //Filtro para el buscador de la tabla
