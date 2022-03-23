@@ -19,7 +19,7 @@ import { VerPedidoDialogComponent } from '../ver-pedido-dialog/ver-pedido-dialog
 })
 export class DetallesOrdenComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService, private _dialog:MatDialog, private dialogRef:MatDialogRef<VerPedidoDialogComponent>, ) { }
+  constructor( private _mozoService:MoozoService, private _dialog:MatDialog, private dialogRef:MatDialogRef<DetallesOrdenComponent>, ) { }
 
   //////////   Atributos de la clase   /////////////   
   estado!:string
@@ -91,10 +91,14 @@ export class DetallesOrdenComponent implements OnInit {
   cambiarEstado(estado:string) {    
     this._mozoService.cambiarEstado(estado, this._mozoService.ordenID, this._mozoService.sesion.sesionID, this._mozoService.mozoID, this._mozoService.tokenMozo).subscribe({
       next: () => {
-        alert("Se actualizo el estado de la orden")        
-        this._dialog.closeAll()
-        this._dialog.open(DetallesSesionDialogComponent)
-        
+        alert("Se actualizo el estado de la orden")
+        if(estado == "finalizada") {
+          this._dialog.closeAll()
+          this._dialog.open(DetallesSesionDialogComponent)
+        } else {
+          this._dialog.closeAll()
+          this._dialog.open(DetallesOrdenComponent)
+        }
       },
       error: () => {
         alert("ERROR: Hubo un error al actualizar el estado de la orden")
