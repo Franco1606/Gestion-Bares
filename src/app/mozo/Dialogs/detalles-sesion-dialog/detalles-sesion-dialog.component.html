@@ -29,7 +29,7 @@
                 </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let element; columns: displayedColumns;" (click)="irDetallesOrden(element)" style="cursor: pointer;"></tr>
+            <tr class="fila" mat-row *matRowDef="let element; columns: displayedColumns;" (click)="irDetallesOrden(element.ordenID)"></tr>
         </table>
         <br>
         <br>

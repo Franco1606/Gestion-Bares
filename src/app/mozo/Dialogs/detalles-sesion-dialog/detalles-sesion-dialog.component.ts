@@ -44,8 +44,8 @@ export class DetallesSesionDialogComponent implements OnInit {
     })
   }  
 
-  irDetallesOrden(orden:modeloOrden) {
-    this._mozoService.orden = orden
+  irDetallesOrden(ordenID:number) {
+    this._mozoService.ordenID = ordenID
     let dialogRef = this._dialog.open(DetallesOrdenComponent)
     dialogRef.afterClosed().subscribe({
       next: () => {        
