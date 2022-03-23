@@ -7,6 +7,11 @@ th, td {
     vertical-align: middle !important;       
 }
 
+.fila:hover {
+    background-color: rgba(0, 0, 0, 0.048);
+    cursor: pointer;
+}
+
 .total {
     font-size: 1.2em;
     font-weight: 500;
