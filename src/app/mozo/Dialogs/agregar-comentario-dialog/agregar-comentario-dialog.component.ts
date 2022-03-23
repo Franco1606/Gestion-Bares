@@ -37,7 +37,8 @@ export class AgregarComentarioComponent {
       } else {
         alert("Este producto ya se agrego al pedido, puede agregar otro de este tipo con un comentario")
       }
-    }    
+    }
+    console.log(this._mozoService.pedido)
     this.dialogRef.close()    
   } 
 
