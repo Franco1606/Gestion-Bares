@@ -23,7 +23,7 @@ export class PedidoMozoComponent {
 
   constructor( private _router:Router, private _adminService:AdminService, private _mozoService:MoozoService, private _dialog:MatDialog ) { }
 
-  //////////   Atributos de la clase   /////////////  
+  //////////   Atributos de la clase   /////////////
   usuarioID!:number
   mozoID!:number
   tokenMozo!:string
@@ -58,7 +58,7 @@ export class PedidoMozoComponent {
     })
   }
 
-  irListaProductos(categoria:modeloCategoria) {  
+  irListaProductos(categoria:modeloCategoria) {
     this._router.navigateByUrl(`mozo/productos/${categoria.categoriaID}`)
   }
 
