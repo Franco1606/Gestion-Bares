@@ -49,7 +49,7 @@ export class DetallesOrdenComponent implements OnInit {
   }
 
   obtenerPedidos() {
-    this._mozoService.obtenerPedidos(this._mozoService.orden.ordenID).subscribe({
+    this._mozoService.obtenerPedidos(this._mozoService.ordenID).subscribe({
       next: (x) => {
         this.dataSource = x
       },
@@ -61,7 +61,7 @@ export class DetallesOrdenComponent implements OnInit {
   }  
 
   obtenerDatos() {
-    this._mozoService.obtenerOrden(this._mozoService.orden.ordenID).subscribe({
+    this._mozoService.obtenerOrden(this._mozoService.ordenID).subscribe({
       next: (x) => {        
         this.form.controls["estado"].setValue(x.estado)
         this.form.controls["numOrden"].setValue(x.numOrden)
@@ -104,7 +104,7 @@ export class DetallesOrdenComponent implements OnInit {
 
   enviarComanda() {
     console.log(this.dataSource)
-    this._mozoService.enviarComanda(this.dataSource, this._mozoService.orden.ordenID ,this._mozoService.tokenMozo).subscribe({
+    this._mozoService.enviarComanda(this.dataSource, this._mozoService.ordenID ,this._mozoService.tokenMozo).subscribe({
       next: () => {
         alert("La comanda se envio a la cocina")
       },
