@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation} from '@angular/core';
+import { Component } from '@angular/core';
 //Modelos
 import { modeloSesion } from '../../ModelosMozo/modeloSesion';
 //Inyeccions de dependencia
@@ -11,8 +11,7 @@ import { DetallesSesionDialogComponent } from "../../Dialogs/detalles-sesion-dia
 @Component({
   selector: 'app-gestion-mesas',
   templateUrl: './gestion-mesas.component.html',
-  styleUrls: ['./gestion-mesas.component.css'],  
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./gestion-mesas.component.css']
 })
 export class GestionMesasComponent {
 
