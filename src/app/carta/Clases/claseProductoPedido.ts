@@ -12,7 +12,8 @@ export class claseProductoPedido {
         } else {
             this.cantidad = producto.cantidad
         }
-        this.categoriaNombre = producto.categoriaNombre        
+        this.categoriaNombre = producto.categoriaNombre
+        this.cocina = Number(producto.cocina)
     }
 
     //////////   Atributos de la clase   /////////////
@@ -24,5 +25,6 @@ export class claseProductoPedido {
     cantidad!:number
     comentario!:string
     IDinterno!:number
+    cocina!:number
 }
 
