@@ -1,3 +1,9 @@
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 table {
     min-width: 280px;
 }
@@ -15,6 +21,19 @@ th, td {
 .total {
     font-size: 1.2em;
     font-weight: 500;
+}
+
+.cocina { 
+    font-weight: 500;
+    font-size: 1.3em;
+}
+
+.si {
+    color: rgb(77, 226, 97);
+}
+
+.no {
+    color: rgb(250, 95, 81);
 }
 
 .estado {
