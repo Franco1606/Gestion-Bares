@@ -17,14 +17,26 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Producto </th>
                 <td mat-cell *matCellDef="let element">
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                        <div style="font-weight: 500; font-size: 1.2em;">{{element.nombre}}</div>
-                        <div *ngIf="element.descripcion">({{element.descripcion}})</div>
+                      <div style="font-weight: 700; font-size: 1.5em; color: rgb(63,81,181);margin-bottom: 10px;"> $ {{element.precio}} </div>
+                        <div style="font-weight: 500; font-size: 1.4em;">{{element.nombre}}</div>
+                        <div style="font-size: 0.9em;"> ({{element.descripcion}}) </div>
                     </div>
+                </td>
+              </ng-container>
+
+              <!-- Accion Column -->
+              <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Agregar </th>
+                <td mat-cell *matCellDef="let element">
+                  <div style="display: flex; flex-direction: column; align-items: center;">
+                    <app-contador class="contador" [mitad]="categoria.mitad" (cantidadProdcutos)="pasarCantidad($event, element)"></app-contador>
+                    <button mat-raised-button color="primary" (click)="agregar(element, categoria.comentario)">AGREGAR</button>                    
+                  </div>
                 </td>
               </ng-container>
             
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr class="fila" mat-row *matRowDef="let element; columns: displayedColumns;" (click)="irAgregar(element)"></tr>
+              <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
             </table>
             
             <mat-paginator [pageSizeOptions]="[10, 20]"
