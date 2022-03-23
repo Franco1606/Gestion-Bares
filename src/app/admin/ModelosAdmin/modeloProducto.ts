@@ -5,5 +5,6 @@ export interface modeloProducto {
     precio:number,
     mostrar:number,
     usuarioID:number,
-    categoriaID:number
+    categoriaID:number,
+    cocina:number
 }
