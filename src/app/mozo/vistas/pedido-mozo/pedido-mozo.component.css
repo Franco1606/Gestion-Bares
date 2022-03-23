@@ -10,7 +10,7 @@
 }
 
 :host ::ng-deep td{
-    padding: 10px !important;
+    padding: 35px !important;
 }
 
 .fila:hover {
