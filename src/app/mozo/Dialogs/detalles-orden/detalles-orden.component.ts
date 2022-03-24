@@ -9,8 +9,6 @@ import { MoozoService } from "../../servicios/api/moozo.service"
 import { MatDialog, MatDialogRef } from "@angular/material/dialog"
 // Dialogs
 import { DetallesSesionDialogComponent } from '../detalles-sesion-dialog/detalles-sesion-dialog.component';
-import { VerPedidoDialogComponent } from '../ver-pedido-dialog/ver-pedido-dialog.component';
-
 
 @Component({
   selector: 'app-detalles-orden',
@@ -19,7 +17,7 @@ import { VerPedidoDialogComponent } from '../ver-pedido-dialog/ver-pedido-dialog
 })
 export class DetallesOrdenComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService, private _dialog:MatDialog, private dialogRef:MatDialogRef<DetallesOrdenComponent>, ) { }
+  constructor( private _mozoService:MoozoService, private _dialog:MatDialog, private dialogRef:MatDialogRef<DetallesOrdenComponent> ) { }
 
   //////////   Atributos de la clase   /////////////   
   estado!:string
@@ -29,7 +27,7 @@ export class DetallesOrdenComponent implements OnInit {
   desactivarEliminar!:boolean
   desactivarEnvioComanda!:boolean
   // Tabla //
-  displayedColumns = ["cantidad","producto","precio", "cocina", "borrar"]
+  displayedColumns = ["cantidad","producto","precio", "cocina"]
   dataSource:modeloPedido[]
   // Formulario
   form:FormGroup = new FormGroup({
@@ -126,10 +124,6 @@ export class DetallesOrdenComponent implements OnInit {
     } else {      
       productoPedido.cocina = 0
     }
-  }
-
-  eliminarPedido(pedidoID:number, cantidad:number, nombre:string) {
-
   }
 
   inhabilitarEnvioComanda() {
