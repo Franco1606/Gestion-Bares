@@ -272,4 +272,32 @@ export class AdminService {
     }
     return this._http.delete<modeloRespuesta>(this.url + `cocineros.php`, options)
   }
+
+  //////////////////////////////////////////////////////////
+  //////////////  METODOS PARA SESIONES  //////////////////
+  ////////////////////////////////////////////////////////
+
+  //Modificar Mozo de la mesa
+  cambiarMozoDeMesa(form:any) {
+    return this._http.put<modeloRespuesta>(this.url + `sesiones.php`, form)
+  }
+
+  //////////////////////////////////////////////////////////
+  //////////////  METODOS PARA PEDIDOS  ///////////////////
+  ////////////////////////////////////////////////////////
+
+  //Eliminar Pedido
+  eliminarPedido(pedidoID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        pedidoID: pedidoID,
+        tokenAdmin: tokenAdmin               
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `pedidos.php`, options)
+  }
+
 }
