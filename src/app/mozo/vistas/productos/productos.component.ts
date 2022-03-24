@@ -37,6 +37,7 @@ export class ProductosComponent implements OnInit{
   productos!:modeloProducto[]
   pedido:claseProductoPedido[] = []
   IDinterno!:number
+  mesaID!:number
   // Tabla //
   displayedColumns = ["nombre", "accion"]
   @ViewChild(MatPaginator) paginator!:MatPaginator
@@ -45,6 +46,7 @@ export class ProductosComponent implements OnInit{
 
   ngOnInit(): void {
     this.obtenerDatos()
+    this.mesaID = this._mozoService.mesaID
   }
 
   obtenerUsuario(datosUsuario:any) {
