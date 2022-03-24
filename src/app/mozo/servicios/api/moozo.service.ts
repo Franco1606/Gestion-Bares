@@ -21,6 +21,7 @@ export class MoozoService {
   //URL de la API
   url = "https://visita360.hopto.org/Api-Gestion-Bares/"
   //Paso de variables por servicio
+  mesaID!:number
   sesion!:modeloSesion
   categoria!:modeloCategoria
   producto!:modeloProductoPedido
