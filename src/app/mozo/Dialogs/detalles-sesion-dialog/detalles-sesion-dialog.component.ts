@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 //Inyeccions de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
 import { CartaService } from "../../../carta/servicios/api/carta.service"
+import { Router } from "@angular/router"
 // Dependencias Angular Material
 import { MatDialog } from "@angular/material/dialog"
 //Modelos
@@ -17,13 +18,13 @@ import { CerrarMesaDialogComponent } from '../cerrar-mesa-dialog/cerrar-mesa-dia
 })
 export class DetallesSesionDialogComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService, private _adminService:CartaService, private _dialog:MatDialog ) { }
+  constructor( private _mozoService:MoozoService, private _adminService:CartaService, private _dialog:MatDialog, private _router:Router ) { }
 
   //////////   Atributos de la clase   /////////////   
   mesaID!:number
   llamarMozo!:number
   // Tabla //
-  displayedColumns = ["numOrden", "estado", "cocina"]
+  displayedColumns = ["numOrden", "estado"]
   dataSource!:modeloOrden[]
 
   ngOnInit(): void {
@@ -48,7 +49,7 @@ export class DetallesSesionDialogComponent implements OnInit {
     this._mozoService.ordenID = ordenID
     let dialogRef = this._dialog.open(DetallesOrdenComponent)
     dialogRef.afterClosed().subscribe({
-      next: () => {        
+      next: () => {
         this.obtenerOrdenes()
       }
     })
@@ -93,5 +94,12 @@ export class DetallesSesionDialogComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  tomarPedido() {
+    this._mozoService.pedido = []
+    this._mozoService.mesaID = this.mesaID
+    this._router.navigateByUrl("/mozo/pedido-mozo")
+    this._dialog.closeAll()
   }
 }
