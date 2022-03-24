@@ -1,0 +1,72 @@
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mozo {
+    text-align: center;
+    font-weight: 500;
+}
+
+table {
+    min-width: 280px;
+}
+
+th, td {
+    text-align: center !important;
+    vertical-align: middle !important;       
+}
+
+.fila:hover {
+    background-color: rgba(0, 0, 0, 0.048);
+    cursor: pointer;
+}
+
+.total {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.cocina { 
+    font-weight: 500;
+    font-size: 1.3em;
+}
+
+.si {
+    color: rgb(77, 226, 97);
+}
+
+.no {
+    color: rgb(250, 95, 81);
+}
+
+.estado {
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.431);
+}
+
+.nueva {
+    color: rgb(116, 116, 116);
+}
+
+.activa {
+    color: rgb(77, 226, 97);
+}
+
+.lista {
+    color: rgb(250, 219, 79); 
+}
+
+.finalizada {
+    color: rgb(250, 95, 81);
+}
+
+@media (max-width:900px){
+
+    .container {
+        width: 100vw;
+    }
+}
