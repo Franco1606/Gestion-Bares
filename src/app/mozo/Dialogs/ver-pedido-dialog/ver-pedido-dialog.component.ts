@@ -39,6 +39,7 @@ export class VerPedidoDialogComponent implements OnInit {
     this.dataSource = this._mozoService.pedido
     this.usuarioID = this._mozoService.usuarioID
     this.mozoID = this._mozoService.mozoID
+    this.form.controls["mesaID"].setValue(this._mozoService.mesaID)
     this.tokenMozo = this._mozoService.tokenMozo
     this._mozoService.pedido.forEach(element => {
       this.total += element.cantidad*element.precio
