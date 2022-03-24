@@ -129,5 +129,4 @@ export class CerrarMesaDialogComponent implements OnInit {
     })
     return pedidos
   }
-
 }
