@@ -1,0 +1,129 @@
+.body-bg {
+    background-color: rgb(54, 54, 54);
+    height: 100vh;
+}
+
+.contenedor-principal {
+    width: 100vw;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mesa {    
+    width: 180px;
+    height: 150px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 5px !important;
+    padding: 0 !important;
+}
+
+.solicitada {
+    background-color: rgb(93, 93, 93);
+}
+
+.abierta {
+    background-color: rgb(15, 124, 33);
+}
+
+.contenedor-mesa {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px,0,0);
+    }
+  
+    20%, 80% {
+        transform: translate3d(2px,0,0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-2px,0,0);
+    }
+
+    40%, 60% {
+        transform: translate3d(2px,0,0);
+    }    
+}
+
+.llamar-mozo {
+    position: absolute;
+    top:8px;
+    left:8px;
+    color: rgba(255, 255, 255, 0.541);
+    animation: shake 1s cubic-bezier(.36,.07,.19,.97) both;
+    animation-iteration-count: infinite;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+  
+
+@keyframes changeSize {
+    from {
+      transform: scale(0.9);
+    }
+  
+    to {
+        transform: scale(1.5);
+    }
+}
+  
+.orden-nueva {
+    position: absolute;
+    color: rgb(250, 95, 81);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.582);
+    top:12px;
+    right: 3px;
+    animation-duration: 0.5s;
+    animation-name: changeSize;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.orden-lista {
+    position: absolute;
+    color: rgb(250, 205, 81);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.582);
+    bottom:30px;
+    right: 3px;
+    animation-duration: 0.5s;
+    animation-name: changeSize;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.estado-sesion {
+    position: absolute;
+    text-transform: uppercase;
+    top: 80px;
+    font-size: 1.6em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.178);
+}
+
+.mesaID {
+    position: absolute;
+    top: 30px;
+    font-size: 6em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.178);
+}
+
+.tiempo {
+    width: 100% !important;
+    border-radius: 0 0 15px 15px;
+    background-color: rgb(63,81,181);
+    color: rgb(230, 230, 230);
+    position: absolute;
+    bottom: 0px;
+}
