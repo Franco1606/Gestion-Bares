@@ -33,7 +33,7 @@ export class DetallesSesionDialogComponent implements OnInit {
   sesion!:modeloSesion
   mozos!:modeloMozo[]
   // Tabla //
-  displayedColumns = ["numOrden", "estado"]
+  displayedColumns = ["numOrden", "estado", "borrar"]
   dataSource!:modeloOrden[]
   // Formulario
   form:FormGroup = new FormGroup({
@@ -121,4 +121,20 @@ export class DetallesSesionDialogComponent implements OnInit {
     this._dialog.open(CerrarMesaDialogComponent)
   }
 
+  eliminarOrden(ordenID:number, numOrden:string) {
+    if(confirm(`Esta por eliminar: La orden # ${numOrden}`)){
+      this._adminService.eliminarOrden(ordenID, this.sesion.sesionID, this.tokenAdmin).subscribe({
+        next: (x) => {
+          if(x.status == "ok"){
+            alert(`Se elminino: La orden # ${numOrden}`)
+            this._dialog.closeAll()
+            this._dialog.open(DetallesSesionDialogComponent)
+          }
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+    }
+  }
 }
