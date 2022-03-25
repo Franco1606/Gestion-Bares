@@ -9,7 +9,7 @@ import { ListaProductosComponent } from "./vistas/lista-productos/lista-producto
 import { EstilosCartaComponent } from "./vistas/estilos-carta/estilos-carta.component"
 import { GestionMozosComponent } from "./vistas/gestion-mozos/gestion-mozos.component"
 import { GestionCocinerosComponent } from "./vistas/gestion-cocineros/gestion-cocineros.component"
-import { MesasComponent } from "./vistas/mesas/mesas.component"
+import { GestionMesasComponent } from "./vistas/gestion-mesas/gestion-mesas.component"
 
 const routes: Routes = [
   { path: "login", component:LoginAdminComponent },
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: "estilos-carta", component:EstilosCartaComponent },
   { path: "gestion-mozos", component:GestionMozosComponent },
   { path: "gestion-cocineros", component:GestionCocinerosComponent },
-  { path: "mesas", component:MesasComponent }
+  { path: "gestion-mesas", component:GestionMesasComponent }
 ];
 
 @NgModule({
