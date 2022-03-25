@@ -10,6 +10,7 @@ import { modeloEstilo } from 'src/app/carta/ModelosCarta/modeloEstilo';
 import { modeloHappy } from '../../ModelosAdmin/modeloHappy';
 import { modeloMozo } from '../../ModelosAdmin/modeloMozo';
 import { modeloCocinero } from '../../ModelosAdmin/modeloCocinero';
+import { modeloSesion } from 'src/app/mozo/ModelosMozo/modeloSesion';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class AdminService {
   producto!:modeloProducto
   mozoID!:number
   cocineroID!:number
-
+  
   //////////////////////////////////////////////////////////
   /////////////  METODOS PARA CATEGORIAS  /////////////////
   ////////////////////////////////////////////////////////
