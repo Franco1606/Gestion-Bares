@@ -59,7 +59,8 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           <br>
-          <button class="boton-comanda" [disabled]="desactivarEnvioComanda" mat-raised-button color="primary" type="submit" (click)="enviarComanda()">Enviar Comanda</button>                  
+          <button class="boton-comanda" [disabled]="desactivarEnvioComanda" mat-raised-button color="primary" type="submit" (click)="enviarComanda()">Enviar Comanda</button>
+          <button class="boton-comanda" [disabled]="desactivarImpresionComanda" mat-raised-button color="accent" type="submit" (click)="imprimirComanda()">Imprimir Comanda</button>          
         </div>        
         <br>
         <mat-form-field class="example-full-width" appearance="outline">
