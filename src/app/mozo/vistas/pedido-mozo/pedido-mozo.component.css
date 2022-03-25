@@ -4,12 +4,17 @@
     align-items: center;
     background-color: white;
     height: 100vh;
+    width: 100vw;
 }
 
 .contenedor-principal {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.contenedor-tabla {
+    width: 100%;
 }
 
 :host ::ng-deep td{
@@ -56,7 +61,7 @@
 }
 
 @media (min-width:900px){
-    .contenedor-tabla-titulo {
+    .contenedor-principal {
         width: 70%;
     }
 }
