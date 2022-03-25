@@ -1,6 +1,6 @@
 <button mat-button color="warn" mat-dialog-close style="float: right;"><mat-icon>close</mat-icon></button>
 <h2 mat-dialog-title>Ordenes mesa: {{mesaID}} </h2>
-<form [formGroup]="form">
+<form *ngIf="sesion.mozoID && sesion.estado == 'abierta'" [formGroup]="form">
     <mat-form-field appearance="fill">
         <mat-label>Mozo</mat-label>
           <mat-select formControlName="mozoID" #mozoCtrl (selectionChange)="cambiarMozo()">
@@ -10,7 +10,13 @@
           </mat-select>
     </mat-form-field>
 </form>
-<div class="contenedor-principal">    
+<div class="contenedor-principal">
+    <div *ngIf="sesion.cerradaFecha">
+        <br >
+        <div style="font-size: 1.5em; font-weight: 500;">{{sesion.cerradaFecha | date : 'dd/MM/yyyy, HH:mm'}}</div>
+        <br>
+        <div style="font-size: 1.2em; font-weight: 400;">Mozo: {{ mozoNombre }}</div>
+    </div>
     <br>  
     <mat-dialog-content style="display: flex; flex-direction: column; align-items: center;">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -34,5 +40,6 @@
         </table>
         <br>
         <br>
+        <button mat-raised-button color="warn" (click)="verConsumos()" style="float: left;"> Ver Consumos </button>
     </mat-dialog-content>
 </div>
