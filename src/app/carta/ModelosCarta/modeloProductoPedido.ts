@@ -7,5 +7,6 @@ export interface modeloProductoPedido {
     categoriaID:number,
     categoriaNombre:string,
     cantidad:number,
-    cocina:number
+    cocina:number,
+    comandera:number
 }
