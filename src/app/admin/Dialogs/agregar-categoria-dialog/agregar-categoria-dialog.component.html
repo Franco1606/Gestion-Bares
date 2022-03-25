@@ -7,10 +7,16 @@
             <mat-label>Categoria</mat-label>
             <input type="input" matInput formControlName="nombre" placeholder="Nombre" required autofocus>
         </mat-form-field>
-        <mat-checkbox type="checkbox" class="example-margin" formControlName="comentario">Habilitar Comentarios</mat-checkbox>
-        <mat-checkbox type="checkbox" class="example-margin" formControlName="mitad">Habilitar Medio Pedido</mat-checkbox>
-        <mat-checkbox type="checkbox" class="example-margin" formControlName="cocina">Productos de Cocina</mat-checkbox>
+        <mat-slide-toggle formControlName="comentario">Habilitar Comentarios</mat-slide-toggle>
         <br>
+        <mat-slide-toggle formControlName="mitad">Habilitar Medio Pedido</mat-slide-toggle>
+        <br>
+        <mat-slide-toggle formControlName="cocina" #cocina (change)="cambiarComandera(cocina.checked)">Productos de Cocina</mat-slide-toggle>        
+        <br>
+        <mat-form-field appearance="fill" style="max-width: 150px;">
+          <mat-label>Comandera</mat-label>
+          <input type="number" matInput formControlName="comandera" placeholder="comandera" [autocomplete]="false">
+        </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true">Agregar</button> 
         <mat-dialog-actions align="end">
           <button mat-button color="warn" mat-dialog-close>Cancelar</button>          
