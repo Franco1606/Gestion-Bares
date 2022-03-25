@@ -1,0 +1,5 @@
+<app-header-admin (datosUsuario)="obtenerUsuario($event)"></app-header-admin>
+<mat-tab-group>
+    <mat-tab label="Mesas Activas"><app-mesas [usuarioID]="usuarioID" [tokenAdmin]="tokenAdmin"></app-mesas> </mat-tab>
+    <mat-tab label="Mesas Cerradas"><app-mesas-cerradas [usuarioID]="usuarioID" [tokenAdmin]="tokenAdmin"></app-mesas-cerradas> </mat-tab>
+</mat-tab-group>
