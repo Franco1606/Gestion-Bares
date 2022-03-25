@@ -129,6 +129,7 @@ export class ProductosComponent implements OnInit{
       } else {
         alert("Este producto ya se agrego al pedido")
       }
+      console.log(this.pedido)
     }
   }
 
