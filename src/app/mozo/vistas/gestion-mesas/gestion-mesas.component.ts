@@ -34,9 +34,13 @@ export class GestionMesasComponent {
   obtenerSesiones() {
     this._mozoService.obtenerSesionesActivas(this.usuarioID).subscribe({
       next: (x) => {
-        this.sesiones = x
+        this.sesiones = x.filter(element => element.mozoID == this.mozoID || element.estado == "solicitada")
+      },
+      error: (err) => {
+        console.log(err)
+        alert("No se pudo obtener los datos de la base de datos")
       }
-    })
+     })
   }
 
   detallesMesa(sesion:modeloSesion) {
