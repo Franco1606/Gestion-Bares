@@ -19,6 +19,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox"
 import { NgxMatColorPickerModule, MAT_COLOR_FORMATS,  NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker'
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 const modules = [
   MatInputModule,
@@ -37,7 +38,8 @@ const modules = [
   MatCheckboxModule,
   NgxMatColorPickerModule,
   ClipboardModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSlideToggleModule
 ]
 
 
