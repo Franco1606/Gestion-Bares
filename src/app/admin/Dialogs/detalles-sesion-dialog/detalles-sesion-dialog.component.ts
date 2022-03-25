@@ -11,9 +11,10 @@ import { modeloSesion } from 'src/app/mozo/ModelosMozo/modeloSesion';
 import { modeloMozo } from '../../ModelosAdmin/modeloMozo';
 // Dependencias Dialog
 import { DetallesOrdenDialogComponent } from "../detalles-orden-dialog/detalles-orden-dialog.component"
+import { CerrarMesaDialogComponent } from "../../../mozo/Dialogs/cerrar-mesa-dialog/cerrar-mesa-dialog.component"
 //Form
 import { FormControl, FormGroup } from '@angular/forms';
-import { NumericColorInputDirective } from '@angular-material-components/color-picker';
+
 
 @Component({
   selector: 'app-detalles-sesion-dialog',
@@ -28,7 +29,7 @@ export class DetallesSesionDialogComponent implements OnInit {
   usuarioID!:number
   tokenAdmin!:string 
   mesaID!:number
-  llamarMozo!:number
+  mozoNombre!:string
   sesion!:modeloSesion
   mozos!:modeloMozo[]
   // Tabla //
@@ -50,9 +51,9 @@ export class DetallesSesionDialogComponent implements OnInit {
 
   obtenerDatos() {
     this.usuarioID = this._adminService.usuarioID
-    this.tokenAdmin = this._adminService.tokenAdmin
-    this.llamarMozo = this._mozoService.sesion.llamarMozo    
+    this.tokenAdmin = this._adminService.tokenAdmin     
     this.sesion = this._mozoService.sesion
+    this.mesaID = this._mozoService.sesion.mesaID
   }
 
   obtenerOrdenes() {
@@ -82,6 +83,7 @@ export class DetallesSesionDialogComponent implements OnInit {
     this._adminService.obtenerMozo(this._mozoService.sesion.mozoID).subscribe({
       next: (x) => {
         this.form.controls["mozoID"].setValue(x.mozoID)
+        this.mozoNombre = x.nombre
       },
       error: (err) => {
         alert("No se pudo obtener los datos de la base de datos")
@@ -113,6 +115,10 @@ export class DetallesSesionDialogComponent implements OnInit {
         this.obtenerOrdenes()
       }
     })
+  }
+
+  verConsumos() {
+    this._dialog.open(CerrarMesaDialogComponent)
   }
 
 }
