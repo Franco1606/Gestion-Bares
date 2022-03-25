@@ -21,9 +21,10 @@ export class EditarCategoriaDialogComponent implements OnInit {
   // Formularios //
   form:FormGroup = new FormGroup({
     "nombre" : new FormControl("", Validators.required),
-    "comentario" : new FormControl("", Validators.required),
-    "mitad" : new FormControl("", Validators.required),
-    "cocina" : new FormControl("", Validators.required),
+    "comentario" : new FormControl(0, Validators.required),
+    "mitad" : new FormControl(0, Validators.required),
+    "cocina" : new FormControl(0, Validators.required),
+    "comandera" : new FormControl(),
     "categoriaID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
@@ -56,6 +57,11 @@ export class EditarCategoriaDialogComponent implements OnInit {
     this.form.controls["comentario"].setValue(Boolean(Number(this._AdminServiceApi.categoria.comentario)))
     this.form.controls["mitad"].setValue(Boolean(Number(this._AdminServiceApi.categoria.mitad)))
     this.form.controls["cocina"].setValue(Boolean(Number(this._AdminServiceApi.categoria.cocina)))
+    if(Boolean(Number(this._AdminServiceApi.categoria.cocina))) {
+      this.form.controls["comandera"].setValue(this._AdminServiceApi.categoria.comandera)
+    } else {
+      this.form.controls["comandera"].disable()      
+    }
     this.formHappy.controls["categoriaID"].setValue(this._AdminServiceApi.categoria.categoriaID)
     this.formHappy.controls["usuarioID"].setValue(this._AdminServiceApi.usuarioID)
     this.formHappy.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
@@ -124,24 +130,28 @@ export class EditarCategoriaDialogComponent implements OnInit {
     })
   }
 
-  editarCategoria() { 
-    this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
-    this.form.controls["mitad"].setValue(Number(this.form.controls["mitad"].value))
-    this.form.controls["cocina"].setValue(Number(this.form.controls["cocina"].value))    
-    if(this.verificarCampos(this.nombre)) {
-      this.quitarEspaciosFinales(this.form.value)
-      this._AdminServiceApi.modificarCategoria(this.form.value).subscribe({
-        next: () => {
-          alert("Se actualizo la categoria")
-          location.reload()
-        },
-        error: () => {        
-          alert("No se pudo actualizar la categoria o no se modifico")
-          location.reload()
-        }
-      })      
+  editarCategoria() {
+    if(!Boolean(this.form.controls["comandera"].value) && this.form.controls["cocina"]) {
+      alert("Se la categoria es de cocina tiene que tener asiganada una comandera")  
     } else {
-      alert("El campo de categoria es requerido")
+      this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
+      this.form.controls["mitad"].setValue(Number(this.form.controls["mitad"].value))
+      this.form.controls["cocina"].setValue(Number(this.form.controls["cocina"].value))
+      if(this.verificarCampos(this.nombre)) {
+        this.quitarEspaciosFinales(this.form.value)
+        this._AdminServiceApi.modificarCategoria(this.form.value).subscribe({
+          next: () => {
+            alert("Se actualizo la categoria")
+            location.reload()
+          },
+          error: () => {        
+            alert("No se pudo actualizar la categoria o no se modifico")
+            location.reload()
+          }
+        })      
+      } else {
+        alert("El campo de categoria es requerido")
+      }
     }
   }
 
@@ -249,5 +259,16 @@ export class EditarCategoriaDialogComponent implements OnInit {
         json[`${key}`] = json[`${key}`].trim()
       }
     });    
+  }
+
+  cambiarComandera(checked:boolean) {
+    if(!checked) {
+      this.form.controls["comandera"].disable()
+    } else if(checked && !Boolean(this.form.controls["comandera"].value)) {
+      this.form.controls["comandera"].enable()
+      this.form.controls["comandera"].setValue(1)
+    } else if(checked) {
+      this.form.controls["comandera"].enable()
+    }
   }
 }
