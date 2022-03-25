@@ -13,4 +13,6 @@ export interface modeloPedido {
     comentario:string,
     happy:number,
     categoriaNombre:string
+    productoCocina:number,
+    comandera:number
 }
