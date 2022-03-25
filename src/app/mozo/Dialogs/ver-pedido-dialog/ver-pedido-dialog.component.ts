@@ -46,7 +46,7 @@ export class VerPedidoDialogComponent implements OnInit {
     })
   }
   
-  emitirOrden() {    
+  emitirOrden() {
     if(parseInt(this.form.controls["mesaID"].value)) {
     this.mesaID = this.form.controls["mesaID"].value
       this._mozoService.generarOrdenMozo(this._mozoService.usuarioID, this.mesaID, this._mozoService.pedido, this.total, this.mozoID, this.tokenMozo).subscribe({
