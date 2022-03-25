@@ -3,11 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 //Modelos
 import { modeloPedido } from '../../../mozo/ModelosMozo/modeloPedido';
+//Clases
+import { claseProductoPedido } from '../../../carta/Clases/claseProductoPedido';
+import { Pdf } from '../../plantillas/pdf';
 //Inyeccions de dependencia
 import { MoozoService } from "../../../mozo/servicios/api/moozo.service"
 import { AdminService } from '../../servicios/api/admin.service';
 // Dependencias Angular Material
 import { MatDialog, MatDialogRef } from "@angular/material/dialog"
+// Dependencias pdfMake
+import pdfMake from "pdfmake/build/pdfMake"
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-detalles-orden-dialog',
@@ -25,6 +32,9 @@ export class DetallesOrdenDialogComponent implements OnInit {
   desactivarChecks!:boolean
   desactivarEliminar!:boolean
   desactivarEnvioComanda!:boolean
+  productosCocina = false
+  desactivarImpresionComanda = true
+  numOrden!:string
   // Tabla //
   displayedColumns = ["cantidad","producto","precio", "cocina", "borrar"]
   dataSource:modeloPedido[]
@@ -43,27 +53,38 @@ export class DetallesOrdenDialogComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    this.obtenerPedidos()
-    this.obtenerDatos()
+    this.obtenerPedidos()    
   }
 
   obtenerPedidos() {
     this._mozoService.obtenerPedidos(this._mozoService.ordenID).subscribe({
       next: (x) => {
         this.dataSource = x
+        this.verificarProductosCocina(x)
+        this.obtenerDatos()
       },
       error: (err) => {
         alert("No se pudo obtener los datos de la base de datos")
         console.log(err)
       }
     })
-  }  
+  }
+
+  verificarProductosCocina(pedidos:modeloPedido[]) {
+    console.log(pedidos)
+    pedidos.forEach(pedido => {
+      if(pedido.productoCocina == 1) {
+        this.productosCocina = true
+      }
+    })
+  }
 
   obtenerDatos() {
     this.tokenAdmin = this._adminService.tokenAdmin
     this._mozoService.obtenerOrden(this._mozoService.ordenID).subscribe({
       next: (x) => {
         this.form.controls["numOrden"].setValue(x.numOrden)
+        this.numOrden = x.numOrden
         this.form.controls["nuevaFecha"].setValue(x.nuevaFecha)
         this.form.controls["activaFecha"].setValue(x.activaFecha)
         this.form.controls["listaFecha"].setValue(x.listaFecha)
@@ -77,6 +98,9 @@ export class DetallesOrdenDialogComponent implements OnInit {
         }
         this.form.controls["total"].setValue(x.total)
         this.estado = x.estado
+        if(this.productosCocina) {
+          this.desactivarImpresionComanda = false
+        }
         this.inhabilitarEnvioComanda()
         this.inhabilitarEliminar()
       },
@@ -107,6 +131,25 @@ export class DetallesOrdenDialogComponent implements OnInit {
         alert("No se pudo enviar la comanda a la cocina")
       }
     })
+  }
+
+  imprimirComanda() {
+    let comanderas:number[] = []
+    this.dataSource.forEach(pedido => {
+      if(!comanderas.includes(pedido.comandera) && Number(pedido.comandera)) {
+        comanderas.push(pedido.comandera)
+      }
+    })    
+    comanderas.forEach(comandera => {
+    let pedidoComandera = this.dataSource.filter(element => element.comandera == comandera)  
+    this.iprimirPdf(pedidoComandera, this.numOrden)
+    })
+  }
+
+  iprimirPdf(pedidos:modeloPedido[], numOrden:string) {
+    let pdf = new Pdf()
+    let contenido = pdf.crear(pedidos, numOrden)
+    pdfMake.createPdf(contenido).print()
   }
 
   eliminarPedido(pedidoID:number, cantidad:number, nombre:string, ) {
