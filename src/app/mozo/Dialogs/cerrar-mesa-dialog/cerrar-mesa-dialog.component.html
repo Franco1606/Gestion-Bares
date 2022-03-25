@@ -41,5 +41,6 @@
           Total: $ {{total}}
       </div>
       <br>
-      <button mat-raised-button color="warn" style="margin-bottom: 30px;" (click)="cerrarMesa()" > Cerrar Mesa </button>
+      <button *ngIf="tokenMozo" mat-raised-button color="warn" style="margin-bottom: 30px;" (click)="cerrarMesa()" > Cerrar Mesa </button>
+      <button *ngIf="!tokenMozo" mat-raised-button color="warn" style="margin-bottom: 30px;" (click)="imprimir()" > Imprimir </button>      
   </mat-dialog-content>
