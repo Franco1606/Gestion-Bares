@@ -23,6 +23,7 @@ export class AgregarProductoDialogComponent implements OnInit {
     "descripcion" : new FormControl(),
     "precio" : new FormControl("", Validators.required),
     "cocina" : new FormControl(),
+    "comandera" : new FormControl(),
     "usuarioID" : new FormControl(),
     "categoriaID" : new FormControl(),
     "categoriaNombre" : new FormControl(),
@@ -45,6 +46,7 @@ export class AgregarProductoDialogComponent implements OnInit {
       next: (x) => {
         this.form.controls["categoriaNombre"].setValue(x.nombre)
         this.form.controls["cocina"].setValue(Number(x.cocina))
+        this.form.controls["comandera"].setValue(Number(x.comandera))
       },
       error: (err) => {
         console.log(err)
