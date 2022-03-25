@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //Modelos
 import { modeloPedido } from '../../ModelosMozo/modeloPedido';
+import { modeloSesion } from '../../ModelosMozo/modeloSesion';
 //Inyeccion de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
 
@@ -17,12 +18,16 @@ export class CerrarMesaDialogComponent implements OnInit {
   total = 0
   peidosSinHappy!:modeloPedido[]
   pedidosConHappy!:modeloPedido[]
+  sesion!:modeloSesion
+  tokenMozo!:string
   // Tabla //
   displayedColumns = ["cantidad", "producto", "precio", "subtotal"]
   dataSource!:any[]
 
   ngOnInit(): void {
-    this._mozoService.obtenerPedidosPorSesion(this._mozoService.sesion.sesionID).subscribe({
+    this.tokenMozo = this._mozoService.tokenMozo    
+    this.sesion = this._mozoService.sesion
+    this._mozoService.obtenerPedidosPorSesion(this.sesion.sesionID).subscribe({
       next: (x) => {        
         this.peidosSinHappy = this.pedidos(this.agruparPorProducto(x))
         this.pedidosConHappy = this.pedidosHappy(this.agruparPorCategoria(x))
@@ -128,5 +133,9 @@ export class CerrarMesaDialogComponent implements OnInit {
       pedidos.push(pedido)      
     })
     return pedidos
+  }
+
+  imprimir() {
+
   }
 }
