@@ -2,8 +2,14 @@ import { Component, OnInit } from '@angular/core';
 //Modelos
 import { modeloPedido } from '../../ModelosMozo/modeloPedido';
 import { modeloSesion } from '../../ModelosMozo/modeloSesion';
+//Clases
+import { Pdf } from '../../plantillas/pdf';
 //Inyeccion de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
+// Dependencias pdfMake
+import pdfMake from "pdfmake/build/pdfMake"
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-cerrar-mesa-dialog',
@@ -136,6 +142,12 @@ export class CerrarMesaDialogComponent implements OnInit {
   }
 
   imprimir() {
-
+    this.imprimirPdf(this.dataSource, this.sesion.mesaID)
+  }
+  
+  imprimirPdf(pedidos:any[], mesaID:number) {
+    let pdf = new Pdf()
+    let contenido = pdf.crear(pedidos, mesaID)
+    pdfMake.createPdf(contenido).print()    
   }
 }
