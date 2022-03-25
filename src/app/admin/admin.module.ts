@@ -22,9 +22,11 @@ import { EditarMozoDialogComponent } from './Dialogs/editar-mozo-dialog/editar-m
 import { GestionCocinerosComponent } from './vistas/gestion-cocineros/gestion-cocineros.component';
 import { AgregarCocineroDialogComponent } from './Dialogs/agregar-cocinero-dialog/agregar-cocinero-dialog.component';
 import { EditarCocineroDialogComponent } from './Dialogs/editar-cocinero-dialog/editar-cocinero-dialog.component';
-import { MesasComponent } from './vistas/mesas/mesas.component';
+import { MesasActivasComponent } from './vistas/mesas-activas/mesas-activas.component';
 import { DetallesOrdenDialogComponent } from './Dialogs/detalles-orden-dialog/detalles-orden-dialog.component';
 import { DetallesSesionDialogComponent } from './Dialogs/detalles-sesion-dialog/detalles-sesion-dialog.component';
+import { GestionMesasComponent } from './vistas/gestion-mesas/gestion-mesas.component';
+import { MesasCerradasComponent } from './vistas/mesas-cerradas/mesas-cerradas.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,11 @@ import { DetallesSesionDialogComponent } from './Dialogs/detalles-sesion-dialog/
     GestionCocinerosComponent,
     AgregarCocineroDialogComponent,
     EditarCocineroDialogComponent,
-    MesasComponent,
+    MesasActivasComponent,
     DetallesOrdenDialogComponent,
-    DetallesSesionDialogComponent      
+    DetallesSesionDialogComponent,
+    GestionMesasComponent,
+    MesasCerradasComponent      
   ],
   imports: [
     CommonModule,
