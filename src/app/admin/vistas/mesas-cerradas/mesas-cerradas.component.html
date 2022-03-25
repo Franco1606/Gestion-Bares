@@ -1,0 +1,28 @@
+<br>
+<br>
+<div class="contenedor-principal">
+    <h1 class="titulo">CIERRES</h1>
+    <div class="contenedor-tabla">        
+        <table mat-table [dataSource]="dataSource" matSort>
+          <!-- Mesa Column-->
+          <ng-container matColumnDef="mesa">
+            <th mat-header-cell *matHeaderCellDef> Mesa </th>
+            <td mat-cell *matCellDef="let element"> {{element.mesaID}} </td>
+          </ng-container>
+        
+          <!-- Cerrada Column-->
+          <ng-container matColumnDef="cerrada">
+            <th mat-header-cell *matHeaderCellDef> Fecha Cierre </th>
+            <td mat-cell *matCellDef="let element"> {{element.cerradaFecha | date : 'dd/MM/yyyy, HH:mm'}}  </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="fila" mat-row *matRowDef="let element; columns: displayedColumns;" (click)="irDetallesSesion(element)"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                       showFirstLastButtons 
+                       aria-label="Seleccione pagina de categoria">
+        </mat-paginator>
+    </div>
+</div>
