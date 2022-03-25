@@ -19,13 +19,14 @@ export class AgregarCategoriaDialogComponent implements OnInit {
   mitad!:number
   cocina!:number
   usuarioID!:number  
-  tokenAdmin!:string   
+  tokenAdmin!:string
   // Formulario //
   form:FormGroup = new FormGroup({
     "nombre" : new FormControl("", Validators.required),
-    "comentario" : new FormControl(0),
-    "mitad" : new FormControl(0),
-    "cocina" : new FormControl(0),
+    "comentario" : new FormControl(false),
+    "mitad" : new FormControl(false),
+    "cocina" : new FormControl(false),
+    "comandera" : new FormControl(),
     "usuarioID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
@@ -35,6 +36,7 @@ export class AgregarCategoriaDialogComponent implements OnInit {
   }
 
   obtenerDatos() {
+    this.form.controls["comandera"].disable()
     this.form.controls["usuarioID"].setValue(this._AdminServiceApi.usuarioID)
     this.form.controls["tokenAdmin"].setValue(this._AdminServiceApi.tokenAdmin)
   }
@@ -43,7 +45,7 @@ export class AgregarCategoriaDialogComponent implements OnInit {
     this.nombre = this.form.controls["nombre"].value.trim()
     this.form.controls["comentario"].setValue(Number(this.form.controls["comentario"].value))
     this.form.controls["mitad"].setValue(Number(this.form.controls["mitad"].value))
-    this.form.controls["cocina"].setValue(Number(this.form.controls["cocina"].value))    
+    this.form.controls["cocina"].setValue(Number(this.form.controls["cocina"].value))
     if(this.verificarCampos(this.nombre)) {
       this.quitarEspaciosFinales(this.form.value)
       this._AdminServiceApi.agregarCategoria(this.form.value).subscribe({
@@ -59,6 +61,17 @@ export class AgregarCategoriaDialogComponent implements OnInit {
       })
     } else {
       alert("El campo de categoria es requerido")
+    }
+  }
+
+  cambiarComandera(checked:boolean) {
+    if(!checked) {
+      this.form.controls["comandera"].disable()
+    } else if(checked && !Boolean(this.form.controls["comandera"].value)) {
+      this.form.controls["comandera"].enable()
+      this.form.controls["comandera"].setValue(1)
+    } else if(checked) {
+      this.form.controls["comandera"].enable()
     }
   }
 
