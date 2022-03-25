@@ -301,4 +301,23 @@ export class AdminService {
     return this._http.delete<modeloRespuesta>(this.url + `pedidos.php`, options)
   }
 
+  //////////////////////////////////////////////////////////
+  //////////////  METODOS PARA ORDENES  ///////////////////
+  ////////////////////////////////////////////////////////
+
+  //Eliminar Pedido
+  eliminarOrden(ordenID:number, sesionID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        ordenID: ordenID,
+        tokenAdmin: tokenAdmin,
+        sesionID: sesionID
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `ordenes.php`, options)
+  }
+
 }
