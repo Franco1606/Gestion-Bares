@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 // Inyecciones de dependencia
 import { AdminService } from "../../servicios/api/admin.service"
-import { Router, ActivatedRoute } from "@angular/router"
+import { ActivatedRoute } from "@angular/router"
 // Modelos
 import { modeloProducto } from '../../ModelosAdmin/modeloProducto';
 // Dependencias para la tabla
