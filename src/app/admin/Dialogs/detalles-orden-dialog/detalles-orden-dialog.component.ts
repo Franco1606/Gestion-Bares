@@ -70,8 +70,8 @@ export class DetallesOrdenDialogComponent implements OnInit {
         this.form.controls["finalizadaFecha"].setValue(x.finalizadaFecha)
         this.form.controls["mesaID"].setValue(x.mesaID)        
         this.form.controls["domicilio"].setValue(x.domicilio)
-        this.form.controls["solicitante"].setValue(x.solicitante)
-        this.form.controls["finalizoMozoID"].setValue(x.finalizoMozoID)
+        this.form.controls["solicitante"].setValue(x.solicitante)        
+        this.obtenerMozo(x.finalizoMozoID)
         if(x.domicilio) {
           this.mesaFlag = false
         }
@@ -81,6 +81,18 @@ export class DetallesOrdenDialogComponent implements OnInit {
         this.inhabilitarEliminar()
       },
       error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  obtenerMozo(mozoID:number) {
+    this._adminService.obtenerMozo(mozoID).subscribe({
+      next: (x) => {
+        this.form.controls["finalizoMozoID"].setValue(x.nombre)
+      },
+      error: (err) => {
+        alert("No se pudo obtener los datos de la base de datos")
         console.log(err)
       }
     })
