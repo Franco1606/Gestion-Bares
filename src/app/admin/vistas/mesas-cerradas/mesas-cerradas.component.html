@@ -3,7 +3,7 @@
 <div class="contenedor-principal">
     <h1 class="titulo">CIERRES</h1>
     <div class="contenedor-tabla">        
-        <table mat-table [dataSource]="dataSource" matSort>
+        <table mat-table [dataSource]="dataSource">
           <!-- Mesa Column-->
           <ng-container matColumnDef="mesa">
             <th mat-header-cell *matHeaderCellDef> Mesa </th>
@@ -22,7 +22,7 @@
         
         <mat-paginator [pageSizeOptions]="[10, 20]"
                        showFirstLastButtons 
-                       aria-label="Seleccione pagina de categoria">
+                       aria-label="Seleccione pagina de sesion">
         </mat-paginator>
     </div>
 </div>
