@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 //Modelos
 import { modeloSesion } from '../../../mozo/ModelosMozo/modeloSesion'
 //Inyeccions de dependencia
@@ -31,12 +31,7 @@ export class MesasCerradasComponent implements OnChanges {
   @ViewChild(MatPaginator) paginator!:MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!:MatTableDataSource<modeloSesion>
-
-  obtenerUsuario(datosUsuario:any) {
-    this.usuarioID = datosUsuario["usuarioID"]    
-    this.tokenAdmin = datosUsuario["tokenAdmin"]    
-  }
-
+  
   ngOnChanges(): void {
     this.obtenerSesionesCerradas()
     setInterval(() => {this.obtenerSesionesCerradas()}, 30000)
@@ -47,9 +42,9 @@ export class MesasCerradasComponent implements OnChanges {
       next: (x) => {
         this.sesiones = x
         this.dataSource = new MatTableDataSource<modeloSesion>(this.sesiones.reverse())
-        this.dataSource.paginator = this.paginator
+        this.dataSource.paginator = this.paginator        
       }
-    })
+    })   
   }
 
   irDetallesSesion(sesion:modeloSesion) {
