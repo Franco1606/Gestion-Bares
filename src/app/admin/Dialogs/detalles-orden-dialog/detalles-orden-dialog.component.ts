@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 //Modelos
 import { modeloPedido } from '../../../mozo/ModelosMozo/modeloPedido';
 //Clases
-import { claseProductoPedido } from '../../../carta/Clases/claseProductoPedido';
 import { Pdf } from '../../plantillas/pdf';
 //Inyeccions de dependencia
 import { MoozoService } from "../../../mozo/servicios/api/moozo.service"
@@ -134,16 +133,7 @@ export class DetallesOrdenDialogComponent implements OnInit {
   }
 
   imprimirComanda() {
-    let comanderas:number[] = []
-    this.dataSource.forEach(pedido => {
-      if(!comanderas.includes(pedido.comandera) && Number(pedido.comandera)) {
-        comanderas.push(pedido.comandera)
-      }
-    })    
-    comanderas.forEach(comandera => {
-    let pedidoComandera = this.dataSource.filter(element => element.comandera == comandera)  
-    this.iprimirPdf(pedidoComandera, this.numOrden)
-    })
+    this.iprimirPdf(this.dataSource, this.numOrden)    
   }
 
   iprimirPdf(pedidos:modeloPedido[], numOrden:string) {
