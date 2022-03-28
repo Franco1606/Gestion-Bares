@@ -34,15 +34,19 @@ export class MesasCerradasComponent implements OnChanges {
   
   ngOnChanges(): void {
     this.obtenerSesionesCerradas()
-    setInterval(() => {this.obtenerSesionesCerradas()}, 30000)
+    setInterval(() => {this.obtenerSesionesCerradas()}, 30000)    
   }
 
   obtenerSesionesCerradas() {
     this._mozoService.obtenerSesionesCerradas(this.usuarioID).subscribe({
       next: (x) => {
-        this.sesiones = x
-        this.dataSource = new MatTableDataSource<modeloSesion>(this.sesiones.reverse())
-        this.dataSource.paginator = this.paginator        
+        if(x.length) {
+          this.sesiones = x
+          this.dataSource = new MatTableDataSource<modeloSesion>(this.sesiones.reverse())
+          this.dataSource.paginator = this.paginator
+        } else {
+          this.sesiones = x
+        }         
       }
     })   
   }
@@ -58,7 +62,7 @@ export class MesasCerradasComponent implements OnChanges {
     if(confirm("Desea eliminar este cierre de mesa?")) {
       this._adminService.eliminarSesion(sesionID, this.tokenAdmin).subscribe({
         next: () => {
-          this.obtenerSesionesCerradas()
+          location.reload()
         },
         error: (err) => {
           console.log(err)
