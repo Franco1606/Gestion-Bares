@@ -32,7 +32,7 @@ export class GestionMesasComponent {
   }
 
   obtenerSesiones() {
-    this._mozoService.obtenerSesionesActivas(this.usuarioID).subscribe({
+    this._mozoService.obtenerSesiones(this.usuarioID, "activa").subscribe({
       next: (x) => {
         this.sesiones = x.filter(element => element.mozoID == this.mozoID || element.estado == "solicitada")
       },
