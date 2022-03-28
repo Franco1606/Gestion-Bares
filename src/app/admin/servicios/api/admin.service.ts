@@ -283,6 +283,20 @@ export class AdminService {
     return this._http.put<modeloRespuesta>(this.url + `sesiones.php`, form)
   }
 
+  //Eliminar Sesion
+  eliminarSesion(sesionID:number, tokenAdmin:string):Observable<modeloRespuesta> {
+    let options = {
+      header: new HttpHeaders({
+        "Content-type" : "application/json"
+      }),
+      body : {
+        sesionID: sesionID,
+        tokenAdmin: tokenAdmin               
+      }
+    }
+    return this._http.delete<modeloRespuesta>(this.url + `sesiones.php`, options)
+  }
+
   //////////////////////////////////////////////////////////
   //////////////  METODOS PARA PEDIDOS  ///////////////////
   ////////////////////////////////////////////////////////
@@ -304,6 +318,16 @@ export class AdminService {
   //////////////////////////////////////////////////////////
   //////////////  METODOS PARA ORDENES  ///////////////////
   ////////////////////////////////////////////////////////
+
+  //Marcar como impresa
+  marcarImpresa(ordenID:number, impresa:number,tokenAdmin:string) {    
+    let body = {      
+      ordenID: ordenID,
+      impresa: impresa,
+      tokenAdmin: tokenAdmin
+    }    
+    return this._http.put<modeloRespuesta>(this.url + `ordenes.php`, body)
+  }
 
   //Eliminar Pedido
   eliminarOrden(ordenID:number, sesionID:number, tokenAdmin:string):Observable<modeloRespuesta> {
