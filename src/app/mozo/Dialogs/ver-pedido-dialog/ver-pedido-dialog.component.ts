@@ -10,7 +10,7 @@ import { MatDialog } from "@angular/material/dialog"
 //Form
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 //Dialogs
-import { DetallesOrdenComponent } from "../../Dialogs/detalles-orden/detalles-orden.component"
+import { DetallesOrdenDialogComponent } from "../detalles-orden-dialog/detalles-orden-dialog.component"
 
 @Component({
   selector: 'app-ver-pedido-dialog',
@@ -55,7 +55,7 @@ export class VerPedidoDialogComponent implements OnInit {
         console.log(x.result["ordenID"])
         this._mozoService.pedido = []
         this._mozoService.ordenID = x.result["ordenID"]
-        this._dialog.open(DetallesOrdenComponent)
+        this._dialog.open(DetallesOrdenDialogComponent)
         this.dialogRef.close()
         },
         error: (err) => {
