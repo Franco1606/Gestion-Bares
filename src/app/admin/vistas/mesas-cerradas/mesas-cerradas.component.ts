@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 //Modelos
 import { modeloSesion } from '../../../mozo/ModelosMozo/modeloSesion'
 //Inyeccions de dependencia
@@ -38,8 +38,9 @@ export class MesasCerradasComponent implements OnChanges {
   }
 
   obtenerSesionesCerradas() {
-    this._mozoService.obtenerSesionesCerradas(this.usuarioID).subscribe({
+    this._mozoService.obtenerSesiones(this.usuarioID, "cerrada").subscribe({
       next: (x) => {
+        console.log(x)
         if(x.length) {
           this.sesiones = x
           this.dataSource = new MatTableDataSource<modeloSesion>(this.sesiones.reverse())
