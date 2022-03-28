@@ -1,0 +1,46 @@
+<app-header-admin (datosUsuario)="obtenerUsuario($event)"></app-header-admin>
+<br>
+<br>
+<div class="contenedor-principal">
+    <h1 class="titulo">PEDIDOS A DOMICILIO</h1>
+    <div class="contenedor-tabla">        
+        <table mat-table [dataSource]="dataSource">
+          <!-- Mesa Column-->
+          <ng-container matColumnDef="domicilio">
+            <th mat-header-cell *matHeaderCellDef> Domicilio </th>
+            <td mat-cell *matCellDef="let element"> {{element.domicilio}} </td>
+          </ng-container>
+        
+          <!-- Cerrada Column-->
+          <ng-container matColumnDef="solicitada">
+            <th mat-header-cell *matHeaderCellDef> Fecha Cierre </th>
+            <td mat-cell *matCellDef="let element"> <button mat-button (click)="irDetallesOrden(element)"> {{element.solicitadaFecha | date : 'dd/MM/yyyy, HH:mm'}} </button></td>
+          </ng-container>
+
+          <!-- Borrar Column -->
+          <ng-container class="container" matColumnDef="borrar">
+            <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+            <td mat-cell *matCellDef="let element">
+             <button mat-button color="warn" (click)="eliminarSesion(element.sesionID)"><mat-icon>delete</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <!-- Imprimir Column -->
+          <ng-container class="container" matColumnDef="imprimir">
+            <th mat-header-cell *matHeaderCellDef> Imprimir </th>
+            <td mat-cell *matCellDef="let element">
+             <button mat-button color="primary" (click)="imprimir(element)"><mat-icon>print</mat-icon></button>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                       showFirstLastButtons 
+                       aria-label="Seleccione pagina de sesion">
+        </mat-paginator>
+    </div>
+</div>
+
