@@ -10,6 +10,7 @@ import { EstilosCartaComponent } from "./vistas/estilos-carta/estilos-carta.comp
 import { GestionMozosComponent } from "./vistas/gestion-mozos/gestion-mozos.component"
 import { GestionCocinerosComponent } from "./vistas/gestion-cocineros/gestion-cocineros.component"
 import { GestionMesasComponent } from "./vistas/gestion-mesas/gestion-mesas.component"
+import { PedidosDomicilioComponent } from "./vistas/pedidos-domicilio/pedidos-domicilio.component"
 
 const routes: Routes = [
   { path: "login", component:LoginAdminComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: "estilos-carta", component:EstilosCartaComponent },
   { path: "gestion-mozos", component:GestionMozosComponent },
   { path: "gestion-cocineros", component:GestionCocinerosComponent },
-  { path: "gestion-mesas", component:GestionMesasComponent }
+  { path: "gestion-mesas", component:GestionMesasComponent },
+  { path: "pedidos-domicilio", component:PedidosDomicilioComponent }
 ];
 
 @NgModule({
