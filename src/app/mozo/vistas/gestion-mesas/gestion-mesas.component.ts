@@ -21,7 +21,7 @@ export class GestionMesasComponent {
   usuarioID:number  
   mozoID!:number   
   tokenMozo!:string
-  sesiones!:modeloSesion[]
+  sesiones:modeloSesion[] = []
 
   obtenerUsuario(datosUsuario:any) {
     this.usuarioID = datosUsuario["usuarioID"]
@@ -34,7 +34,9 @@ export class GestionMesasComponent {
   obtenerSesiones() {
     this._mozoService.obtenerSesiones(this.usuarioID, "activa").subscribe({
       next: (x) => {
-        this.sesiones = x.filter(element => element.mozoID == this.mozoID || element.estado == "solicitada")
+        if(x.length) {
+          this.sesiones = x.filter(element => element.mozoID == this.mozoID || element.estado == "solicitada")  
+        }
       },
       error: (err) => {
         console.log(err)
