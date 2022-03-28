@@ -4,11 +4,17 @@ import { DatePipe } from '@angular/common';
 export class Pdf {
     //////////   Atributos de la clase   /////////////
     
-    crear(pedidos:any[], mesaID:number):any {
+    crear(pedidos:any[], mesaID:number, domicilio:string):any {
         const datepipe: DatePipe = new DatePipe('en-US')
         let formattedDate = datepipe.transform(new Date(), 'dd MMM YYYY, HH:mm')
         let total = 0  
-        let cantidad      
+        let cantidad
+        let lugar
+        if(domicilio != "") {
+            lugar = `Domicilio: ${domicilio}`
+        } else {
+            lugar = `Mesa: ${mesaID}`
+        }
         let body:any = []
         body[0] = ["Cant.", "Producto", "$", "Subt."]            
         pedidos.forEach(pedido => {
@@ -36,7 +42,7 @@ export class Pdf {
                     alignment: "center",
                 },
                 {
-                    text: `Mesa: ${mesaID}`,
+                    text: lugar,
                     margin: [0,0,0,10],
                     fontSize: 10,
                     alignment: "center",
