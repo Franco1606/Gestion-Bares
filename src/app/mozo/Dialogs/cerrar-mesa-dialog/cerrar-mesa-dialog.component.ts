@@ -159,7 +159,7 @@ export class CerrarMesaDialogComponent implements OnInit {
   
   imprimirPdf(pedidos:any[], mesaID:number) {
     let pdf = new Pdf()
-    let contenido = pdf.crear(pedidos, mesaID)
+    let contenido = pdf.crear(pedidos, mesaID, "")
     pdfMake.createPdf(contenido).print()    
   }
 }
