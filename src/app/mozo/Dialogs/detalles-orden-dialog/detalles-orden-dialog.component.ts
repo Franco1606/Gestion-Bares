@@ -149,13 +149,15 @@ export class DetallesOrdenDialogComponent implements OnInit {
   }
 
   cambiarEstado(estado:string) {
-    if(this.mozoID) {      
+    if(this.mozoID) {
       this._mozoService.cambiarEstado(estado, this.ordenID, this.sesionID, this.mozoID, this.tokenMozo, this.tokenAdmin).subscribe({
         next: () => {
           alert("Se actualizo el estado de la orden")
           if(estado == "finalizada") {
             this._dialog.closeAll()
-            this._dialog.open(DetallesSesionDialogComponent)
+            if(this.mozoID != 9999) {
+              this._dialog.open(DetallesSesionDialogComponent)
+            }
           } else {
             this._dialog.closeAll()
             this._dialog.open(DetallesOrdenDialogComponent)
