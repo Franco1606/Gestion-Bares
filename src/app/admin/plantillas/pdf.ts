@@ -54,7 +54,7 @@ export class Pdf {
 
             let tablaConPedidos = {                
                 columns: [
-                    { width: 0, text: '' },
+                    { width: "*", text: '' },
                     {
                         layout: 'lightHorizontalLines', 
                         width: 'auto',
@@ -66,7 +66,7 @@ export class Pdf {
                             margin: [0,20,0,0],                    
                         }
                     },
-                    { width: 0, text: '' },
+                    { width: "*", text: '' },
                 ]                
             }
 
