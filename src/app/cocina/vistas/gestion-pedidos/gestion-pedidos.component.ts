@@ -43,10 +43,12 @@ export class GestionPedidosComponent {
   obtenerPedidosCocina() {
     this._cocinaService.obtenerPedidosDeCocina(this.usuarioID, 1).subscribe({
       next: (x) => {
-        this.pedidos = this.sumarCantidades(this.agruparPorProducto(x.reverse()))
-        this.dataSource = new MatTableDataSource<modeloPedido>(this.pedidos)
-        this.dataSource.paginator = this.paginator
-        this.dataSource.sort = this.sort
+        if(x.length) {
+          this.pedidos = this.sumarCantidades(this.agruparPorProducto(x.reverse()))
+          this.dataSource = new MatTableDataSource<modeloPedido>(this.pedidos)
+          this.dataSource.paginator = this.paginator
+          this.dataSource.sort = this.sort
+        }
       },  
       error: (err) => {
         alert("No se pudo obtener los datos de la base de datos")
