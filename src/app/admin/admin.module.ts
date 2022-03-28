@@ -26,6 +26,7 @@ import { MesasActivasComponent } from './vistas/mesas-activas/mesas-activas.comp
 import { DetallesSesionDialogComponent } from './Dialogs/detalles-sesion-dialog/detalles-sesion-dialog.component';
 import { GestionMesasComponent } from './vistas/gestion-mesas/gestion-mesas.component';
 import { MesasCerradasComponent } from './vistas/mesas-cerradas/mesas-cerradas.component';
+import { PedidosDomicilioComponent } from './vistas/pedidos-domicilio/pedidos-domicilio.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MesasCerradasComponent } from './vistas/mesas-cerradas/mesas-cerradas.c
     MesasActivasComponent,
     DetallesSesionDialogComponent,
     GestionMesasComponent,
-    MesasCerradasComponent      
+    MesasCerradasComponent,
+    PedidosDomicilioComponent      
   ],
   imports: [
     CommonModule,
