@@ -10,7 +10,7 @@ import { LoginMozoComponent } from './plantillas/login-mozo/login-mozo.component
 import { GestionMesasComponent } from './vistas/gestion-mesas/gestion-mesas.component';
 import { HeaderMozoComponent } from './plantillas/header-mozo/header-mozo.component';
 import { DetallesSesionDialogComponent } from './Dialogs/detalles-sesion-dialog/detalles-sesion-dialog.component';
-import { DetallesOrdenComponent } from './Dialogs/detalles-orden/detalles-orden.component';
+import { DetallesOrdenDialogComponent } from './Dialogs/detalles-orden-dialog/detalles-orden-dialog.component';
 import { CerrarMesaDialogComponent } from './Dialogs/cerrar-mesa-dialog/cerrar-mesa-dialog.component';
 import { PedidoMozoComponent } from './vistas/pedido-mozo/pedido-mozo.component';
 import { ProductosComponent } from './vistas/productos/productos.component';
@@ -23,7 +23,7 @@ import { VerPedidoDialogComponent } from './Dialogs/ver-pedido-dialog/ver-pedido
     GestionMesasComponent,
     HeaderMozoComponent,
     DetallesSesionDialogComponent,
-    DetallesOrdenComponent,
+    DetallesOrdenDialogComponent,
     CerrarMesaDialogComponent,
     PedidoMozoComponent,
     ProductosComponent,
