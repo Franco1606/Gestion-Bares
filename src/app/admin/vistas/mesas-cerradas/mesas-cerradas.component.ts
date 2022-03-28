@@ -39,8 +39,7 @@ export class MesasCerradasComponent implements OnChanges {
 
   obtenerSesionesCerradas() {
     this._mozoService.obtenerSesiones(this.usuarioID, "cerrada").subscribe({
-      next: (x) => {
-        console.log(x)
+      next: (x) => {        
         if(x.length) {
           this.sesiones = x
           this.dataSource = new MatTableDataSource<modeloSesion>(this.sesiones.reverse())
