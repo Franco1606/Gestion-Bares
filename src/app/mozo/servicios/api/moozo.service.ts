@@ -37,16 +37,11 @@ export class MoozoService {
   
   /////////////////////////////////////////////////////////
   /////////////  METODOS PARA SESIONES  //////////////////
-  ///////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////  
 
   //Obtener sesiones por usuarioID
-  obtenerSesionesActivas(usuarioID:number):Observable<modeloSesion[]> {
-    return this._http.get<modeloSesion[]>(this.url + `sesiones.php?usuarioID=${usuarioID}&activas=1`)
-  }
-
-  //Obtener sesiones por usuarioID
-  obtenerSesionesCerradas(usuarioID:number):Observable<modeloSesion[]> {
-    return this._http.get<modeloSesion[]>(this.url + `sesiones.php?usuarioID=${usuarioID}&cerradas=1`)
+  obtenerSesiones(usuarioID:number, estado:string):Observable<modeloSesion[]> {
+    return this._http.get<modeloSesion[]>(this.url + `sesiones.php?usuarioID=${usuarioID}&estado=${estado}`)
   }
 
   //Modificar sesion
