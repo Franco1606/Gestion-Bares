@@ -10,6 +10,12 @@
     flex-wrap: wrap;
 }
 
+.sin-mesas {
+    font-size: 1.1em;
+    font-weight: 400;
+    color: white;
+}
+
 .mesa {    
     width: 180px;
     height: 150px;
