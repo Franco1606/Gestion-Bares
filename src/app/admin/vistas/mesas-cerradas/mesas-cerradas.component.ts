@@ -27,7 +27,7 @@ export class MesasCerradasComponent implements OnChanges {
   @Input() tokenAdmin!:string 
   sesiones!:modeloSesion[]
   // Tabla //
-  displayedColumns = ["mesa", "cerrada"]
+  displayedColumns = ["mesa", "cerrada", "borrar"]
   @ViewChild(MatPaginator) paginator!:MatPaginator
   @ViewChild(MatSort) sort!: MatSort;
   dataSource!:MatTableDataSource<modeloSesion>
@@ -52,5 +52,18 @@ export class MesasCerradasComponent implements OnChanges {
     this._adminService.tokenAdmin = this.tokenAdmin
     this._mozoService.sesion = sesion
     this._dialog.open(DetallesSesionDialogComponent)
+  }
+
+  eliminarSesion(sesionID:number) {
+    if(confirm("Desea eliminar este cierre de mesa?")) {
+      this._adminService.eliminarSesion(sesionID, this.tokenAdmin).subscribe({
+        next: () => {
+          this.obtenerSesionesCerradas()
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+    }
   }
 }
