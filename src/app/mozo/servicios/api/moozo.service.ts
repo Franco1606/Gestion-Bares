@@ -23,6 +23,7 @@ export class MoozoService {
   //Paso de variables por servicio
   mesaID!:number
   sesion!:modeloSesion
+  sesionID!:number
   categoria!:modeloCategoria
   producto!:modeloProductoPedido
   pedido:claseProductoPedido[] = []
@@ -49,11 +50,15 @@ export class MoozoService {
   }
 
   //Modificar sesion
-  cambiarEstadoSesion(estado:string, sesionID:number, tokenMozo:string) {
+  cambiarEstadoSesion(estado:string, sesionID:number, tokenMozo:string, tokenAdmin:string) {
     let body = {
       estado: estado,
-      sesionID: sesionID,
-      tokenMozo: tokenMozo
+      sesionID: sesionID      
+    }
+    if(tokenMozo) {
+      body["tokenMozo"] = tokenMozo
+    } else if (tokenAdmin) {
+      body["tokenAdmin"] = tokenAdmin
     }
     return this._http.put<modeloRespuesta>(this.url + `sesiones.php`, body)
   }
@@ -63,8 +68,8 @@ export class MoozoService {
   ///////////////////////////////////////////////////////
 
   //Obtener Ordenes
-  obtenerOrdenes(usuarioID:number, sesionID:number):Observable<modeloOrden[]> {
-    return this._http.get<modeloOrden[]>(this.url + `ordenes.php?usuarioID=${usuarioID}&sesionID=${sesionID}`)
+  obtenerOrdenesXSesion(sesionID:number):Observable<modeloOrden[]> {
+    return this._http.get<modeloOrden[]>(this.url + `ordenes.php?sesionID=${sesionID}`)
   }
 
   //Obtener Orden
@@ -73,13 +78,17 @@ export class MoozoService {
   }
 
   //Modificar Orden
-  cambiarEstado(estado:string, ordenID:number, sesionID:number, mozoID:number,tokenMozo:string) {
+  cambiarEstado(estado:string, ordenID:number, sesionID:number, mozoID:number, tokenMozo:string, tokenAdmin:string) {    
     let body = {
       estado: estado,
       ordenID: ordenID,
       sesionID: sesionID,
-      mozoID: mozoID,
-      tokenMozo: tokenMozo
+      mozoID: mozoID      
+    }
+    if(tokenAdmin) {
+      body["tokenAdmin"] = tokenAdmin
+    } else {
+      body["tokenMozo"] = tokenMozo
     }
     return this._http.put<modeloRespuesta>(this.url + `ordenes.php`, body)
   }
