@@ -6,6 +6,7 @@ import { modeloSesion } from '../../ModelosMozo/modeloSesion';
 import { Pdf } from '../../plantillas/pdf';
 //Inyeccion de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
+import { AdminService } from "../../../admin/servicios/api/admin.service"
 // Dependencias pdfMake
 import pdfMake from "pdfmake/build/pdfMake"
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -18,21 +19,32 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class CerrarMesaDialogComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService ) { }
+  constructor( private _mozoService:MoozoService, private _adminService:AdminService ) { }
 
   //////////   Atributos de la clase   /////////////
   total = 0
   peidosSinHappy!:modeloPedido[]
   pedidosConHappy!:modeloPedido[]
+  //Paso de variable por servicio
   sesion!:modeloSesion
   tokenMozo!:string
+  tokenAdmin!:string
   // Tabla //
   displayedColumns = ["cantidad", "producto", "precio", "subtotal"]
   dataSource!:any[]
 
   ngOnInit(): void {
-    this.tokenMozo = this._mozoService.tokenMozo    
+    this.obtenerVarPorServicio()
+    this.obtenerPedidosXSesion()
+  }
+
+  obtenerVarPorServicio() {
     this.sesion = this._mozoService.sesion
+    this.tokenMozo = this._mozoService.tokenMozo
+    this.tokenAdmin = this._adminService.tokenAdmin    
+  }
+
+  obtenerPedidosXSesion() {
     this._mozoService.obtenerPedidosPorSesion(this.sesion.sesionID).subscribe({
       next: (x) => {        
         this.peidosSinHappy = this.pedidos(this.agruparPorProducto(x))
@@ -56,7 +68,7 @@ export class CerrarMesaDialogComponent implements OnInit {
 
   cerrarMesa() {
     if(confirm("¿Desea cerrar la mesa?")) {
-      this._mozoService.cambiarEstadoSesion("cerrada", this._mozoService.sesion.sesionID, this._mozoService.tokenMozo).subscribe({
+      this._mozoService.cambiarEstadoSesion("cerrada", this.sesion.sesionID, this.tokenMozo, this.tokenAdmin).subscribe({
         next:() => {              
           location.reload()
         },

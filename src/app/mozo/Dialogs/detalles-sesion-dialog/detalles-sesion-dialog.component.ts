@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 //Inyeccions de dependencia
 import { MoozoService } from "../../servicios/api/moozo.service"
 import { CartaService } from "../../../carta/servicios/api/carta.service"
+import { AdminService } from "../../../admin/servicios/api/admin.service"
 import { Router } from "@angular/router"
 // Dependencias Angular Material
 import { MatDialog } from "@angular/material/dialog"
 //Modelos
 import { modeloOrden } from '../../ModelosMozo/modeloOrden';
 // Dependencias para Dialogs
-import { DetallesOrdenComponent } from "../../Dialogs/detalles-orden/detalles-orden.component"
+import { DetallesOrdenDialogComponent } from "../detalles-orden-dialog/detalles-orden-dialog.component"
 import { CerrarMesaDialogComponent } from '../cerrar-mesa-dialog/cerrar-mesa-dialog.component';
 
 @Component({
@@ -18,23 +19,36 @@ import { CerrarMesaDialogComponent } from '../cerrar-mesa-dialog/cerrar-mesa-dia
 })
 export class DetallesSesionDialogComponent implements OnInit {
 
-  constructor( private _mozoService:MoozoService, private _adminService:CartaService, private _dialog:MatDialog, private _router:Router ) { }
+  constructor( private _mozoService:MoozoService, private _cartaService:CartaService, private _adminService:AdminService, private _dialog:MatDialog, private _router:Router ) { }
 
   //////////   Atributos de la clase   /////////////   
+  //Variables pasadas por servicio
+  usuarioID!:number
   mesaID!:number
+  sesionID!:number
+  tokenMozo!:string
+  tokenAdmin!:string
   llamarMozo!:number
   // Tabla //
   displayedColumns = ["numOrden", "estado"]
   dataSource!:modeloOrden[]
 
   ngOnInit(): void {
-    this.llamarMozo = this._mozoService.sesion.llamarMozo
-    this.mesaID = this._mozoService.sesion.mesaID
+    this.obtenerVarPorServicio()
     this.obtenerOrdenes()
   }
 
+  obtenerVarPorServicio() {
+    this.llamarMozo = this._mozoService.sesion.llamarMozo
+    this.usuarioID = this._mozoService.usuarioID
+    this.mesaID = this._mozoService.sesion.mesaID
+    this.sesionID = this._mozoService.sesion.sesionID
+    this.tokenMozo = this._mozoService.tokenMozo
+    this.tokenAdmin = this._adminService.tokenAdmin
+  }
+
   obtenerOrdenes() {
-    this._mozoService.obtenerOrdenes(this._mozoService.usuarioID, this._mozoService.sesion.sesionID).subscribe({
+    this._mozoService.obtenerOrdenesXSesion(this.sesionID).subscribe({
       next: (x) => {
         this.dataSource = x
       },
@@ -47,7 +61,7 @@ export class DetallesSesionDialogComponent implements OnInit {
 
   irDetallesOrden(ordenID:number) {
     this._mozoService.ordenID = ordenID
-    let dialogRef = this._dialog.open(DetallesOrdenComponent)
+    let dialogRef = this._dialog.open(DetallesOrdenDialogComponent)
     dialogRef.afterClosed().subscribe({
       next: () => {
         this.obtenerOrdenes()
@@ -56,7 +70,7 @@ export class DetallesSesionDialogComponent implements OnInit {
   }
 
   cerrarMesa() {
-    this._mozoService.obtenerOrdenes(this._mozoService.usuarioID, this._mozoService.sesion.sesionID).subscribe({
+    this._mozoService.obtenerOrdenesXSesion(this.sesionID).subscribe({
       next: (x) => {
         if(x.length > 0) {
           if(x.filter(element => element.estado == "nueva" || element.estado == "lista" || element.estado == "activa").length == 0) {
@@ -65,7 +79,7 @@ export class DetallesSesionDialogComponent implements OnInit {
             alert("No se puede cerrar la mesa con ordenes nuevas, listas o activas, debe finalizar todas las ordenes")          
           }
         } else {
-          this._mozoService.cambiarEstadoSesion("cerrada", this._mozoService.sesion.sesionID, this._mozoService.tokenMozo).subscribe({
+          this._mozoService.cambiarEstadoSesion("cerrada", this.sesionID, this.tokenMozo, this.tokenAdmin).subscribe({
             next:() => {              
               location.reload()
             },
@@ -85,7 +99,7 @@ export class DetallesSesionDialogComponent implements OnInit {
   }
 
   atenderLlamada() {
-    this._adminService.llamarMozo(this._mozoService.usuarioID, this.mesaID, 0).subscribe({
+    this._cartaService.llamarMozo(this.usuarioID, this.mesaID, 0).subscribe({
       next: () => {
         alert("Se atendió la llamada de esta mesa")
         location.reload()

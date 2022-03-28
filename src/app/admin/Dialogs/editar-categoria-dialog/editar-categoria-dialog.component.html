@@ -30,9 +30,7 @@
           <div class="aviso-happy">EL happy Hour solo se puede configurar en categorias donde TODOS los proudctos tengan el MISMO PRECIO </div>
           <br>
         </div>
-        <form [formGroup]="formHappy" style="display: flex; flex-direction: column;" (ngSubmit)="editarHappy()">
-          <mat-checkbox type="checkbox" class="example-margin" formControlName="estado">Activar</mat-checkbox>
-          <br>
+        <form [formGroup]="formHappy" style="display: flex; flex-direction: column;" (ngSubmit)="editarHappy()">          
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Inicio</mat-label>
               <mat-select formControlName="inicio">

@@ -13,5 +13,6 @@ export interface modeloOrden {
     estado:string,
     solicitante:string,
     total:number,
-    cocina:number
+    cocina:number,
+    impresa:number
 }

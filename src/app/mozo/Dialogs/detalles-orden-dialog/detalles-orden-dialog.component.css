@@ -114,7 +114,9 @@ table {
 }
 
 .boton-comanda {
-    max-width: 150px;    
+    width: 100%;
+    min-width: 130px;
+    margin: 4px;    
 }
 
 .mat-dialog-container {

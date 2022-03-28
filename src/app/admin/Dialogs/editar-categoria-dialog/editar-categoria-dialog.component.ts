@@ -28,8 +28,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
     "categoriaID" : new FormControl(),
     "tokenAdmin" : new FormControl()
   })
-  formHappy:FormGroup = new FormGroup({
-    "estado" : new FormControl("", Validators.required),
+  formHappy:FormGroup = new FormGroup({    
     "inicio" : new FormControl("", Validators.required),
     "fin" : new FormControl("", Validators.required),
     "usuarioID" : new FormControl(),
@@ -81,8 +80,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
           })
           if(mismoPrecio) {
             this._AdminServiceApi.obtenerHappy(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID).subscribe({
-              next: (x) => {        
-                this.formHappy.controls["estado"].setValue(Boolean(Number(x.estado)))
+              next: (x) => {                
                 this.formHappy.controls["inicio"].setValue(x.inicio)
                 this.formHappy.controls["fin"].setValue(x.fin)
                 this.formHappy.controls["lunes"].setValue(Boolean(Number(x.lunes)))
@@ -97,8 +95,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
                 console.log(err)
               }
             })
-          } else {
-            this.formHappy.controls["estado"].disable()
+          } else {            
             this.formHappy.controls["inicio"].disable()
             this.formHappy.controls["fin"].disable()
             this.formHappy.controls["lunes"].disable()
@@ -110,8 +107,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
             this.formHappy.controls["domingo"].disable()
             this.desactivarHappy = true
           }
-        } else {
-            this.formHappy.controls["estado"].disable()
+        } else {            
             this.formHappy.controls["inicio"].disable()
             this.formHappy.controls["fin"].disable()
             this.formHappy.controls["lunes"].disable()
@@ -155,12 +151,7 @@ export class EditarCategoriaDialogComponent implements OnInit {
     }
   }
 
-  editarHappy() {    
-    if(this.formHappy.controls["estado"].value) {
-      this.formHappy.controls["estado"].setValue(1)
-    } else {
-      this.formHappy.controls["estado"].setValue(0)
-    }
+  editarHappy() {
     if(this.formHappy.controls["lunes"].value) {
       this.formHappy.controls["lunes"].setValue(1)
     } else {
@@ -227,8 +218,6 @@ export class EditarCategoriaDialogComponent implements OnInit {
   }
 
   eliminarHappy() {
-    console.log(this._AdminServiceApi.usuarioID)
-    console.log(this._AdminServiceApi.categoria.categoriaID)
     this._AdminServiceApi.eliminarHappy(this._AdminServiceApi.usuarioID, this._AdminServiceApi.categoria.categoriaID, this._AdminServiceApi.tokenAdmin).subscribe({
       next: () => {
         alert("Se elimino el Happy Hour")

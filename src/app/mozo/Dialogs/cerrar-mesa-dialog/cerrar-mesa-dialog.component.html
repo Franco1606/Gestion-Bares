@@ -41,6 +41,8 @@
           Total: $ {{total}}
       </div>
       <br>
-      <button *ngIf="tokenMozo" mat-raised-button color="warn" style="margin-bottom: 30px;" (click)="cerrarMesa()" > Cerrar Mesa </button>
-      <button *ngIf="!tokenMozo" mat-raised-button color="warn" style="margin-bottom: 30px;" (click)="imprimir()" > Imprimir </button>      
-  </mat-dialog-content>
+    </mat-dialog-content>
+    <div style="display: flex; justify-content: space-around;">
+      <button mat-raised-button color="warn" style="margin-bottom: 30px; min-width: 130px;" (click)="cerrarMesa()" > Cerrar Mesa </button>
+      <button *ngIf="!tokenMozo" mat-raised-button color="primary" style="margin-bottom: 30px; min-width: 130px;" (click)="imprimir()" > Iprimir </button>
+    </div>
