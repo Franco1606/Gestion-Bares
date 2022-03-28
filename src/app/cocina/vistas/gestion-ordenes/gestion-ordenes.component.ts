@@ -43,10 +43,12 @@ export class GestionOrdenesComponent {
   obtenerOrdenesCocina() {
     this._cocinaService.obtenerOrdenesDeCocina(this.usuarioID, 1).subscribe({
       next: (x) => {
-        this.ordenes = x
-        this.dataSource = new MatTableDataSource<modeloOrden>(this.ordenes.reverse())
-        this.dataSource.paginator = this.paginator
-        this.dataSource.sort = this.sort
+        if(x.length) {
+          this.ordenes = x
+          this.dataSource = new MatTableDataSource<modeloOrden>(this.ordenes.reverse())
+          this.dataSource.paginator = this.paginator
+          this.dataSource.sort = this.sort
+        }
       },  
       error: (err) => {
         alert("No se pudo obtener los datos de la base de datos")
